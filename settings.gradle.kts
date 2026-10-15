@@ -23,5 +23,5 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "MPAZ PRO 3"
+rootProject.name = "APP ESCUELA MARCELA PAZ"
 include(":app")

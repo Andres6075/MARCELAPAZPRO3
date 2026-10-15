@@ -43,13 +43,13 @@ fun PantallaInicio(
             ) {
                 Column {
                     Text(
-                        text = "MPAZ PRO 3",
-                        style = MaterialTheme.typography.headlineMedium,
+                        text = "APP ESCUELA MARCELA PAZ",
+                        style = MaterialTheme.typography.headlineSmall,
                         fontWeight = FontWeight.Bold,
                         color = MaterialTheme.colorScheme.primary
                     )
                     Text(
-                        text = "Rol: ${perfil.rolActual.descripcion} | Escuela Marcela Paz",
+                        text = "Rol: ${perfil.rolActual.descripcion} | 3° Basico",
                         style = MaterialTheme.typography.bodyMedium,
                         fontWeight = FontWeight.SemiBold,
                         color = MaterialTheme.colorScheme.onSurfaceVariant
