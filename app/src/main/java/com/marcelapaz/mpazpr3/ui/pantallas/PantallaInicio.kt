@@ -6,20 +6,23 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.AdminPanelSettings
 import androidx.compose.material.icons.filled.CheckCircle
-import androidx.compose.material.icons.filled.School
+import androidx.compose.material.icons.filled.Person
 import androidx.compose.material.icons.filled.PhoneAndroid
+import androidx.compose.material.icons.filled.School
 import androidx.compose.material.icons.filled.TrendingUp
+import androidx.compose.material.icons.filled.Verified
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import com.marcelapaz.mpazpr3.datos.ModuloAprendizaje
 import com.marcelapaz.mpazpr3.datos.PerfilEstudiante
+import com.marcelapaz.mpazpr3.datos.RolUsuario
 
 @Composable
 fun PantallaInicio(
@@ -35,7 +38,7 @@ fun PantallaInicio(
         verticalArrangement = Arrangement.spacedBy(16.dp)
     ) {
         item {
-            // Encabezado de bienvenida mas generico para la app
+            // Encabezado de bienvenida adaptado dinamicamente al rol activo (Seccion 3.1)
             Row(
                 modifier = Modifier.fillMaxWidth(),
                 horizontalArrangement = Arrangement.SpaceBetween,
@@ -49,8 +52,9 @@ fun PantallaInicio(
                         color = MaterialTheme.colorScheme.primary
                     )
                     Text(
-                        text = "Escuela Escritora Marcela Paz | 3° Basico",
+                        text = "Rol: ${perfil.rolActual.descripcion} | Escuela Marcela Paz",
                         style = MaterialTheme.typography.bodyMedium,
+                        fontWeight = FontWeight.SemiBold,
                         color = MaterialTheme.colorScheme.onSurfaceVariant
                     )
                 }
@@ -61,8 +65,12 @@ fun PantallaInicio(
                 ) {
                     Box(contentAlignment = Alignment.Center) {
                         Icon(
-                            imageVector = Icons.Default.School,
-                            contentDescription = "Icono",
+                            imageVector = when (perfil.rolActual) {
+                                RolUsuario.ESTUDIANTE -> Icons.Default.School
+                                RolUsuario.DOCENTE -> Icons.Default.Verified
+                                RolUsuario.UTP -> Icons.Default.AdminPanelSettings
+                            },
+                            contentDescription = "Icono Rol",
                             tint = MaterialTheme.colorScheme.onPrimaryContainer
                         )
                     }
@@ -71,7 +79,7 @@ fun PantallaInicio(
         }
 
         item {
-            // Tarjeta de condiciones de uso (Seccion 3.3: Android, sin camara/GPS/biometria, interfaz clara)
+            // Tarjeta de condiciones de uso (Seccion 3.3)
             Card(
                 colors = CardDefaults.cardColors(
                     containerColor = MaterialTheme.colorScheme.surfaceVariant
@@ -106,81 +114,184 @@ fun PantallaInicio(
             }
         }
 
-        item {
-            // Tarjeta de progreso general de aprendizaje del estudiante
-            Card(
-                colors = CardDefaults.cardColors(
-                    containerColor = MaterialTheme.colorScheme.primary,
-                    contentColor = MaterialTheme.colorScheme.onPrimary
-                ),
-                shape = RoundedCornerShape(20.dp),
-                modifier = Modifier.fillMaxWidth()
-            ) {
-                Column(
-                    modifier = Modifier.padding(20.dp),
-                    verticalArrangement = Arrangement.spacedBy(12.dp)
-                ) {
-                    Row(
-                        modifier = Modifier.fillMaxWidth(),
-                        horizontalArrangement = Arrangement.SpaceBetween,
-                        verticalAlignment = Alignment.CenterVertically
+        // Contenido dinamico segun el Rol Seleccionado (Seccion 3.1)
+        when (perfil.rolActual) {
+            RolUsuario.ESTUDIANTE -> {
+                item {
+                    // Tarjeta de progreso general de aprendizaje del estudiante
+                    Card(
+                        colors = CardDefaults.cardColors(
+                            containerColor = MaterialTheme.colorScheme.primary,
+                            contentColor = MaterialTheme.colorScheme.onPrimary
+                        ),
+                        shape = RoundedCornerShape(20.dp),
+                        modifier = Modifier.fillMaxWidth()
                     ) {
-                        Text(
-                            text = "Mi Progreso de Aprendizaje",
-                            style = MaterialTheme.typography.titleMedium,
-                            fontWeight = FontWeight.SemiBold
-                        )
-                        Icon(
-                            imageVector = Icons.Default.TrendingUp,
-                            contentDescription = "Progreso"
-                        )
+                        Column(
+                            modifier = Modifier.padding(20.dp),
+                            verticalArrangement = Arrangement.spacedBy(12.dp)
+                        ) {
+                            Row(
+                                modifier = Modifier.fillMaxWidth(),
+                                horizontalArrangement = Arrangement.SpaceBetween,
+                                verticalAlignment = Alignment.CenterVertically
+                            ) {
+                                Text(
+                                    text = "Mi Progreso de Aprendizaje (3° Basico)",
+                                    style = MaterialTheme.typography.titleMedium,
+                                    fontWeight = FontWeight.SemiBold
+                                )
+                                Icon(
+                                    imageVector = Icons.Default.TrendingUp,
+                                    contentDescription = "Progreso"
+                                )
+                            }
+
+                            LinearProgressIndicator(
+                                progress = { perfil.progresoGeneral },
+                                modifier = Modifier
+                                    .fillMaxWidth()
+                                    .height(10.dp)
+                                    .clip(RoundedCornerShape(5.dp)),
+                                color = MaterialTheme.colorScheme.onPrimary,
+                                trackColor = MaterialTheme.colorScheme.primaryContainer.copy(alpha = 0.5f),
+                            )
+
+                            Row(
+                                modifier = Modifier.fillMaxWidth(),
+                                horizontalArrangement = Arrangement.SpaceBetween
+                            ) {
+                                Text(
+                                    text = "${(perfil.progresoGeneral * 100).toInt()}% completado",
+                                    style = MaterialTheme.typography.bodyMedium
+                                )
+                                Text(
+                                    text = "${perfil.modulosCompletadosTotal}/${modulos.size} Modulos",
+                                    style = MaterialTheme.typography.bodyMedium
+                                )
+                            }
+                        }
                     }
+                }
 
-                    LinearProgressIndicator(
-                        progress = { perfil.progresoGeneral },
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .height(10.dp)
-                            .clip(RoundedCornerShape(5.dp)),
-                        color = MaterialTheme.colorScheme.onPrimary,
-                        trackColor = MaterialTheme.colorScheme.primaryContainer.copy(alpha = 0.5f),
-                    )
-
+                item {
+                    // Estadisticas rapidas del estudiante
                     Row(
                         modifier = Modifier.fillMaxWidth(),
-                        horizontalArrangement = Arrangement.SpaceBetween
+                        horizontalArrangement = Arrangement.spacedBy(12.dp)
                     ) {
-                        Text(
-                            text = "${(perfil.progresoGeneral * 100).toInt()}% completado",
-                            style = MaterialTheme.typography.bodyMedium
+                        TarjetaEstadistica(
+                            modifier = Modifier.weight(1f),
+                            titulo = "Racha de Estudio",
+                            valor = "${perfil.rachaDiasEstudio} dias",
+                            icono = Icons.Default.TrendingUp
                         )
-                        Text(
-                            text = "${perfil.modulosCompletadosTotal}/${modulos.size} Modulos",
-                            style = MaterialTheme.typography.bodyMedium
+                        TarjetaEstadistica(
+                            modifier = Modifier.weight(1f),
+                            titulo = "Modulos Activos",
+                            valor = "${modulos.size}",
+                            icono = Icons.Default.School
                         )
                     }
                 }
             }
-        }
 
-        item {
-            // Fila de estadisticas rapidas del estudiante
-            Row(
-                modifier = Modifier.fillMaxWidth(),
-                horizontalArrangement = Arrangement.spacedBy(12.dp)
-            ) {
-                TarjetaEstadistica(
-                    modifier = Modifier.weight(1f),
-                    titulo = "Racha de Estudio",
-                    valor = "${perfil.rachaDiasEstudio} dias",
-                    icono = Icons.Default.TrendingUp
-                )
-                TarjetaEstadistica(
-                    modifier = Modifier.weight(1f),
-                    titulo = "Modulos Activos",
-                    valor = "${modulos.size}",
-                    icono = Icons.Default.School
-                )
+            RolUsuario.DOCENTE -> {
+                item {
+                    // Tarjeta de resumen para el Docente de Tercero Basico
+                    Card(
+                        colors = CardDefaults.cardColors(
+                            containerColor = MaterialTheme.colorScheme.secondaryContainer,
+                            contentColor = MaterialTheme.colorScheme.onSecondaryContainer
+                        ),
+                        shape = RoundedCornerShape(20.dp),
+                        modifier = Modifier.fillMaxWidth()
+                    ) {
+                        Column(
+                            modifier = Modifier.padding(20.dp),
+                            verticalArrangement = Arrangement.spacedBy(12.dp)
+                        ) {
+                            Text(
+                                text = "Panel Docente - Tercero Basico",
+                                style = MaterialTheme.typography.titleMedium,
+                                fontWeight = FontWeight.Bold
+                            )
+                            Text(
+                                text = "Supervision de las 4 asignaturas MVP, gestion de intentos maximos para evaluaciones y seguimiento del curso.",
+                                style = MaterialTheme.typography.bodyMedium
+                            )
+                        }
+                    }
+                }
+
+                item {
+                    Row(
+                        modifier = Modifier.fillMaxWidth(),
+                        horizontalArrangement = Arrangement.spacedBy(12.dp)
+                    ) {
+                        TarjetaEstadistica(
+                            modifier = Modifier.weight(1f),
+                            titulo = "Estudiantes 3°B",
+                            valor = "27 Alumnos",
+                            icono = Icons.Default.Person
+                        )
+                        TarjetaEstadistica(
+                            modifier = Modifier.weight(1f),
+                            titulo = "Rendimiento Curso",
+                            valor = "82% Logro",
+                            icono = Icons.Default.TrendingUp
+                        )
+                    }
+                }
+            }
+
+            RolUsuario.UTP -> {
+                item {
+                    // Tarjeta de resumen para Jefatura de UTP
+                    Card(
+                        colors = CardDefaults.cardColors(
+                            containerColor = MaterialTheme.colorScheme.tertiaryContainer,
+                            contentColor = MaterialTheme.colorScheme.onTertiaryContainer
+                        ),
+                        shape = RoundedCornerShape(20.dp),
+                        modifier = Modifier.fillMaxWidth()
+                    ) {
+                        Column(
+                            modifier = Modifier.padding(20.dp),
+                            verticalArrangement = Arrangement.spacedBy(12.dp)
+                        ) {
+                            Text(
+                                text = "Panel Jefatura UTP - Revision Curricular",
+                                style = MaterialTheme.typography.titleMedium,
+                                fontWeight = FontWeight.Bold
+                            )
+                            Text(
+                                text = "Validacion y autorizacion de contenidos pedagogicos segun Objetivos de Aprendizaje oficiales (Seccion 3.1).",
+                                style = MaterialTheme.typography.bodyMedium
+                            )
+                        }
+                    }
+                }
+
+                item {
+                    Row(
+                        modifier = Modifier.fillMaxWidth(),
+                        horizontalArrangement = Arrangement.spacedBy(12.dp)
+                    ) {
+                        TarjetaEstadistica(
+                            modifier = Modifier.weight(1f),
+                            titulo = "Autorizados UTP",
+                            valor = "${modulos.count { it.aprobadoPorUtp }}/${modulos.size}",
+                            icono = Icons.Default.Verified
+                        )
+                        TarjetaEstadistica(
+                            modifier = Modifier.weight(1f),
+                            titulo = "Estado Informe",
+                            valor = "Validado",
+                            icono = Icons.Default.AdminPanelSettings
+                        )
+                    }
+                }
             }
         }
 
@@ -208,7 +319,7 @@ fun PantallaInicio(
 }
 
 @Composable
-fun TarjetaEstadistica(modifier: Modifier = Modifier, titulo: String, valor: String, icono: ImageVector) {
+fun TarjetaEstadistica(modifier: Modifier = Modifier, titulo: String, valor: String, icono: androidx.compose.ui.graphics.vector.ImageVector) {
     Card(
         modifier = modifier,
         colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surfaceVariant),
