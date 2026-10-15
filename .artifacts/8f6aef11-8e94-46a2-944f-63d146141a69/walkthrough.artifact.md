@@ -6,21 +6,27 @@ Este proyecto cumple con los requerimientos establecidos en el documento oficial
 - La aplicacion esta diseñada para responder al desafio de la Escuela Escritora Marcela Paz de San Bernardo, ofreciendo un apoyo didactico y seguimiento del aprendizaje enfocado en Tercero Basico.
 - Organiza los contenidos y modulos educativos facilitando el acceso a las asignaturas y permitiendo registrar el avance de los estudiantes de manera digital en lugar de usar solo guias impresas.
 
-2. Tareas y funciones cumplidas en la aplicacion
-- Modulos de aprendizaje: Se estructuran contenidos organizados por categorias y objetivos de aprendizaje, facilitando la comprension de los temas.
-- Seguimiento del progreso: La aplicacion cuenta con indicadores visuales y barras de avance que muestran el porcentaje completado por el estudiante.
-- Recursos didacticos: Cada modulo incluye recursos asociados como guias, videos y cuestionarios para reforzar el estudio.
-- Perfil del estudiante: Muestra la informacion del alumno y un resumen del estado de sus actividades dentro de la asignatura DSY1105.
+2. Tareas y funciones cumplidas por perfiles (Seccion 3.1)
+- Estudiante: Consulta material asignado, desarrolla actividades, revisa respuestas y avance.
+- Docente: Gestiona asignacion de contenidos y definicion de intentos para evaluaciones.
+- UTP: Revisa y autoriza contenidos pedagogicos y accede al informe pedagogico reservado.
 
-3. Condiciones de uso y restricciones del MVP academico
-- Interfaz adaptada: Se construyo con Jetpack Compose y Material 3 utilizando textos legibles, botones visibles y una navegacion sencilla y fluida.
-- Datos ficticios: Cumple con la condicion de utilizar una base de datos de prueba con perfiles, modulos y resultados ficticios, sin conectar con sistemas reales ni bases de datos institucionales.
+3. Informacion curricular y proceso (Seccion 3.2)
+- Nivel educativo, asignaturas (Lenguaje, Matematica, Ciencias Naturales, Historia), unidades y Objetivos de Aprendizaje (OA) con codigos oficiales.
+- Recursos didacticos con instrucciones, ejemplos y soporte para audios de apoyo.
 
-4. Resumen de las pantallas desarrolladas
-- Pantalla de Inicio: Muestra un saludo personalizado, la tarjeta de progreso general de la evaluacion, estadisticas de racha de estudio y acceso directo a los modulos.
-- Pantalla de Modulos: Permite ver la lista completa de temas de estudio e incluye un buscador interactivo en tiempo real.
-- Pantalla de Detalle: Muestra la descripcion del modulo, las horas estimadas, un control deslizante para actualizar el progreso, la opcion de marcar como completado y los recursos didacticos.
-- Pantalla de Perfil: Muestra los datos del estudiante, su identificador, la asignatura DSY1105 y una insignia de confirmacion de la evaluacion 2.
+4. Condiciones de uso y restricciones (Secciones 3.3 y 3.4)
+- Interfaz adaptada para Tercero Basico mediante Jetpack Compose y Material 3, sin requerir camara, GPS, microfono ni biometria.
+- MVP independiente con datos ficticios basados en el Curriculum Nacional, sin conexion a sistemas reales ni IA externa.
+- Estructura visual y navegacion implementadas segun la Guia 10 (Scaffold, NavHost, NavigationBar y paso de argumentos).
 
-Conclusion:
-El desarrollo de MPAZ PRO 3 cumple a cabalidad con los criterios de exito del caso de estudio academico, ofreciendo una solucion moderna, funcional y estructurada para el seguimiento del aprendizaje. Todo el codigo se encuentra guardado y compilado sin errores.
+Glosario de terminos:
+- MVP: Producto minimo viable, una version inicial del software con las caracteristicas esenciales para probar la propuesta.
+- Jetpack Compose: Kit de herramientas moderno de Android para crear interfaces de usuario de forma declarativa.
+- Material 3: Sistema de diseño oficial de Google para crear interfaces atractivas y accesibles.
+- ViewModel y StateFlow: Componentes encargados de gestionar y mantener el estado de la aplicacion de manera reactiva.
+- Scaffold: Estructura visual basica de una pantalla que incluye barras superiores, inferiores y contenido.
+- NavHost y NavController: Componentes de navegacion encargados de gestionar las rutas y el movimiento entre pantallas.
+- OA (Objetivo de Aprendizaje): Meta curricular oficial definida por el Ministerio de Educacion para guiar el proceso educativo.
+- UTP (Unidad Tecnico Pedagogica): Instancia encargada de revisar, validar y autorizar los contenidos educativos del establecimiento.
+- Racha de estudio: Indicador que muestra los dias consecutivos que el estudiante ha ingresado a repasar y estudiar.

@@ -18,6 +18,10 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
+        
+        // Inicializa la base de datos local Room
+        modeloVista.inicializarRoom(this)
+
         setContent {
             MPAZPRO3Theme {
                 Surface(modifier = Modifier.fillMaxSize()) {

@@ -1,5 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- Manifiesto principal de la aplicacion Android -->
+<!--
+  Aqui configuramos el archivo principal de Android.
+  Le avisamos al sistema cuales son las pantallas de nuestra aplicacion,
+  como se llama la app y que permisos o ajustes usamos.
+  Para nuestro proyecto MPAZ PRO 3, aqui declaramos la actividad principal
+  sin pedir permisos molestos de camara o GPS, cumpliendo con el caso de estudio.
+-->
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
@@ -13,7 +19,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MPAZPRO3">
 
-        <!-- Actividad principal que inicia la aplicacion -->
+        <!-- Aqui arranca la aplicacion abriendo nuestra MainActivity con Jetpack Compose -->
         <activity
             android:name=".MainActivity"
             android:exported="true"
@@ -22,10 +28,21 @@
             android:windowSoftInputMode="adjustResize">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
     </application>
 
 </manifest>
+
+<!--
+  Glosario estudiantil y tecnico:
+  - Manifest: El archivo de configuracion principal que lee Android.
+  - Activity: Cada pantalla o ventana interactiva de la aplicacion.
+  - Intent Filter: El filtro que le dice a Android cual pantalla se abre primero al tocar el icono de la app.
+  - Backup Rules: Las reglas para guardar respaldos seguros en la nube.
+  - MVP: Nuestro prototipo de aplicacion escolar para Tercero Basico.
+  - Scaffold: La estructura base de nuestras pantallas con barra de navegacion.
+  - ViewModel: Lo que guarda los datos y el estado para que no se borren al girar la pantalla.
+  - OA: Los objetivos de aprendizaje del ministerio que usamos en los modulos.
+-->

@@ -1,7 +1,15 @@
 package com.marcelapaz.mpazpr3.datos
 
-// Repositorio con informacion curricular completa segun la seccion 3.2 del caso
+/*
+  Aqui creamos nuestro repositorio de datos. Como este MVP no se conecta 
+  a bases de datos externas ni plataformas institucionales (seccion 3.4 del caso),
+  creamos una base de datos local ficticia. 
+  Aqui guardamos los modulos de Tercero Basico para Lenguaje, Matematica, Ciencias e Historia, 
+  junto con los recursos didacticos y el informe pedagogico de UTP.
+*/
 object RepositorioDatos {
+    
+    // Funcion que entrega la lista con las 4 asignaturas y sus objetivos curriculares
     fun obtenerModulos(): List<ModuloAprendizaje> {
         return listOf(
             ModuloAprendizaje(
@@ -87,6 +95,7 @@ object RepositorioDatos {
         )
     }
 
+    // Funcion que entrega los recursos de apoyo con instrucciones y ejemplos (seccion 3.2)
     fun obtenerRecursos(): List<RecursoDidactico> {
         return listOf(
             RecursoDidactico(1, "Guia 9: Adaptabilidad del diseño", "Guia", "12 paginas", 2, "Lee la introduccion y responde los ejercicios.", "Ejemplo: Suma 345 + 123", true, true),
@@ -97,6 +106,7 @@ object RepositorioDatos {
         )
     }
 
+    // Funcion que entrega los datos de prueba del estudiante con su identificador ficticio (seccion 3.2 y 5.1)
     fun obtenerPerfil(): PerfilEstudiante {
         return PerfilEstudiante(
             nombre = "Marcela Paz",
@@ -109,6 +119,7 @@ object RepositorioDatos {
         )
     }
 
+    // Funcion que entrega el informe pedagogico reservado para UTP y Docente (seccion 3.1 y 3.2)
     fun obtenerInformePedagogico(): InformePedagogico {
         return InformePedagogico(
             asignatura = "Tercero Basico (4 Asignaturas MVP)",
@@ -120,3 +131,17 @@ object RepositorioDatos {
         )
     }
 }
+
+/*
+  Glosario bien contundente de repositorio y gestion de datos:
+  - Repositorio (Repository): Objeto o clase centralizada que provee los datos a la aplicacion.
+  - Object: Declaracion en Kotlin para un objeto unico que no necesita instanciarse (patron Singleton).
+  - List: Coleccion ordenada de elementos (en este caso, una lista de modulos).
+  - MVP (Producto Minimo Viable): Version simplificada del software para validar la solucion escolar.
+  - Datos ficticios: Informacion de prueba que no utiliza datos reales de alumnos para proteger su privacidad.
+  - Currículum Nacional: Marco de referencia oficial del ministerio que usamos para los objetivos de aprendizaje.
+  - Informe Pedagogico: Reporte reservado para docentes y UTP con rendimientos y areas a reforzar.
+  - UTP: Unidad Tecnico Pedagogica que revisa y autoriza los contenidos educativos.
+  - Asignatura: Materia escolar (Lenguaje, Matematica, Ciencias e Historia).
+  - Unidad: Subdivision de la asignatura segun el plan curricular.
+*/
