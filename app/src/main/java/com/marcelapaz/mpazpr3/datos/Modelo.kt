@@ -1,35 +1,42 @@
 package com.marcelapaz.mpazpr3.datos
 
-// Perfiles de usuario definidos en el caso (3.1)
+/*
+  En este archivo definimos todas las estructuras de datos (moldes) que usa nuestra app.
+  Aqui creamos las clases para los modulos escolares, los recursos didacticos,
+  los perfiles de usuario exigidos en el caso (Estudiante, Docente y UTP) y el informe pedagogico.
+  Todo adaptado al caso de estudio de la Escuela Marcela Paz para Tercero Basico.
+*/
+
+// Aqui definimos los tres roles de usuario que pide la seccion 3.1 del caso de estudio
 enum class RolUsuario(val descripcion: String) {
     ESTUDIANTE("Estudiante (3° Basico)"),
     DOCENTE("Docente de Tercero Basico"),
     UTP("Jefatura de UTP")
 }
 
-// Modelo curricular detallado segun la seccion 3.2 del caso
+// Este molde representa cada modulo de aprendizaje con su informacion curricular completa (seccion 3.2)
 data class ModuloAprendizaje(
     val id: Int,
     val titulo: String,
     val descripcion: String,
-    val nivelEducativo: String, // "Tercero Basico"
-    val asignatura: String, // "Lenguaje", "Matematica", etc.
-    val unidad: String, // "Unidad 1"
-    val objetivoAprendizaje: String, // "OA 1"
-    val codigoOficial: String, // "OA-01"
-    val ejeCurricular: String, // "Lectura"
+    val nivelEducativo: String, // Ejemplo: "Tercero Basico"
+    val asignatura: String, // Ejemplo: "Lenguaje y Comunicacion", "Matematica"
+    val unidad: String, // Ejemplo: "Unidad 1"
+    val objetivoAprendizaje: String, // Meta curricular oficial
+    val codigoOficial: String, // Ejemplo: "OA-LENG-03-03"
+    val ejeCurricular: String, // Ejemplo: "Lectura"
     val explicacion: String,
     val tieneAudioApoyo: Boolean,
     val intentosPermitidos: Int,
     val intentosRealizados: Int,
     val dificultad: String, // "Baja", "Media", "Alta"
-    val progreso: Float, // de 0.0 al 1.0
+    val progreso: Float, // Porcentaje de avance de 0.0 a 1.0
     val estaCompletado: Boolean,
     val horasEstimadas: Int,
     val aprobadoPorUtp: Boolean = true
 )
 
-// Modelo para recursos didacticos segun la seccion 3.2 (audios, imagenes, ejemplos, instrucciones)
+// Este molde representa los recursos didacticos de apoyo (guias, videos, ejemplos e instrucciones de la seccion 3.2)
 data class RecursoDidactico(
     val id: Int,
     val titulo: String,
@@ -42,18 +49,18 @@ data class RecursoDidactico(
     val estaDisponible: Boolean = false
 )
 
-// Modelo para representar el perfil del usuario actual con identificador ficticio (3.2)
+// Este molde representa los datos del usuario actual y su identificador ficticio (seccion 3.2 y 3.4)
 data class PerfilEstudiante(
     val nombre: String,
     val correo: String,
-    val codigoEstudiante: String, // Identificador ficticio
+    val codigoEstudiante: String, // Identificador ficticio para proteger la privacidad
     val modulosCompletadosTotal: Int,
     val rachaDiasEstudio: Int,
     val progresoGeneral: Float,
     val rolActual: RolUsuario = RolUsuario.ESTUDIANTE
 )
 
-// Informe pedagogico reservado para Docente y UTP (3.1 y 3.2)
+// Este molde representa el informe pedagogico reservado para el docente y la UTP (secciones 3.1 y 3.2)
 data class InformePedagogico(
     val asignatura: String,
     val rendimientoPromedio: String,
@@ -62,3 +69,19 @@ data class InformePedagogico(
     val fechaValidacion: String,
     val estadoValidacion: String
 )
+
+/*
+  Glosario bien contundente de modelos de datos y arquitectura:
+  - Data Class: Una clase especial en Kotlin pensada unicamente para almacenar datos y estructuras fijas.
+  - Enum Class: Un conjunto limitado de opciones constantes (en nuestro caso, los tres roles del caso).
+  - Val: Propiedad de solo lectura que no puede ser modificada despues de crearse.
+  - Int: Numero entero (para IDs o contadores).
+  - String: Texto plano para titulos, descripciones y codigos oficiales.
+  - Float: Numero decimal (utilizado para calcular el progreso de 0.0 a 1.0).
+  - Boolean: Valor verdadero o falso (para saber si esta completado o aprobado).
+  - OA (Objetivo de Aprendizaje): Meta curricular oficial del ministerio.
+  - UTP: Unidad Tecnico Pedagogica encargada de autorizar contenidos.
+  - MVP: Producto minimo viable desarrollado como prototipo academico.
+  - Racha de estudio: Dias seguidos que el alumno entra a estudiar.
+  - Identificador ficticio: Codigo de prueba para proteger datos personales segun la regla 5.1 del caso.
+*/

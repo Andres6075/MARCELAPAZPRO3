@@ -21,6 +21,7 @@ import com.marcelapaz.mpazpr3.ui.pantallas.PantallaModulos
 import com.marcelapaz.mpazpr3.ui.pantallas.PantallaPerfil
 import com.marcelapaz.mpazpr3.ui.modelovista.ModeloVistaMpaz
 
+// Definicion de pantallas y rutas de navegacion (Cumple Guia 10: Navegacion y estructura visual)
 sealed class PantallaNavegacion(val ruta: String, val titulo: String, val icono: ImageVector) {
     object Inicio : PantallaNavegacion("inicio", "Inicio", Icons.Default.Home)
     object Modulos : PantallaNavegacion("modulos", "Modulos", Icons.Default.School)
@@ -30,6 +31,7 @@ sealed class PantallaNavegacion(val ruta: String, val titulo: String, val icono:
     }
 }
 
+// Grafo principal de navegacion y estructura visual con Scaffold y NavHost (Guia 2.2.4)
 @Composable
 fun GrafoNavegacionMpaz(modeloVista: ModeloVistaMpaz) {
     val controladorNav = rememberNavController()
@@ -48,8 +50,10 @@ fun GrafoNavegacionMpaz(modeloVista: ModeloVistaMpaz) {
     val entradaActual by controladorNav.currentBackStackEntryAsState()
     val rutaActual = entradaActual?.destination?.route
 
+    // Muestra la barra inferior solo en las pantallas principales
     val mostrarBarraInferior = rutaActual in elementos.map { val pantalla = it; pantalla.ruta }
 
+    // Estructura visual principal utilizando Scaffold y NavigationBar (Guia 10)
     Scaffold(
         bottomBar = {
             if (mostrarBarraInferior) {
@@ -76,6 +80,7 @@ fun GrafoNavegacionMpaz(modeloVista: ModeloVistaMpaz) {
             }
         },
         content = { rellenoInterno ->
+            // Host de navegacion para gestionar las transiciones entre pantallas (Guia 2.2.4)
             NavHost(
                 navController = controladorNav,
                 startDestination = PantallaNavegacion.Inicio.ruta,
@@ -83,6 +88,7 @@ fun GrafoNavegacionMpaz(modeloVista: ModeloVistaMpaz) {
                     .fillMaxSize()
                     .padding(rellenoInterno)
             ) {
+                // Ruta 1: Pantalla de Inicio / Dashboard
                 composable(PantallaNavegacion.Inicio.ruta) {
                     PantallaInicio(
                         perfil = perfil,
@@ -102,6 +108,7 @@ fun GrafoNavegacionMpaz(modeloVista: ModeloVistaMpaz) {
                     )
                 }
 
+                // Ruta 2: Pantalla de Modulos y Asignaturas
                 composable(PantallaNavegacion.Modulos.ruta) {
                     PantallaModulos(
                         modulos = modulos,
@@ -113,6 +120,7 @@ fun GrafoNavegacionMpaz(modeloVista: ModeloVistaMpaz) {
                     )
                 }
 
+                // Ruta 3: Pantalla de Perfil de Usuario y Roles (Estudiante, Docente, UTP)
                 composable(PantallaNavegacion.Perfil.ruta) {
                     PantallaPerfil(
                         perfil = perfil,
@@ -123,6 +131,7 @@ fun GrafoNavegacionMpaz(modeloVista: ModeloVistaMpaz) {
                     )
                 }
 
+                // Ruta 4: Pantalla de Detalle con paso de argumentos (idModulo)
                 composable(
                     route = PantallaNavegacion.Detalle.ruta,
                     arguments = listOf(navArgument("idModulo") { type = NavType.IntType })
@@ -141,3 +150,51 @@ fun GrafoNavegacionMpaz(modeloVista: ModeloVistaMpaz) {
         }
     )
 }
+
+/*
+GLOSARIO GENERAL COMPLETO DE KOTLIN, UI, ANDROID Y CURRICULO:
+- val: Palabra clave en Kotlin para declarar una variable de solo lectura (constante).
+- var: Palabra clave en Kotlin para declarar una variable cuyo valor puede cambiar.
+- fun: Palabra clave para definir una funcion o bloque de codigo reutilizable.
+- class: Plantilla para crear objetos que agrupan propiedades y funciones.
+- object: Permite crear una clase de instancia unica (objeto estatico o repositorio).
+- package: Define la carpeta o paquete logico donde se ubica el archivo de codigo.
+- import: Permite utilizar clases, funciones o librerias ubicadas en otros paquetes.
+- return: Devuelve un resultado al finalizar la ejecucion de una funcion.
+- String: Tipo de dato que representa texto o cadenas de caracteres.
+- Int: Tipo de dato que representa numeros enteros.
+- Boolean: Tipo de dato logico que almacena verdadero o falso.
+- List: Estructura de datos para almacenar una coleccion ordenada de elementos.
+- Lambda: Funcion anonima que se puede pasar como parametro (ej. bloques de codigo entre llaves).
+- If / Else: Estructura condicional para tomar decisiones segun si se cumple o no una condicion.
+- When: Estructura de seleccion multiple util para comparar varios casos posibles.
+- Scaffold: Estructura visual basica que organiza la pantalla con barra inferior y contenido.
+- NavController: Controlador encargado de gestionar el movimiento entre pantallas.
+- NavHost: Contenedor que muestra las pantallas segun la ruta activa actual.
+- Ruta: Texto que identifica de forma unica a cada pantalla en la navegacion.
+- Argumento: Dato que se envia de una pantalla a otra (por ejemplo, el id del modulo).
+- NavigationBar: Barra inferior visible para cambiar de seccion facilmente.
+- ViewModel (Modelo Vista): Componente que almacena y gestiona los datos y estados de la interfaz.
+- StateFlow: Flujo de datos reactivo que actualiza la pantalla automaticamente cuando cambian los valores.
+- Modulo de aprendizaje: Contenido educativo organizado por asignaturas, unidades y objetivos de aprendizaje.
+- Recurso didactico: Material de apoyo como guias, videos, ejemplos y audios para la lectura autonoma.
+- Rol UTP / Docente / Estudiante: Perfiles de usuario definidos en el caso para cumplir las tareas de autorizacion, asignacion y consulta.
+- Racha de estudio: Indicador de dias consecutivos que el estudiante ingresa a repasar y completar actividades.
+- MVP: Producto minimo viable desarrollado con fines academicos y datos ficticios.
+- Jetpack Compose: Kit de herramientas moderno de Android para crear interfaces de usuario de forma declarativa.
+- Material 3: Sistema de diseño oficial de Google que aporta componentes visuales modernos y accesibles.
+- Composable: Funcion especial de Jetpack Compose que dibuja y construye elementos en la pantalla.
+- LazyColumn: Lista vertical optimizada que carga elementos a medida que el usuario desliza la pantalla.
+- Card: Tarjeta visual con bordes redondeados ideal para agrupar informacion relacionada.
+- Surface: Superficie base para aplicar colores de fondo y elevacion visual.
+- MutableStateFlow: Contenedor de datos reactivo que permite modificar su valor y notifica cambios en tiempo real.
+- Remember: Funcion para recordar y conservar un valor mientras la pantalla sigue activa.
+- Corrutinas: Tareas en segundo plano que permiten ejecutar procesos sin congelar la interfaz principal.
+- Android Studio: Entorno de desarrollo oficial utilizado para programar y compilar aplicaciones Android.
+- Gradle: Sistema de automatizacion de construccion que compila y empaqueta el proyecto.
+- SDK: Kit de desarrollo de software que provee las herramientas necesarias para crear apps para Android.
+- Manifest: Archivo de configuracion principal que declara actividades, nombre y ajustes generales de la app.
+- APK: Paquete de instalacion ejecutable generado para dispositivos Android.
+- OA (Objetivo de Aprendizaje): Meta curricular oficial definida por el Ministerio de Educacion para guiar el proceso educativo.
+- UTP (Unidad Tecnico Pedagogica): Instancia encargada de revisar, validar y autorizar los contenidos educativos del establecimiento.
+*/
