@@ -80,6 +80,18 @@ class ModeloVistaMpaz : ViewModel() {
         }
     }
 
+    fun cambiarIntentosDocente(idModulo: Int, nuevosIntentos: Int) {
+        _modulos.update { lista ->
+            lista.map { modulo ->
+                if (modulo.id == idModulo) {
+                    val modificado = modulo.copy(intentosPermitidos = nuevosIntentos)
+                    guardarEnRoom(modificado)
+                    modificado
+                } else modulo
+            }
+        }
+    }
+
     fun cambiarEstadoModulo(idModulo: Int) {
         _modulos.update { listaActual ->
             listaActual.map { modulo ->
