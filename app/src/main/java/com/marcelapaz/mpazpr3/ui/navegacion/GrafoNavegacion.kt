@@ -108,12 +108,15 @@ fun GrafoNavegacionMpaz(modeloVista: ModeloVistaMpaz) {
                     )
                 }
 
-                // Ruta 2: Pantalla de Modulos y Asignaturas
+                // Ruta 2: Pantalla de Modulos y Asignaturas con funciones adaptadas por Rol (Seccion 3.1)
                 composable(PantallaNavegacion.Modulos.ruta) {
                     PantallaModulos(
                         modulos = modulos,
+                        rolActual = perfil.rolActual,
                         textoBusqueda = textoBusqueda,
                         alCambiarTextoBusqueda = { modeloVista.actualizarTextoBusqueda(it) },
+                        alAutorizarModuloUtp = { id -> modeloVista.autorizarModuloUtp(id) },
+                        alCambiarIntentosDocente = { id, intentos -> modeloVista.cambiarIntentosDocente(id, intentos) },
                         alHacerClicModulo = { idModulo ->
                             controladorNav.navigate(PantallaNavegacion.Detalle.crearRuta(idModulo))
                         }
@@ -180,7 +183,7 @@ GLOSARIO GENERAL COMPLETO DE KOTLIN, UI, ANDROID Y CURRICULO:
 - Recurso didactico: Material de apoyo como guias, videos, ejemplos y audios para la lectura autonoma.
 - Rol UTP / Docente / Estudiante: Perfiles de usuario definidos en el caso para cumplir las tareas de autorizacion, asignacion y consulta.
 - Racha de estudio: Indicador de dias consecutivos que el estudiante ingresa a repasar y completar actividades.
-- MVP: Producto minimo viable desarrollado con fines academicos y datos ficticios.
+- MVP: Producto minimo variable desarrollado con fines academicos y datos ficticios.
 - Jetpack Compose: Kit de herramientas moderno de Android para crear interfaces de usuario de forma declarativa.
 - Material 3: Sistema de diseño oficial de Google que aporta componentes visuales modernos y accesibles.
 - Composable: Funcion especial de Jetpack Compose que dibuja y construye elementos en la pantalla.
