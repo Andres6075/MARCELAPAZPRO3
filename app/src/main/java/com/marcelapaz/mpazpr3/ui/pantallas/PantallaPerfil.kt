@@ -16,6 +16,15 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import android.graphics.Bitmap
+import android.net.Uri
+import androidx.activity.compose.rememberLauncherForActivityResult
+import androidx.activity.result.PickVisualMediaRequest
+import androidx.activity.result.contract.ActivityResultContracts
+import androidx.compose.foundation.Image
+import androidx.compose.foundation.clickable
+import androidx.compose.ui.graphics.asImageBitmap
+import androidx.compose.ui.layout.ContentScale
 import com.marcelapaz.mpazpr3.datos.InformePedagogico
 import com.marcelapaz.mpazpr3.datos.ModuloAprendizaje
 import com.marcelapaz.mpazpr3.datos.PerfilEstudiante
@@ -28,9 +37,19 @@ fun PantallaPerfil(
     modulos: List<ModuloAprendizaje>,
     informe: InformePedagogico,
     alCambiarRol: (RolUsuario) -> Unit,
-    alAutorizarModulo: (Int) -> Unit
+    alAutorizarModulo: (Int) -> Unit,
+    avatar: Bitmap?,
+    alElegirFoto: (Uri) -> Unit
 ) {
     var expandido by remember { mutableStateOf(false) }
+
+    // Recurso nativo: selector de fotos del sistema (no requiere permisos). Si se cancela, uri es null.
+    val lanzadorFoto = rememberLauncherForActivityResult(ActivityResultContracts.PickVisualMedia()) { uri ->
+        if (uri != null) alElegirFoto(uri)
+    }
+    val elegirFoto = {
+        lanzadorFoto.launch(PickVisualMediaRequest(ActivityResultContracts.PickVisualMedia.ImageOnly))
+    }
 
     LazyColumn(
         modifier = Modifier
@@ -46,23 +65,37 @@ fun PantallaPerfil(
             Surface(
                 shape = CircleShape,
                 color = MaterialTheme.colorScheme.primaryContainer,
-                modifier = Modifier.size(90.dp)
+                modifier = Modifier.size(90.dp).clickable { elegirFoto() }
             ) {
                 Box(contentAlignment = Alignment.Center) {
-                    Icon(
-                        imageVector = when (perfil.rolActual) {
-                            RolUsuario.ESTUDIANTE -> Icons.Default.Person
-                            RolUsuario.DOCENTE -> Icons.Default.Verified
-                            RolUsuario.UTP -> Icons.Default.AdminPanelSettings
-                        },
-                        contentDescription = "Rol",
-                        modifier = Modifier.size(45.dp),
-                        tint = MaterialTheme.colorScheme.onPrimaryContainer
-                    )
+                    if (avatar != null) {
+                        Image(
+                            bitmap = avatar.asImageBitmap(),
+                            contentDescription = "Foto de perfil",
+                            contentScale = ContentScale.Crop,
+                            modifier = Modifier.fillMaxSize()
+                        )
+                    } else {
+                        Icon(
+                            imageVector = when (perfil.rolActual) {
+                                RolUsuario.ESTUDIANTE -> Icons.Default.Person
+                                RolUsuario.DOCENTE -> Icons.Default.Verified
+                                RolUsuario.UTP -> Icons.Default.AdminPanelSettings
+                            },
+                            contentDescription = "Rol",
+                            modifier = Modifier.size(45.dp),
+                            tint = MaterialTheme.colorScheme.onPrimaryContainer
+                        )
+                    }
                 }
             }
         }
 
+        item {
+            TextButton(onClick = { elegirFoto() }) {
+                Text("Cambiar foto de perfil")
+            }
+        }
         item {
             Text(
                 text = perfil.nombre,
