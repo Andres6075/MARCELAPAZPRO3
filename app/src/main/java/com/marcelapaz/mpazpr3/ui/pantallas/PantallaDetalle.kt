@@ -17,6 +17,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import com.marcelapaz.mpazpr3.datos.RecursoDidactico
+import com.marcelapaz.mpazpr3.ui.componentes.BotonEscuchar
 import com.marcelapaz.mpazpr3.datos.ModuloAprendizaje
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -125,25 +126,30 @@ fun PantallaDetalle(
                 }
 
                 item {
-                    Text(
-                        text = "Explicacion e Instrucciones:",
-                        style = MaterialTheme.typography.titleMedium,
-                        fontWeight = FontWeight.Bold
-                    )
-                    Spacer(modifier = Modifier.height(4.dp))
-                    Text(
-                        text = modulo.explicacion,
-                        style = MaterialTheme.typography.bodyLarge,
-                        color = MaterialTheme.colorScheme.onSurfaceVariant
-                    )
-                    if (modulo.tieneAudioApoyo) {
+                    Column {
+                        Text(
+                            text = "Explicacion e Instrucciones:",
+                            style = MaterialTheme.typography.titleMedium,
+                            fontWeight = FontWeight.Bold
+                        )
+                        Spacer(modifier = Modifier.height(4.dp))
+                        Text(
+                            text = modulo.explicacion,
+                            style = MaterialTheme.typography.bodyLarge,
+                            color = MaterialTheme.colorScheme.onSurfaceVariant
+                        )
                         Spacer(modifier = Modifier.height(8.dp))
-                        Row(
-                            verticalAlignment = Alignment.CenterVertically,
-                            horizontalArrangement = Arrangement.spacedBy(8.dp)
-                        ) {
-                            Icon(imageVector = Icons.Default.VolumeUp, contentDescription = "Audio", tint = MaterialTheme.colorScheme.primary)
-                            Text(text = "Incluye audio de apoyo para la lectura autonoma", style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.primary)
+                        // Recurso nativo: lectura en voz alta con TextToSpeech
+                        BotonEscuchar(texto = modulo.explicacion)
+                        if (modulo.tieneAudioApoyo) {
+                            Spacer(modifier = Modifier.height(8.dp))
+                            Row(
+                                verticalAlignment = Alignment.CenterVertically,
+                                horizontalArrangement = Arrangement.spacedBy(8.dp)
+                            ) {
+                                Icon(imageVector = Icons.Default.VolumeUp, contentDescription = "Audio", tint = MaterialTheme.colorScheme.primary)
+                                Text(text = "Incluye audio de apoyo para la lectura autonoma", style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.primary)
+                            }
                         }
                     }
                 }

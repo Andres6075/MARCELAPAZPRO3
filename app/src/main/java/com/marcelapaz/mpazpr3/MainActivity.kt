@@ -21,6 +21,7 @@ class MainActivity : ComponentActivity() {
         
         // Inicializa la base de datos local Room
         modeloVista.inicializarRoom(this)
+        modeloVista.cargarAvatar(this)
 
         setContent {
             MPAZPRO3Theme {
