@@ -9,6 +9,7 @@ import androidx.compose.material.icons.filled.School
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavGraph.Companion.findStartDestination
@@ -16,6 +17,7 @@ import androidx.navigation.NavType
 import androidx.navigation.compose.*
 import androidx.navigation.navArgument
 import com.marcelapaz.mpazpr3.ui.pantallas.PantallaDetalle
+import com.marcelapaz.mpazpr3.ui.pantallas.PantallaFormularioModulo
 import com.marcelapaz.mpazpr3.ui.pantallas.PantallaInicio
 import com.marcelapaz.mpazpr3.ui.pantallas.PantallaModulos
 import com.marcelapaz.mpazpr3.ui.pantallas.PantallaPerfil
@@ -26,6 +28,7 @@ sealed class PantallaNavegacion(val ruta: String, val titulo: String, val icono:
     object Inicio : PantallaNavegacion("inicio", "Inicio", Icons.Default.Home)
     object Modulos : PantallaNavegacion("modulos", "Modulos", Icons.Default.School)
     object Perfil : PantallaNavegacion("perfil", "Perfil", Icons.Default.Person)
+    object NuevoModulo : PantallaNavegacion("nuevoModulo", "Nuevo Modulo", Icons.Default.School)
     object Detalle : PantallaNavegacion("detalle/{idModulo}", "Detalle", Icons.Default.School) {
         fun crearRuta(idModulo: Int) = "detalle/$idModulo"
     }
@@ -40,6 +43,8 @@ fun GrafoNavegacionMpaz(modeloVista: ModeloVistaMpaz) {
     val perfil by modeloVista.perfil.collectAsStateWithLifecycle()
     val informe by modeloVista.informe.collectAsStateWithLifecycle()
     val textoBusqueda by modeloVista.textoBusqueda.collectAsStateWithLifecycle()
+    val avatar by modeloVista.avatar.collectAsStateWithLifecycle()
+    val contexto = LocalContext.current
 
     val elementos = listOf(
         PantallaNavegacion.Inicio,
@@ -117,6 +122,7 @@ fun GrafoNavegacionMpaz(modeloVista: ModeloVistaMpaz) {
                         alCambiarTextoBusqueda = { modeloVista.actualizarTextoBusqueda(it) },
                         alAutorizarModuloUtp = { id -> modeloVista.autorizarModuloUtp(id) },
                         alCambiarIntentosDocente = { id, intentos -> modeloVista.cambiarIntentosDocente(id, intentos) },
+                        alCrearModulo = { controladorNav.navigate(PantallaNavegacion.NuevoModulo.ruta) },
                         alHacerClicModulo = { idModulo ->
                             controladorNav.navigate(PantallaNavegacion.Detalle.crearRuta(idModulo))
                         }
@@ -130,10 +136,19 @@ fun GrafoNavegacionMpaz(modeloVista: ModeloVistaMpaz) {
                         modulos = modulos,
                         informe = informe,
                         alCambiarRol = { rol -> modeloVista.cambiarRolUsuario(rol) },
-                        alAutorizarModulo = { id -> modeloVista.autorizarModuloUtp(id) }
+                        alAutorizarModulo = { id -> modeloVista.autorizarModuloUtp(id) },
+                        avatar = avatar,
+                        alElegirFoto = { uri -> modeloVista.guardarAvatar(contexto, uri) }
                     )
                 }
 
+                // Ruta 5: Formulario para crear un modulo nuevo (Docente / UTP)
+                composable(PantallaNavegacion.NuevoModulo.ruta) {
+                    PantallaFormularioModulo(
+                        alGuardar = { modulo -> modeloVista.agregarModulo(modulo) },
+                        alVolver = { controladorNav.popBackStack() }
+                    )
+                }
                 // Ruta 4: Pantalla de Detalle con paso de argumentos (idModulo)
                 composable(
                     route = PantallaNavegacion.Detalle.ruta,

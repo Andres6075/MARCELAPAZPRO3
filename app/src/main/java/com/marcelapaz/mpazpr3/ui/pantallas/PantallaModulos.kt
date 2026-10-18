@@ -1,5 +1,7 @@
 package com.marcelapaz.mpazpr3.ui.pantallas
 
+import androidx.compose.animation.core.animateFloatAsState
+import androidx.compose.animation.core.tween
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
@@ -27,6 +29,7 @@ fun PantallaModulos(
     alCambiarTextoBusqueda: (String) -> Unit,
     alAutorizarModuloUtp: (Int) -> Unit,
     alCambiarIntentosDocente: (Int, Int) -> Unit,
+    alCrearModulo: () -> Unit,
     alHacerClicModulo: (Int) -> Unit
 ) {
     val modulosFiltrados = remember(modulos, textoBusqueda) {
@@ -93,6 +96,18 @@ fun PantallaModulos(
             )
         }
 
+        // Solo Docente y UTP pueden crear modulos nuevos (formulario con validacion)
+        if (rolActual != RolUsuario.ESTUDIANTE) {
+            Button(
+                onClick = alCrearModulo,
+                modifier = Modifier.fillMaxWidth()
+            ) {
+                Icon(Icons.Default.Add, contentDescription = null)
+                Spacer(modifier = Modifier.width(8.dp))
+                Text("Nuevo modulo")
+            }
+        }
+
         LazyColumn(
             modifier = Modifier.fillMaxSize(),
             verticalArrangement = Arrangement.spacedBy(12.dp)
@@ -118,6 +133,12 @@ fun TarjetaModuloResumen(
     alCambiarIntentos: (Int) -> Unit,
     alHacerClic: () -> Unit
 ) {
+    // Animacion: el circulo de progreso se mueve suavemente cuando cambia el avance
+    val progresoAnimado = animateFloatAsState(
+        targetValue = modulo.progreso,
+        animationSpec = tween(durationMillis = 600),
+        label = "progresoModulo"
+    )
     Card(
         modifier = Modifier
             .fillMaxWidth()
@@ -190,7 +211,7 @@ fun TarjetaModuloResumen(
                     )
                 } else {
                     CircularProgressIndicator(
-                        progress = { modulo.progreso },
+                        progress = { progresoAnimado.value },
                         modifier = Modifier.size(32.dp),
                         strokeWidth = 3.dp
                     )
