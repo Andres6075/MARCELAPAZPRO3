@@ -20,6 +20,9 @@ interface ModuloDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertarModulos(modulos: List<ModuloEntidad>)
 
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun insertarModulo(modulo: ModuloEntidad)
+
     @Update
     suspend fun actualizarModulo(modulo: ModuloEntidad)
 
