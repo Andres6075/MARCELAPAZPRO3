@@ -3,6 +3,10 @@ package com.marcelapaz.mpazpr3.ui.modelovista
 import android.content.Context
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import android.graphics.Bitmap
+import android.net.Uri
+import com.marcelapaz.mpazpr3.datos.AlmacenAvatar
+import kotlinx.coroutines.Dispatchers
 import com.marcelapaz.mpazpr3.datos.InformePedagogico
 import com.marcelapaz.mpazpr3.datos.ModuloAprendizaje
 import com.marcelapaz.mpazpr3.datos.PerfilEstudiante
@@ -57,6 +61,22 @@ class ModeloVistaMpaz : ViewModel() {
                     }
                 }
             }
+        }
+    }
+
+    // Foto de perfil guardada en el almacenamiento interno (recurso nativo: selector de fotos)
+    private val _avatar = MutableStateFlow<Bitmap?>(null)
+    val avatar: StateFlow<Bitmap?> = _avatar.asStateFlow()
+
+    fun cargarAvatar(contexto: Context) {
+        viewModelScope.launch(Dispatchers.IO) {
+            _avatar.value = AlmacenAvatar.cargar(contexto.applicationContext)
+        }
+    }
+
+    fun guardarAvatar(contexto: Context, uri: Uri) {
+        viewModelScope.launch(Dispatchers.IO) {
+            AlmacenAvatar.guardar(contexto.applicationContext, uri)?.let { _avatar.value = it }
         }
     }
 
@@ -127,6 +147,13 @@ class ModeloVistaMpaz : ViewModel() {
             }
         }
         calcularProgresoGeneral()
+    }
+
+    // Guarda en Room un modulo nuevo creado desde el formulario (Room asigna el id)
+    fun agregarModulo(modulo: ModuloAprendizaje) {
+        viewModelScope.launch {
+            moduloDao?.insertarModulo(modulo.aEntidad())
+        }
     }
 
     private fun guardarEnRoom(modulo: ModuloAprendizaje) {

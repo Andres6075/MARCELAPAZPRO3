@@ -1,5 +1,7 @@
 package com.marcelapaz.mpazpr3.ui.pantallas
 
+import androidx.compose.animation.core.animateFloatAsState
+import androidx.compose.animation.core.tween
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -144,8 +146,13 @@ fun PantallaInicio(
                                 )
                             }
 
+                            val progresoAnimado = animateFloatAsState(
+                                targetValue = perfil.progresoGeneral,
+                                animationSpec = tween(durationMillis = 800),
+                                label = "progresoGeneral"
+                            )
                             LinearProgressIndicator(
-                                progress = { perfil.progresoGeneral },
+                                progress = { progresoAnimado.value },
                                 modifier = Modifier
                                     .fillMaxWidth()
                                     .height(10.dp)
