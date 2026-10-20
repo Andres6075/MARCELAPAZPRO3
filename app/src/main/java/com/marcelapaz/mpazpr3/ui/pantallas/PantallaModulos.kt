@@ -112,6 +112,16 @@ fun PantallaModulos(
             modifier = Modifier.fillMaxSize(),
             verticalArrangement = Arrangement.spacedBy(12.dp)
         ) {
+            if (modulosFiltrados.isEmpty()) {
+                item {
+                    Text(
+                        text = if (rolActual == RolUsuario.ESTUDIANTE) "Aun no hay modulos autorizados por la UTP."
+                        else "No se encontraron modulos.",
+                        style = MaterialTheme.typography.bodyLarge,
+                        color = MaterialTheme.colorScheme.onSurfaceVariant
+                    )
+                }
+            }
             items(modulosFiltrados) { modulo ->
                 TarjetaModuloResumen(
                     modulo = modulo,
