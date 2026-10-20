@@ -19,7 +19,10 @@ import com.marcelapaz.mpazpr3.datos.db.aEntidad
 import com.marcelapaz.mpazpr3.datos.db.aModeloDominio
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.combine
+import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
@@ -35,6 +38,17 @@ class ModeloVistaMpaz : ViewModel() {
 
     private val _perfil = MutableStateFlow(RepositorioDatos.obtenerPerfil())
     val perfil: StateFlow<PerfilEstudiante> = _perfil.asStateFlow()
+
+    // Regla del caso (3.1): el estudiante solo ve los modulos autorizados por la UTP.
+    // Docente y UTP ven todos, porque el docente los crea y la UTP los autoriza.
+    val modulosVisibles: StateFlow<List<ModuloAprendizaje>> =
+        combine(_modulos, _perfil) { lista, perfilActual ->
+            modulosSegunRol(lista, perfilActual.rolActual)
+        }.stateIn(
+            scope = viewModelScope,
+            started = SharingStarted.Eagerly,
+            initialValue = modulosSegunRol(_modulos.value, _perfil.value.rolActual)
+        )
 
     private val _informe = MutableStateFlow(RepositorioDatos.obtenerInformePedagogico())
     val informe: StateFlow<InformePedagogico> = _informe.asStateFlow()
@@ -86,6 +100,8 @@ class ModeloVistaMpaz : ViewModel() {
 
     fun cambiarRolUsuario(nuevoRol: RolUsuario) {
         _perfil.update { it.copy(rolActual = nuevoRol) }
+        // El avance general depende de los modulos que ve el rol actual
+        calcularProgresoGeneral()
     }
 
     fun autorizarModuloUtp(idModulo: Int) {
@@ -98,6 +114,7 @@ class ModeloVistaMpaz : ViewModel() {
                 } else modulo
             }
         }
+        calcularProgresoGeneral()
     }
 
     fun cambiarIntentosDocente(idModulo: Int, nuevosIntentos: Int) {
@@ -113,6 +130,7 @@ class ModeloVistaMpaz : ViewModel() {
     }
 
     fun cambiarEstadoModulo(idModulo: Int) {
+        if (!puedeAvanzar(idModulo)) return
         _modulos.update { listaActual ->
             listaActual.map { modulo ->
                 if (modulo.id == idModulo) {
@@ -132,6 +150,7 @@ class ModeloVistaMpaz : ViewModel() {
     }
 
     fun actualizarProgresoModulo(idModulo: Int, nuevoProgreso: Float) {
+        if (!puedeAvanzar(idModulo)) return
         _modulos.update { listaActual ->
             listaActual.map { modulo ->
                 if (modulo.id == idModulo) {
@@ -156,6 +175,16 @@ class ModeloVistaMpaz : ViewModel() {
         }
     }
 
+    // Filtra los modulos segun el rol: el estudiante solo accede a los autorizados por la UTP
+    private fun modulosSegunRol(lista: List<ModuloAprendizaje>, rol: RolUsuario): List<ModuloAprendizaje> =
+        if (rol == RolUsuario.ESTUDIANTE) lista.filter { it.aprobadoPorUtp } else lista
+
+    // Un estudiante no puede avanzar ni completar un modulo que la UTP no ha autorizado
+    private fun puedeAvanzar(idModulo: Int): Boolean {
+        val modulo = _modulos.value.find { it.id == idModulo } ?: return false
+        return _perfil.value.rolActual != RolUsuario.ESTUDIANTE || modulo.aprobadoPorUtp
+    }
+
     private fun guardarEnRoom(modulo: ModuloAprendizaje) {
         viewModelScope.launch {
             moduloDao?.actualizarModulo(modulo.aEntidad())
@@ -163,9 +192,8 @@ class ModeloVistaMpaz : ViewModel() {
     }
 
     private fun calcularProgresoGeneral() {
-        val lista = _modulos.value
-        if (lista.isEmpty()) return
-        val promedio = lista.map { it.progreso }.average().toFloat()
+        val lista = modulosSegunRol(_modulos.value, _perfil.value.rolActual)
+        val promedio = if (lista.isEmpty()) 0f else lista.map { it.progreso }.average().toFloat()
         val completados = lista.count { it.estaCompletado }
         _perfil.update { p ->
             p.copy(

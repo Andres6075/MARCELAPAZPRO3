@@ -38,7 +38,7 @@ sealed class PantallaNavegacion(val ruta: String, val titulo: String, val icono:
 @Composable
 fun GrafoNavegacionMpaz(modeloVista: ModeloVistaMpaz) {
     val controladorNav = rememberNavController()
-    val modulos by modeloVista.modulos.collectAsStateWithLifecycle()
+    val modulos by modeloVista.modulosVisibles.collectAsStateWithLifecycle()
     val recursos by modeloVista.recursos.collectAsStateWithLifecycle()
     val perfil by modeloVista.perfil.collectAsStateWithLifecycle()
     val informe by modeloVista.informe.collectAsStateWithLifecycle()

@@ -12,7 +12,7 @@ La escuela trabaja con guías impresas, por lo que el avance por objetivo de apr
 
 ## Funcionalidades implementadas
 
-- **Tres perfiles con permisos distintos:** Estudiante (consulta y avanza, sin modificar contenidos ni ver el informe), Docente (asigna contenidos y define intentos) y UTP (autoriza módulos y accede al informe pedagógico reservado).
+- **Tres perfiles con permisos distintos:** Estudiante (consulta y avanza solo en los módulos autorizados por la UTP, sin modificar contenidos ni ver el informe), Docente (asigna contenidos y define intentos) y UTP (autoriza módulos y accede al informe pedagógico reservado).
 - **Módulos y asignaturas:** lista con buscador en tiempo real por asignatura, unidad, código OA o palabra clave.
 - **Detalle del módulo:** información curricular, recursos didácticos, avance ajustable con deslizador y botón para marcar como completado.
 - **Formulario "Nuevo módulo" (Docente y UTP):** seis campos con validación por campo, mensaje de error e ícono de error. El módulo se guarda como pendiente de autorización de la UTP.
