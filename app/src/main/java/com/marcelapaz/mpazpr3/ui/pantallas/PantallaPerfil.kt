@@ -120,6 +120,7 @@ fun PantallaPerfil(
                     value = "Cambiar Perfil: ${perfil.rolActual.descripcion}",
                     onValueChange = {},
                     readOnly = true,
+                    supportingText = { Text("Selector solo para demostración: simula el inicio de sesión de cada perfil") },
                     trailingIcon = { ExposedDropdownMenuDefaults.TrailingIcon(expanded = expandido) },
                     modifier = Modifier
                         .fillMaxWidth()
