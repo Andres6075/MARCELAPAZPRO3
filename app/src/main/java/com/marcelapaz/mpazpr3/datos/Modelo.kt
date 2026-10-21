@@ -9,8 +9,8 @@ package com.marcelapaz.mpazpr3.datos
 
 // Aqui definimos los tres roles de usuario que pide la seccion 3.1 del caso de estudio
 enum class RolUsuario(val descripcion: String) {
-    ESTUDIANTE("Estudiante (3° Basico)"),
-    DOCENTE("Docente de Tercero Basico"),
+    ESTUDIANTE("Estudiante (3° Básico)"),
+    DOCENTE("Docente de Tercero Básico"),
     UTP("Jefatura de UTP")
 }
 
@@ -19,8 +19,8 @@ data class ModuloAprendizaje(
     val id: Int,
     val titulo: String,
     val descripcion: String,
-    val nivelEducativo: String, // Ejemplo: "Tercero Basico"
-    val asignatura: String, // Ejemplo: "Lenguaje y Comunicacion", "Matematica"
+    val nivelEducativo: String, // Ejemplo: "Tercero Básico"
+    val asignatura: String, // Ejemplo: "Lenguaje y Comunicación", "Matemática"
     val unidad: String, // Ejemplo: "Unidad 1"
     val objetivoAprendizaje: String, // Meta curricular oficial
     val codigoOficial: String, // Ejemplo: "OA-LENG-03-03"
@@ -40,7 +40,7 @@ data class ModuloAprendizaje(
 data class RecursoDidactico(
     val id: Int,
     val titulo: String,
-    val tipo: String, // "Video", "Lectura", "Cuestionario", "Guia"
+    val tipo: String, // "Video", "Lectura", "Cuestionario", "Guía"
     val duracionOPaginas: String,
     val moduloId: Int,
     val instrucciones: String,

@@ -26,9 +26,9 @@ import com.marcelapaz.mpazpr3.ui.modelovista.ModeloVistaMpaz
 // Definicion de pantallas y rutas de navegacion (Cumple Guia 10: Navegacion y estructura visual)
 sealed class PantallaNavegacion(val ruta: String, val titulo: String, val icono: ImageVector) {
     object Inicio : PantallaNavegacion("inicio", "Inicio", Icons.Default.Home)
-    object Modulos : PantallaNavegacion("modulos", "Modulos", Icons.Default.School)
+    object Modulos : PantallaNavegacion("modulos", "Módulos", Icons.Default.School)
     object Perfil : PantallaNavegacion("perfil", "Perfil", Icons.Default.Person)
-    object NuevoModulo : PantallaNavegacion("nuevoModulo", "Nuevo Modulo", Icons.Default.School)
+    object NuevoModulo : PantallaNavegacion("nuevoModulo", "Nuevo Módulo", Icons.Default.School)
     object Detalle : PantallaNavegacion("detalle/{idModulo}", "Detalle", Icons.Default.School) {
         fun crearRuta(idModulo: Int) = "detalle/$idModulo"
     }

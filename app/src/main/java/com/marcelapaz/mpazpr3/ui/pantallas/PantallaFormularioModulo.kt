@@ -50,7 +50,7 @@ fun PantallaFormularioModulo(
     Scaffold(
         topBar = {
             TopAppBar(
-                title = { Text("Nuevo Modulo") },
+                title = { Text("Nuevo Módulo") },
                 navigationIcon = {
                     IconButton(onClick = alVolver) {
                         Icon(Icons.Default.ArrowBack, contentDescription = "Volver")
@@ -85,7 +85,7 @@ fun PantallaFormularioModulo(
                     ) {
                         Icon(Icons.Default.CheckCircle, contentDescription = "Guardado")
                         Text(
-                            "Modulo guardado. Queda pendiente de autorizacion de la UTP.",
+                            "Módulo guardado. Queda pendiente de autorización de la UTP.",
                             fontWeight = FontWeight.SemiBold
                         )
                     }
@@ -94,7 +94,7 @@ fun PantallaFormularioModulo(
 
             CampoFormulario(
                 valor = estado.titulo,
-                etiqueta = "Titulo del modulo",
+                etiqueta = "Título del módulo",
                 error = errores.titulo,
                 alCambiar = modeloVista::cambiarTitulo
             )
@@ -147,7 +147,7 @@ fun PantallaFormularioModulo(
 
             CampoFormulario(
                 valor = estado.codigoOa,
-                etiqueta = "Codigo OA (ej: OA-LENG-03-03)",
+                etiqueta = "Código OA (ej: OA-LENG-03-03)",
                 error = errores.codigoOa,
                 alCambiar = modeloVista::cambiarCodigoOa
             )
@@ -179,7 +179,7 @@ fun PantallaFormularioModulo(
                 colors = ButtonDefaults.buttonColors(containerColor = colorBoton),
                 modifier = Modifier.fillMaxWidth()
             ) {
-                Text("Guardar modulo")
+                Text("Guardar módulo")
             }
         }
     }

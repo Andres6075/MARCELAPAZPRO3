@@ -36,7 +36,7 @@ fun PantallaDetalle(
     Scaffold(
         topBar = {
             TopAppBar(
-                title = { Text("Detalle Curricular del Modulo") },
+                title = { Text("Detalle Curricular del Módulo") },
                 navigationIcon = {
                     IconButton(onClick = alVolver) {
                         Icon(imageVector = Icons.Default.ArrowBack, contentDescription = "Volver")
@@ -52,7 +52,7 @@ fun PantallaDetalle(
                     .padding(rellenoInterno),
                 contentAlignment = Alignment.Center
             ) {
-                Text("Modulo no encontrado")
+                Text("Módulo no encontrado")
             }
         } else {
             LazyColumn(
@@ -111,14 +111,14 @@ fun PantallaDetalle(
                             verticalArrangement = Arrangement.spacedBy(8.dp)
                         ) {
                             Text(
-                                text = "Informacion Curricular (Seccion 3.2)",
+                                text = "Información Curricular",
                                 style = MaterialTheme.typography.titleSmall,
                                 fontWeight = FontWeight.Bold,
                                 color = MaterialTheme.colorScheme.primary
                             )
                             Text(text = "Nivel: ${modulo.nivelEducativo}", style = MaterialTheme.typography.bodyMedium)
                             Text(text = "Objetivo: ${modulo.objetivoAprendizaje}", style = MaterialTheme.typography.bodyMedium, fontWeight = FontWeight.SemiBold)
-                            Text(text = "Codigo Oficial: ${modulo.codigoOficial}", style = MaterialTheme.typography.bodySmall)
+                            Text(text = "Código Oficial: ${modulo.codigoOficial}", style = MaterialTheme.typography.bodySmall)
                             Text(text = "Eje Curricular: ${modulo.ejeCurricular}", style = MaterialTheme.typography.bodySmall)
                             Text(text = "Dificultad: ${modulo.dificultad} | Intentos: ${modulo.intentosRealizados}/${modulo.intentosPermitidos}", style = MaterialTheme.typography.bodySmall)
                         }
@@ -128,7 +128,7 @@ fun PantallaDetalle(
                 item {
                     Column {
                         Text(
-                            text = "Explicacion e Instrucciones:",
+                            text = "Explicación e Instrucciones:",
                             style = MaterialTheme.typography.titleMedium,
                             fontWeight = FontWeight.Bold
                         )
@@ -148,7 +148,7 @@ fun PantallaDetalle(
                                 horizontalArrangement = Arrangement.spacedBy(8.dp)
                             ) {
                                 Icon(imageVector = Icons.Default.VolumeUp, contentDescription = "Audio", tint = MaterialTheme.colorScheme.primary)
-                                Text(text = "Incluye audio de apoyo para la lectura autonoma", style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.primary)
+                                Text(text = "Incluye audio de apoyo para la lectura autónoma", style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.primary)
                             }
                         }
                     }
@@ -164,7 +164,7 @@ fun PantallaDetalle(
                             verticalArrangement = Arrangement.spacedBy(12.dp)
                         ) {
                             Text(
-                                text = "Progreso del Modulo: ${(modulo.progreso * 100).toInt()}%",
+                                text = "Progreso del Módulo: ${(modulo.progreso * 100).toInt()}%",
                                 style = MaterialTheme.typography.titleMedium,
                                 fontWeight = FontWeight.Bold
                             )
@@ -190,7 +190,7 @@ fun PantallaDetalle(
 
                 item {
                     Text(
-                        text = "Recursos Didacticos y Ejemplos (3.2)",
+                        text = "Recursos Didácticos y Ejemplos",
                         style = MaterialTheme.typography.titleMedium,
                         fontWeight = FontWeight.Bold
                     )
@@ -199,7 +199,7 @@ fun PantallaDetalle(
                 if (recursosModulo.isEmpty()) {
                     item {
                         Text(
-                            text = "No hay recursos didacticos especificos para este modulo.",
+                            text = "No hay recursos didácticos específicos para este módulo.",
                             style = MaterialTheme.typography.bodyMedium,
                             color = MaterialTheme.colorScheme.onSurfaceVariant
                         )

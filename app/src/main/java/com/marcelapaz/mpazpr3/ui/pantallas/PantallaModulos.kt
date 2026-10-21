@@ -53,7 +53,7 @@ fun PantallaModulos(
         verticalArrangement = Arrangement.spacedBy(16.dp)
     ) {
         Text(
-            text = "Asignaturas y Unidades (3.2)",
+            text = "Asignaturas y Unidades",
             style = MaterialTheme.typography.headlineMedium,
             fontWeight = FontWeight.Bold,
             color = MaterialTheme.colorScheme.primary
@@ -63,7 +63,7 @@ fun PantallaModulos(
             value = textoBusqueda,
             onValueChange = alCambiarTextoBusqueda,
             modifier = Modifier.fillMaxWidth(),
-            placeholder = { Text("Buscar por asignatura, unidad o codigo OA...") },
+            placeholder = { Text("Buscar por asignatura, unidad o código OA...") },
             leadingIcon = { Icon(Icons.Default.Search, contentDescription = "Buscar") },
             singleLine = true,
             shape = MaterialTheme.shapes.medium
@@ -82,8 +82,8 @@ fun PantallaModulos(
             Text(
                 text = when (rolActual) {
                     RolUsuario.ESTUDIANTE -> "Modo Estudiante: Consulta tus asignaturas y practica con las actividades autorizadas."
-                    RolUsuario.DOCENTE -> "Modo Docente: Configura los intentos maximos permitidos para la evaluacion final."
-                    RolUsuario.UTP -> "Modo UTP: Revisa y autoriza oficialmente los contenidos pedagogicos."
+                    RolUsuario.DOCENTE -> "Modo Docente: Configura los intentos máximos permitidos para la evaluación final."
+                    RolUsuario.UTP -> "Modo UTP: Revisa y autoriza oficialmente los contenidos pedagógicos."
                 },
                 style = MaterialTheme.typography.bodySmall,
                 fontWeight = FontWeight.SemiBold,
@@ -104,7 +104,7 @@ fun PantallaModulos(
             ) {
                 Icon(Icons.Default.Add, contentDescription = null)
                 Spacer(modifier = Modifier.width(8.dp))
-                Text("Nuevo modulo")
+                Text("Nuevo módulo")
             }
         }
 
@@ -238,7 +238,7 @@ fun TarjetaModuloResumen(
                         verticalAlignment = Alignment.CenterVertically
                     ) {
                         Text(
-                            text = "Gestion UTP:",
+                            text = "Gestión UTP:",
                             style = MaterialTheme.typography.labelMedium,
                             fontWeight = FontWeight.Bold
                         )
@@ -261,7 +261,7 @@ fun TarjetaModuloResumen(
                         verticalAlignment = Alignment.CenterVertically
                     ) {
                         Text(
-                            text = "Intentos Evaluacion: ${modulo.intentosPermitidos}",
+                            text = "Intentos Evaluación: ${modulo.intentosPermitidos}",
                             style = MaterialTheme.typography.labelMedium,
                             fontWeight = FontWeight.Bold
                         )
