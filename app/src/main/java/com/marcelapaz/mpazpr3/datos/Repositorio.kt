@@ -14,15 +14,15 @@ object RepositorioDatos {
         return listOf(
             ModuloAprendizaje(
                 id = 1,
-                titulo = "Comprension y Narrativa Literaria",
-                descripcion = "Lectura guiada de textos breves, fabulas y cuentos con preguntas de comprension.",
-                nivelEducativo = "Tercero Basico",
-                asignatura = "Lenguaje y Comunicacion",
+                titulo = "Comprensión y Narrativa Literaria",
+                descripcion = "Lectura guiada de textos breves, fábulas y cuentos con preguntas de comprensión.",
+                nivelEducativo = "Tercero Básico",
+                asignatura = "Lenguaje y Comunicación",
                 unidad = "Unidad 1: Descubriendo Historias",
                 objetivoAprendizaje = "OA 3: Leer y familiarizarse con un amplio repertorio de literatura.",
                 codigoOficial = "OA-LENG-03-03",
                 ejeCurricular = "Lectura",
-                explicacion = "Lee atentamente la fabula y responde las alternativas segun las acciones de los personajes.",
+                explicacion = "Lee atentamente la fábula y responde las alternativas según las acciones de los personajes.",
                 tieneAudioApoyo = true,
                 intentosPermitidos = 3,
                 intentosRealizados = 1,
@@ -34,14 +34,14 @@ object RepositorioDatos {
             ),
             ModuloAprendizaje(
                 id = 2,
-                titulo = "Numeros Hasta el 1000 y Adicion",
-                descripcion = "Resolucion de problemas cotidianos utilizando la adicion y sustraccion con numeros de tres cifras.",
-                nivelEducativo = "Tercero Basico",
-                asignatura = "Matematica",
-                unidad = "Unidad 1: Numeros y Operaciones",
-                objetivoAprendizaje = "OA 4: Representar y describir numeros del 0 al 1000.",
+                titulo = "Números Hasta el 1000 y Adición",
+                descripcion = "Resolución de problemas cotidianos utilizando la adición y sustracción con números de tres cifras.",
+                nivelEducativo = "Tercero Básico",
+                asignatura = "Matemática",
+                unidad = "Unidad 1: Números y Operaciones",
+                objetivoAprendizaje = "OA 4: Representar y describir números del 0 al 1000.",
                 codigoOficial = "OA-MAT-03-04",
-                ejeCurricular = "Numeros y Operaciones",
+                ejeCurricular = "Números y Operaciones",
                 explicacion = "Utiliza la tabla de valor posicional para sumar unidades, decenas y centenas.",
                 tieneAudioApoyo = true,
                 intentosPermitidos = 3,
@@ -54,15 +54,15 @@ object RepositorioDatos {
             ),
             ModuloAprendizaje(
                 id = 3,
-                titulo = "Los Seres Vivos y sus Habitats",
-                descripcion = "Exploracion de plantas y animales nativos de Chile, sus caracteristicas y necesidades.",
-                nivelEducativo = "Tercero Basico",
+                titulo = "Los Seres Vivos y sus Hábitats",
+                descripcion = "Exploración de plantas y animales nativos de Chile, sus características y necesidades.",
+                nivelEducativo = "Tercero Básico",
                 asignatura = "Ciencias Naturales",
                 unidad = "Unidad 1: El Entorno Natural",
-                objetivoAprendizaje = "OA 1: Observar y describir las caracteristicas de los animales nativos.",
+                objetivoAprendizaje = "OA 1: Observar y describir las características de los animales nativos.",
                 codigoOficial = "OA-CIE-03-01",
                 ejeCurricular = "Ciencias de la Vida",
-                explicacion = "Observa las imagenes de los animales y clasificalos segun su cubierta corporal y desplazamiento.",
+                explicacion = "Observa las imágenes de los animales y clasifícalos según su cubierta corporal y desplazamiento.",
                 tieneAudioApoyo = false,
                 intentosPermitidos = 2,
                 intentosRealizados = 1,
@@ -74,15 +74,15 @@ object RepositorioDatos {
             ),
             ModuloAprendizaje(
                 id = 4,
-                titulo = "Paisajes de Chile y Ubicacion",
+                titulo = "Paisajes de Chile y Ubicación",
                 descripcion = "Reconocimiento de paisajes de la zona norte, centro y sur de Chile mediante mapas y recursos visuales.",
-                nivelEducativo = "Tercero Basico",
-                asignatura = "Historia, Geografia y Cs. Sociales",
+                nivelEducativo = "Tercero Básico",
+                asignatura = "Historia, Geografía y Cs. Sociales",
                 unidad = "Unidad 1: Descubriendo Paisajes de Chile",
                 objetivoAprendizaje = "OA 8: Describir paisajes de Chile por medio de fuentes.",
                 codigoOficial = "OA-HIS-03-08",
-                ejeCurricular = "Geografia",
-                explicacion = "Identifica las principales caracteristicas geograficas y climaticas de las zonas naturales.",
+                ejeCurricular = "Geografía",
+                explicacion = "Identifica las principales características geográficas y climáticas de las zonas naturales.",
                 tieneAudioApoyo = true,
                 intentosPermitidos = 3,
                 intentosRealizados = 3,
@@ -98,11 +98,11 @@ object RepositorioDatos {
     // Funcion que entrega los recursos de apoyo con instrucciones y ejemplos (seccion 3.2)
     fun obtenerRecursos(): List<RecursoDidactico> {
         return listOf(
-            RecursoDidactico(1, "Guia 9: Adaptabilidad del diseño", "Guia", "12 paginas", 2, "Lee la introduccion y responde los ejercicios.", "Ejemplo: Suma 345 + 123", true, true),
-            RecursoDidactico(2, "Audio explicativo de operaciones", "Video", "15 min", 2, "Escucha atentamente el audio de apoyo antes de resolver.", "Ejemplo de llevadas en la adicion", true, false),
-            RecursoDidactico(3, "Cuestionario de Autoevaluacion M1", "Cuestionario", "10 preguntas", 1, "Selecciona la alternativa correcta.", "Pregunta sobre la fabula leida", false, true),
-            RecursoDidactico(4, "Lectura guiada: Flora nativa", "Lectura", "15 paginas", 3, "Revisa las imagenes de la flora chilena.", "Ejemplo de adaptacion de plantas", true, false),
-            RecursoDidactico(5, "Taller de paisajes de Chile", "Guia", "20 paginas", 4, "Ubica las regiones en el mapa interactivo.", "Ejemplo de la zona norte de Chile", true, true)
+            RecursoDidactico(1, "Práctica de sumas con llevada", "Guía", "12 páginas", 2, "Lee la introducción y responde los ejercicios.", "Ejemplo: Suma 345 + 123", true, true),
+            RecursoDidactico(2, "Audio explicativo de operaciones", "Audio", "15 min", 2, "Escucha atentamente el audio de apoyo antes de resolver.", "Ejemplo de llevadas en la adición", true, false),
+            RecursoDidactico(3, "Cuestionario de Autoevaluación M1", "Cuestionario", "10 preguntas", 1, "Selecciona la alternativa correcta.", "Pregunta sobre la fábula leída", false, true),
+            RecursoDidactico(4, "Lectura guiada: Flora nativa", "Lectura", "15 páginas", 3, "Revisa las imágenes de la flora chilena.", "Ejemplo de adaptación de plantas", true, false),
+            RecursoDidactico(5, "Taller de paisajes de Chile", "Guía", "20 páginas", 4, "Ubica las regiones en el mapa interactivo.", "Ejemplo de la zona norte de Chile", true, true)
         )
     }
 
@@ -122,10 +122,10 @@ object RepositorioDatos {
     // Funcion que entrega el informe pedagogico reservado para UTP y Docente (seccion 3.1 y 3.2)
     fun obtenerInformePedagogico(): InformePedagogico {
         return InformePedagogico(
-            asignatura = "Tercero Basico (4 Asignaturas MVP)",
+            asignatura = "Tercero Básico (4 Asignaturas MVP)",
             rendimientoPromedio = "82% de logro general",
-            fortalezas = "Excelente comprension de lectura y participacion en desafios matematicos.",
-            contenidosAReforzar = "Reforzar unidades de Ciencias Naturales y medicion de tiempo.",
+            fortalezas = "Excelente comprensión de lectura y participación en desafíos matemáticos.",
+            contenidosAReforzar = "Reforzar unidades de Ciencias Naturales y medición de tiempo.",
             fechaValidacion = "07-09-2026",
             estadoValidacion = "Validado y autorizado por UTP"
         )

@@ -158,9 +158,9 @@ fun PantallaPerfil(
                     HorizontalDivider()
                     FilaInformacionPerfil(etiqueta = "Establecimiento", valor = "Escuela Escritora Marcela Paz")
                     HorizontalDivider()
-                    FilaInformacionPerfil(etiqueta = "Nivel", valor = "Tercero Basico (3° Básico)")
+                    FilaInformacionPerfil(etiqueta = "Nivel", valor = "Tercero Básico (3° Básico)")
                     HorizontalDivider()
-                    FilaInformacionPerfil(etiqueta = "Base de Datos", valor = "Independiente de Prueba (Seccion 3.4)")
+                    FilaInformacionPerfil(etiqueta = "Base de Datos", valor = "Independiente de Prueba")
                 }
             }
         }
@@ -185,13 +185,13 @@ fun PantallaPerfil(
                     )
                     Column(verticalArrangement = Arrangement.spacedBy(2.dp)) {
                         Text(
-                            text = "MVP Independiente y Ficticio (3.4)",
+                            text = "MVP Independiente y Ficticio",
                             style = MaterialTheme.typography.titleSmall,
                             fontWeight = FontWeight.Bold,
                             color = MaterialTheme.colorScheme.onSecondaryContainer
                         )
                         Text(
-                            text = "No se conecta al Libro MPAZ ni sistemas institucionales. Trabaja con datos ficticios basados en el Curriculum Nacional, sin requerir IA generativa.",
+                            text = "No se conecta al Libro MPAZ ni sistemas institucionales. Trabaja con datos ficticios basados en el Currículum Nacional, sin requerir IA generativa.",
                             style = MaterialTheme.typography.bodySmall,
                             color = MaterialTheme.colorScheme.onSecondaryContainer
                         )
@@ -220,7 +220,7 @@ fun PantallaPerfil(
                                 color = MaterialTheme.colorScheme.onPrimaryContainer
                             )
                             Text(
-                                text = "Puedes consultar tu material asignado, desarrollar actividades y revisar tus respuestas correctas e incorrectas. (Nota: Segun el caso 3.1, el estudiante no puede modificar contenidos ni acceder al informe pedagogico).",
+                                text = "Puedes consultar tu material asignado, desarrollar actividades y revisar tus respuestas correctas e incorrectas.",
                                 style = MaterialTheme.typography.bodySmall,
                                 color = MaterialTheme.colorScheme.onPrimaryContainer
                             )
@@ -241,13 +241,13 @@ fun PantallaPerfil(
                             verticalArrangement = Arrangement.spacedBy(8.dp)
                         ) {
                             Text(
-                                text = "Panel del Docente de Tercero Basico",
+                                text = "Panel del Docente de Tercero Básico",
                                 style = MaterialTheme.typography.titleMedium,
                                 fontWeight = FontWeight.Bold,
                                 color = MaterialTheme.colorScheme.primary
                             )
                             Text(
-                                text = "Asignacion de contenidos, definicion de intentos maximos para evaluaciones y revision de resultados de los estudiantes.",
+                                text = "Asignación de contenidos, definición de intentos máximos para evaluaciones y revisión de resultados de los estudiantes.",
                                 style = MaterialTheme.typography.bodySmall,
                                 color = MaterialTheme.colorScheme.onSurfaceVariant
                             )
@@ -268,13 +268,13 @@ fun PantallaPerfil(
                             verticalArrangement = Arrangement.spacedBy(12.dp)
                         ) {
                             Text(
-                                text = "Panel de Jefatura UTP (Revision de Contenidos)",
+                                text = "Panel de Jefatura UTP (Revisión de Contenidos)",
                                 style = MaterialTheme.typography.titleMedium,
                                 fontWeight = FontWeight.Bold,
                                 color = MaterialTheme.colorScheme.onTertiaryContainer
                             )
                             Text(
-                                text = "Autoriza los contenidos pedagogicos y verifica su relacion con los objetivos de aprendizaje oficial.",
+                                text = "Autoriza los contenidos pedagógicos y verifica su relación con los objetivos de aprendizaje oficial.",
                                 style = MaterialTheme.typography.bodySmall,
                                 color = MaterialTheme.colorScheme.onTertiaryContainer
                             )
@@ -282,7 +282,7 @@ fun PantallaPerfil(
                             HorizontalDivider()
 
                             Text(
-                                text = "Autorizacion de Modulos:",
+                                text = "Autorización de Módulos:",
                                 style = MaterialTheme.typography.titleSmall,
                                 fontWeight = FontWeight.Bold
                             )
@@ -312,7 +312,7 @@ fun PantallaPerfil(
                             HorizontalDivider()
 
                             Text(
-                                text = "Informe Pedagogico Reservado (3.4 sin IA externa):",
+                                text = "Informe Pedagógico Reservado:",
                                 style = MaterialTheme.typography.titleSmall,
                                 fontWeight = FontWeight.Bold
                             )

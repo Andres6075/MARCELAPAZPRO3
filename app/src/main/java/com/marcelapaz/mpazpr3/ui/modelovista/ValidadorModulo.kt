@@ -9,19 +9,19 @@ package com.marcelapaz.mpazpr3.ui.modelovista
 object ValidadorModulo {
 
     val asignaturasPermitidas = listOf(
-        "Lenguaje y Comunicacion",
-        "Matematica",
+        "Lenguaje y Comunicación",
+        "Matemática",
         "Ciencias Naturales",
-        "Historia, Geografia y Cs. Sociales"
+        "Historia, Geografía y Cs. Sociales"
     )
 
     // Formato oficial usado en la app, ejemplo: OA-LENG-03-03 u OA-MAT-03-04
     private val formatoCodigoOa = Regex("^OA-(LENG|MAT|CIE|HIS)-\\d{2}-\\d{2}$")
 
     fun validarTitulo(titulo: String): String? = when {
-        titulo.isBlank() -> "El titulo es obligatorio"
+        titulo.isBlank() -> "El título es obligatorio"
         titulo.trim().length < 5 -> "Debe tener al menos 5 caracteres"
-        titulo.trim().length > 60 -> "Maximo 60 caracteres"
+        titulo.trim().length > 60 -> "Máximo 60 caracteres"
         else -> null
     }
 
@@ -38,8 +38,8 @@ object ValidadorModulo {
     }
 
     fun validarCodigoOa(codigo: String): String? = when {
-        codigo.isBlank() -> "El codigo OA es obligatorio"
-        !formatoCodigoOa.matches(codigo.trim()) -> "Formato invalido. Ejemplo: OA-LENG-03-03"
+        codigo.isBlank() -> "El código OA es obligatorio"
+        !formatoCodigoOa.matches(codigo.trim()) -> "Formato inválido. Ejemplo: OA-LENG-03-03"
         else -> null
     }
 
@@ -47,7 +47,7 @@ object ValidadorModulo {
         val valor = horas.trim().toIntOrNull()
         return when {
             horas.isBlank() -> "Las horas son obligatorias"
-            valor == null -> "Ingresa solo numeros"
+            valor == null -> "Ingresa solo números"
             valor !in 1..20 -> "Debe estar entre 1 y 20 horas"
             else -> null
         }
@@ -57,7 +57,7 @@ object ValidadorModulo {
         val valor = intentos.trim().toIntOrNull()
         return when {
             intentos.isBlank() -> "Los intentos son obligatorios"
-            valor == null -> "Ingresa solo numeros"
+            valor == null -> "Ingresa solo números"
             valor !in 1..5 -> "Debe estar entre 1 y 5 intentos"
             else -> null
         }

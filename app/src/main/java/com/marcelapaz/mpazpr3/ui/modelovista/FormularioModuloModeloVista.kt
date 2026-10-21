@@ -107,14 +107,14 @@ class FormularioModuloModeloVista : ViewModel() {
         val nuevo = ModuloAprendizaje(
             id = 0, // Room asigna el id automaticamente
             titulo = actual.titulo.trim(),
-            descripcion = "Modulo creado por el docente.",
-            nivelEducativo = "Tercero Basico",
+            descripcion = "Módulo creado por el docente.",
+            nivelEducativo = "Tercero Básico",
             asignatura = actual.asignatura,
             unidad = actual.unidad.trim(),
             objetivoAprendizaje = "Objetivo de aprendizaje ${actual.codigoOa.trim()}",
             codigoOficial = actual.codigoOa.trim(),
             ejeCurricular = "General",
-            explicacion = "Sigue las instrucciones de tu docente para completar este modulo.",
+            explicacion = "Sigue las instrucciones de tu docente para completar este módulo.",
             tieneAudioApoyo = false,
             intentosPermitidos = actual.intentos.trim().toInt(),
             intentosRealizados = 0,

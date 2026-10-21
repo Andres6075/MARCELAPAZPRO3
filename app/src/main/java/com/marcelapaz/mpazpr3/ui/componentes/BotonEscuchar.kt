@@ -72,6 +72,6 @@ fun BotonEscuchar(texto: String, modifier: Modifier = Modifier) {
             contentDescription = null
         )
         Spacer(modifier = Modifier.width(8.dp))
-        Text(if (hablando) "Detener" else "Escuchar explicacion")
+        Text(if (hablando) "Detener" else "Escuchar explicación")
     }
 }

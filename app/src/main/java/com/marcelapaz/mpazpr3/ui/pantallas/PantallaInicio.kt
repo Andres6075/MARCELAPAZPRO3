@@ -51,7 +51,7 @@ fun PantallaInicio(
                         color = MaterialTheme.colorScheme.primary
                     )
                     Text(
-                        text = "Rol: ${perfil.rolActual.descripcion} | 3° Basico",
+                        text = "Rol: ${perfil.rolActual.descripcion} | 3° Básico",
                         style = MaterialTheme.typography.bodyMedium,
                         fontWeight = FontWeight.SemiBold,
                         color = MaterialTheme.colorScheme.onSurfaceVariant
@@ -99,12 +99,12 @@ fun PantallaInicio(
                     )
                     Column(verticalArrangement = Arrangement.spacedBy(2.dp)) {
                         Text(
-                            text = "Apoyo Didactico y Seguimiento (3.3)",
+                            text = "Apoyo Didáctico y Seguimiento",
                             style = MaterialTheme.typography.titleSmall,
                             fontWeight = FontWeight.Bold
                         )
                         Text(
-                            text = "Interfaz sencilla para Tercero Basico. Conserva tu progreso y no requiere camara, GPS, microfono ni datos biometricos.",
+                            text = "Interfaz sencilla para Tercero Básico. Conserva tu progreso y no requiere cámara, GPS, micrófono ni datos biométricos.",
                             style = MaterialTheme.typography.bodySmall,
                             color = MaterialTheme.colorScheme.onSurfaceVariant
                         )
@@ -136,7 +136,7 @@ fun PantallaInicio(
                                 verticalAlignment = Alignment.CenterVertically
                             ) {
                                 Text(
-                                    text = "Mi Progreso de Aprendizaje (3° Basico)",
+                                    text = "Mi Progreso de Aprendizaje (3° Básico)",
                                     style = MaterialTheme.typography.titleMedium,
                                     fontWeight = FontWeight.SemiBold
                                 )
@@ -170,7 +170,7 @@ fun PantallaInicio(
                                     style = MaterialTheme.typography.bodyMedium
                                 )
                                 Text(
-                                    text = "${perfil.modulosCompletadosTotal}/${modulos.size} Modulos",
+                                    text = "${perfil.modulosCompletadosTotal}/${modulos.size} Módulos",
                                     style = MaterialTheme.typography.bodyMedium
                                 )
                             }
@@ -187,12 +187,12 @@ fun PantallaInicio(
                         TarjetaEstadistica(
                             modifier = Modifier.weight(1f),
                             titulo = "Racha de Estudio",
-                            valor = "${perfil.rachaDiasEstudio} dias",
+                            valor = "${perfil.rachaDiasEstudio} días",
                             icono = Icons.Default.TrendingUp
                         )
                         TarjetaEstadistica(
                             modifier = Modifier.weight(1f),
-                            titulo = "Modulos Activos",
+                            titulo = "Módulos Activos",
                             valor = "${modulos.size}",
                             icono = Icons.Default.School
                         )
@@ -216,12 +216,12 @@ fun PantallaInicio(
                             verticalArrangement = Arrangement.spacedBy(12.dp)
                         ) {
                             Text(
-                                text = "Panel Docente - Tercero Basico",
+                                text = "Panel Docente - Tercero Básico",
                                 style = MaterialTheme.typography.titleMedium,
                                 fontWeight = FontWeight.Bold
                             )
                             Text(
-                                text = "Supervision de las 4 asignaturas MVP, gestion de intentos maximos para evaluaciones y seguimiento del curso.",
+                                text = "Supervisión de las 4 asignaturas MVP, gestión de intentos máximos para evaluaciones y seguimiento del curso.",
                                 style = MaterialTheme.typography.bodyMedium
                             )
                         }
@@ -265,12 +265,12 @@ fun PantallaInicio(
                             verticalArrangement = Arrangement.spacedBy(12.dp)
                         ) {
                             Text(
-                                text = "Panel Jefatura UTP - Revision Curricular",
+                                text = "Panel Jefatura UTP - Revisión Curricular",
                                 style = MaterialTheme.typography.titleMedium,
                                 fontWeight = FontWeight.Bold
                             )
                             Text(
-                                text = "Validacion y autorizacion de contenidos pedagogicos segun Objetivos de Aprendizaje oficiales (Seccion 3.1).",
+                                text = "Validación y autorización de contenidos pedagógicos según Objetivos de Aprendizaje oficiales.",
                                 style = MaterialTheme.typography.bodyMedium
                             )
                         }
@@ -311,7 +311,7 @@ fun PantallaInicio(
                     modifier = Modifier.size(20.dp)
                 )
                 Spacer(modifier = Modifier.width(8.dp))
-                Text("Ir a Modulos y Asignaturas")
+                Text("Ir a Módulos y Asignaturas")
             }
         }
     }

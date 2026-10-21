@@ -11,12 +11,12 @@ class ValidadorModuloPrueba {
 
     @Test
     fun tituloVacioEsInvalido() {
-        assertEquals("El titulo es obligatorio", ValidadorModulo.validarTitulo(""))
+        assertEquals("El título es obligatorio", ValidadorModulo.validarTitulo(""))
     }
 
     @Test
     fun tituloCorrectoEsValido() {
-        assertNull(ValidadorModulo.validarTitulo("Fabulas y cuentos"))
+        assertNull(ValidadorModulo.validarTitulo("Fábulas y cuentos"))
     }
 
     @Test
