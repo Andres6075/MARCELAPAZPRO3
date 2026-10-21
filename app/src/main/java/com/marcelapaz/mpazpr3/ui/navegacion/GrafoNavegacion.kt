@@ -21,6 +21,7 @@ import com.marcelapaz.mpazpr3.ui.pantallas.PantallaFormularioModulo
 import com.marcelapaz.mpazpr3.ui.pantallas.PantallaInicio
 import com.marcelapaz.mpazpr3.ui.pantallas.PantallaModulos
 import com.marcelapaz.mpazpr3.ui.pantallas.PantallaPerfil
+import com.marcelapaz.mpazpr3.datos.RolUsuario
 import com.marcelapaz.mpazpr3.ui.modelovista.ModeloVistaMpaz
 
 // Definicion de pantallas y rutas de navegacion (Cumple Guia 10: Navegacion y estructura visual)
@@ -45,6 +46,11 @@ fun GrafoNavegacionMpaz(modeloVista: ModeloVistaMpaz) {
     val textoBusqueda by modeloVista.textoBusqueda.collectAsStateWithLifecycle()
     val avatar by modeloVista.avatar.collectAsStateWithLifecycle()
     val contexto = LocalContext.current
+
+    // El estudiante solo ve los módulos que la UTP ya autorizó (regla del caso 3.1)
+    val modulosVisibles = remember(modulos, perfil.rolActual) {
+        if (perfil.rolActual == RolUsuario.ESTUDIANTE) modulos.filter { it.aprobadoPorUtp } else modulos
+    }
 
     val elementos = listOf(
         PantallaNavegacion.Inicio,
@@ -97,7 +103,7 @@ fun GrafoNavegacionMpaz(modeloVista: ModeloVistaMpaz) {
                 composable(PantallaNavegacion.Inicio.ruta) {
                     PantallaInicio(
                         perfil = perfil,
-                        modulos = modulos,
+                        modulos = modulosVisibles,
                         alHacerClicModulo = { idModulo ->
                             controladorNav.navigate(PantallaNavegacion.Detalle.crearRuta(idModulo))
                         },
@@ -116,7 +122,7 @@ fun GrafoNavegacionMpaz(modeloVista: ModeloVistaMpaz) {
                 // Ruta 2: Pantalla de Modulos y Asignaturas con funciones adaptadas por Rol (Seccion 3.1)
                 composable(PantallaNavegacion.Modulos.ruta) {
                     PantallaModulos(
-                        modulos = modulos,
+                        modulos = modulosVisibles,
                         rolActual = perfil.rolActual,
                         textoBusqueda = textoBusqueda,
                         alCambiarTextoBusqueda = { modeloVista.actualizarTextoBusqueda(it) },
@@ -144,10 +150,15 @@ fun GrafoNavegacionMpaz(modeloVista: ModeloVistaMpaz) {
 
                 // Ruta 5: Formulario para crear un modulo nuevo (Docente / UTP)
                 composable(PantallaNavegacion.NuevoModulo.ruta) {
-                    PantallaFormularioModulo(
-                        alGuardar = { modulo -> modeloVista.agregarModulo(modulo) },
-                        alVolver = { controladorNav.popBackStack() }
-                    )
+                    // Protección: el estudiante no puede crear módulos aunque llegue a esta ruta
+                    if (perfil.rolActual == RolUsuario.ESTUDIANTE) {
+                        LaunchedEffect(Unit) { controladorNav.popBackStack() }
+                    } else {
+                        PantallaFormularioModulo(
+                            alGuardar = { modulo -> modeloVista.agregarModulo(modulo) },
+                            alVolver = { controladorNav.popBackStack() }
+                        )
+                    }
                 }
                 // Ruta 4: Pantalla de Detalle con paso de argumentos (idModulo)
                 composable(
@@ -157,7 +168,7 @@ fun GrafoNavegacionMpaz(modeloVista: ModeloVistaMpaz) {
                     val idModulo = entradaPila.arguments?.getInt("idModulo") ?: 1
                     PantallaDetalle(
                         idModulo = idModulo,
-                        modulos = modulos,
+                        modulos = modulosVisibles,
                         recursos = recursos,
                         alCambiarEstado = { id -> modeloVista.cambiarEstadoModulo(id) },
                         alActualizarProgreso = { id, progreso -> modeloVista.actualizarProgresoModulo(id, progreso) },
