@@ -12,6 +12,10 @@ import androidx.compose.material.icons.filled.VolumeUp
 import androidx.compose.material.icons.filled.Schedule
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableFloatStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
@@ -159,18 +163,24 @@ fun PantallaDetalle(
                         modifier = Modifier.fillMaxWidth(),
                         colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surfaceVariant)
                     ) {
+                        // Valor local del slider: mientras se arrastra solo cambia la interfaz.
+                        // El progreso se guarda en Room una sola vez, al soltar el dedo.
+                        var progresoLocal by remember(modulo.id, modulo.progreso) {
+                            mutableFloatStateOf(modulo.progreso)
+                        }
                         Column(
                             modifier = Modifier.padding(16.dp),
                             verticalArrangement = Arrangement.spacedBy(12.dp)
                         ) {
                             Text(
-                                text = "Progreso del Módulo: ${(modulo.progreso * 100).toInt()}%",
+                                text = "Progreso del Módulo: ${(progresoLocal * 100).toInt()}%",
                                 style = MaterialTheme.typography.titleMedium,
                                 fontWeight = FontWeight.Bold
                             )
                             Slider(
-                                value = modulo.progreso,
-                                onValueChange = { nuevoValor -> alActualizarProgreso(modulo.id, nuevoValor) }
+                                value = progresoLocal,
+                                onValueChange = { nuevoValor -> progresoLocal = nuevoValor },
+                                onValueChangeFinished = { alActualizarProgreso(modulo.id, progresoLocal) }
                             )
                             Button(
                                 onClick = { alCambiarEstado(modulo.id) },

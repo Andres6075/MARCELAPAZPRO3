@@ -144,20 +144,14 @@ class ModeloVistaMpaz : ViewModel() {
 
     fun actualizarProgresoModulo(idModulo: Int, nuevoProgreso: Float) {
         if (!puedeAvanzar(idModulo)) return
-        _modulos.update { listaActual ->
-            listaActual.map { modulo ->
-                if (modulo.id == idModulo) {
-                    val modificado = modulo.copy(
-                        progreso = nuevoProgreso,
-                        estaCompletado = nuevoProgreso >= 1.0f
-                    )
-                    guardarEnRoom(modificado)
-                    modificado
-                } else {
-                    modulo
-                }
-            }
-        }
+        val actual = _modulos.value.firstOrNull { it.id == idModulo } ?: return
+        val modificado = actual.copy(
+            progreso = nuevoProgreso,
+            estaCompletado = nuevoProgreso >= 1.0f
+        )
+        // Primero se actualiza el estado (sin efectos secundarios dentro de update) y luego se guarda en Room
+        _modulos.update { lista -> lista.map { if (it.id == idModulo) modificado else it } }
+        guardarEnRoom(modificado)
         calcularProgresoGeneral()
     }
 
