@@ -267,10 +267,6 @@ fun TarjetaRecurso(recurso: RecursoDidactico) {
                         )
                     }
                 }
-
-                if (recurso.tieneAudio) {
-                    Icon(imageVector = Icons.Default.VolumeUp, contentDescription = stringResource(R.string.detalle_audio), tint = MaterialTheme.colorScheme.primary)
-                }
             }
 
             Text(
@@ -284,6 +280,25 @@ fun TarjetaRecurso(recurso: RecursoDidactico) {
                 fontWeight = FontWeight.SemiBold,
                 color = MaterialTheme.colorScheme.primary
             )
+
+            when {
+                // Recurso aun no publicado: se avisa en vez de mostrar una accion que no existe
+                !recurso.estaDisponible -> Surface(
+                    shape = RoundedCornerShape(50),
+                    color = MaterialTheme.colorScheme.surfaceVariant
+                ) {
+                    Text(
+                        text = stringResource(R.string.recurso_proximamente),
+                        modifier = Modifier.padding(horizontal = 12.dp, vertical = 4.dp),
+                        style = MaterialTheme.typography.labelMedium
+                    )
+                }
+                // Recurso con audio: lee en voz alta el titulo, las instrucciones y el ejemplo (TextToSpeech)
+                recurso.tieneAudio -> BotonEscuchar(
+                    texto = "${recurso.titulo}. ${recurso.instrucciones} ${recurso.ejemplo}",
+                    etiqueta = stringResource(R.string.recurso_escuchar)
+                )
+            }
         }
     }
 }
