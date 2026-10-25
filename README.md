@@ -85,3 +85,6 @@ Pruebas unitarias del validador del formulario en `app/src/pruebasUnitarias`:
 ## Control de versiones
 
 El historial de commits describe cada cambio técnico (formulario con validación, recursos nativos, animaciones y ajustes de interfaz).
+## Planificación
+
+Tablero de Trello con la distribución de tareas: https://trello.com/b/DFTy2a06
