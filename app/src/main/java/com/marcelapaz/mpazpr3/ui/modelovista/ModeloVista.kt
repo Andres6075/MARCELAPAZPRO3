@@ -12,11 +12,8 @@ import com.marcelapaz.mpazpr3.datos.ModuloAprendizaje
 import com.marcelapaz.mpazpr3.datos.PerfilEstudiante
 import com.marcelapaz.mpazpr3.datos.RecursoDidactico
 import com.marcelapaz.mpazpr3.datos.RepositorioDatos
+import com.marcelapaz.mpazpr3.datos.RepositorioModulos
 import com.marcelapaz.mpazpr3.datos.RolUsuario
-import com.marcelapaz.mpazpr3.datos.db.BaseDatosApp
-import com.marcelapaz.mpazpr3.datos.db.ModuloDao
-import com.marcelapaz.mpazpr3.datos.db.aEntidad
-import com.marcelapaz.mpazpr3.datos.db.aModeloDominio
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.SharingStarted
@@ -28,7 +25,7 @@ import kotlinx.coroutines.launch
 
 // Modelo de vista para manejar el estado de la aplicacion, perfiles y persistencia local con Room
 class ModeloVistaMpaz : ViewModel() {
-    private var moduloDao: ModuloDao? = null
+    private var repositorio: RepositorioModulos? = null
 
     private val _modulos = MutableStateFlow(RepositorioDatos.obtenerModulos())
     val modulos: StateFlow<List<ModuloAprendizaje>> = _modulos.asStateFlow()
@@ -56,23 +53,18 @@ class ModeloVistaMpaz : ViewModel() {
     private val _textoBusqueda = MutableStateFlow("")
     val textoBusqueda: StateFlow<String> = _textoBusqueda.asStateFlow()
 
-    // Inicializa Room Database para almacenar el progreso de forma persistente
+    // Crea el repositorio (Room) y mantiene la lista de modulos sincronizada con la base de datos local
     fun inicializarRoom(contexto: Context) {
-        if (moduloDao != null) return
-        val db = BaseDatosApp.obtenerBaseDatos(contexto)
-        moduloDao = db.moduloDao()
+        if (repositorio != null) return
+        val repo = RepositorioModulos.crear(contexto)
+        repositorio = repo
 
         viewModelScope.launch {
-            moduloDao?.let { dao ->
-                if (dao.contarModulos() == 0) {
-                    val iniciales = RepositorioDatos.obtenerModulos().map { it.aEntidad() }
-                    dao.insertarModulos(iniciales)
-                }
-                dao.obtenerTodosLosModulos().collect { listaEntidades ->
-                    if (listaEntidades.isNotEmpty()) {
-                        _modulos.value = listaEntidades.map { it.aModeloDominio() }
-                        calcularProgresoGeneral()
-                    }
+            repo.sembrarDatosIniciales()
+            repo.modulos.collect { lista ->
+                if (lista.isNotEmpty()) {
+                    _modulos.value = lista
+                    calcularProgresoGeneral()
                 }
             }
         }
@@ -171,7 +163,7 @@ class ModeloVistaMpaz : ViewModel() {
     // Guarda en Room un modulo nuevo creado desde el formulario (Room asigna el id)
     fun agregarModulo(modulo: ModuloAprendizaje) {
         viewModelScope.launch {
-            moduloDao?.insertarModulo(modulo.aEntidad())
+            repositorio?.insertar(modulo)
         }
     }
 
@@ -187,7 +179,7 @@ class ModeloVistaMpaz : ViewModel() {
 
     private fun guardarEnRoom(modulo: ModuloAprendizaje) {
         viewModelScope.launch {
-            moduloDao?.actualizarModulo(modulo.aEntidad())
+            repositorio?.actualizar(modulo)
         }
     }
 
