@@ -12,6 +12,7 @@ La escuela trabaja con guías impresas, por lo que el avance por objetivo de apr
 
 ## Funcionalidades implementadas
 
+- **Inicio de sesión y registro:** dos formularios con validación por campo (correo, contraseña, confirmación y perfil), íconos y mensajes de error. Las contraseñas se guardan con hash SHA-256 y sal aleatoria en Room, y el perfil de la sesión define los permisos.
 - **Tres perfiles con permisos distintos:** Estudiante (consulta y avanza solo en los módulos autorizados por la UTP, sin modificar contenidos ni ver el informe), Docente (asigna contenidos y define intentos) y UTP (autoriza módulos y accede al informe pedagógico reservado).
 - **Módulos y asignaturas:** lista con buscador en tiempo real por asignatura, unidad, código OA o palabra clave.
 - **Detalle del módulo:** información curricular, recursos didácticos, avance ajustable con deslizador y botón para marcar como completado.
@@ -20,6 +21,18 @@ La escuela trabaja con guías impresas, por lo que el avance por objetivo de apr
 - **Recursos nativos:** lectura en voz alta de la explicación (TextToSpeech) y foto de perfil con el selector de fotos del sistema.
 - **Animaciones:** mensaje de éxito con `AnimatedVisibility`, color del botón con `animateColorAsState` y barras de progreso con `animateFloatAsState`.
 - **Navegación:** `Scaffold` con `NavigationBar`, `NavHost` y paso de argumento (`idModulo`) a la pantalla de detalle.
+
+## Cuentas de prueba
+
+Al abrir la app por primera vez se crean tres cuentas ficticias (contraseña `Mpaz2026`):
+
+| Perfil | Correo |
+|---|---|
+| Estudiante | estudiante@escuelamarcelapaz.cl |
+| Docente | docente@escuelamarcelapaz.cl |
+| UTP | utp@escuelamarcelapaz.cl |
+
+También se puede crear una cuenta nueva desde la pantalla de registro. La sesión no se conserva al cerrar la app.
 
 ## Arquitectura (MVVM)
 
