@@ -1,5 +1,7 @@
 package com.marcelapaz.mpazpr3.ui.pantallas
 
+import androidx.compose.ui.res.stringResource
+import com.marcelapaz.mpazpr3.R
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.animateColorAsState
 import androidx.compose.animation.expandVertically
@@ -76,13 +78,13 @@ fun PantallaLogin(
             modifier = Modifier.size(64.dp)
         )
         Text(
-            text = "Escuela Marcela Paz",
+            text = stringResource(R.string.login_escuela_marcela_paz),
             style = MaterialTheme.typography.headlineMedium,
             fontWeight = FontWeight.Bold,
             color = MaterialTheme.colorScheme.primary
         )
         Text(
-            text = "Ingresa con tu cuenta para continuar",
+            text = stringResource(R.string.login_ingresa_con_tu_cuenta_para),
             style = MaterialTheme.typography.bodyMedium,
             color = MaterialTheme.colorScheme.onSurfaceVariant,
             textAlign = TextAlign.Center
@@ -106,7 +108,7 @@ fun PantallaLogin(
                 ) {
                     Icon(
                         Icons.Default.Error,
-                        contentDescription = "Error",
+                        contentDescription = stringResource(R.string.comun_error),
                         tint = MaterialTheme.colorScheme.onErrorContainer
                     )
                     Text(
@@ -120,7 +122,7 @@ fun PantallaLogin(
 
         CampoTextoValidado(
             valor = estado.correo,
-            etiqueta = "Correo electrónico",
+            etiqueta = stringResource(R.string.comun_correo_electronico),
             error = estado.errores.correo,
             alCambiar = alCambiarCorreo,
             iconoInicial = Icons.Default.Email,
@@ -129,7 +131,7 @@ fun PantallaLogin(
 
         CampoClave(
             valor = estado.clave,
-            etiqueta = "Contraseña",
+            etiqueta = stringResource(R.string.login_contrasena),
             error = estado.errores.clave,
             alCambiar = alCambiarClave
         )
@@ -148,11 +150,11 @@ fun PantallaLogin(
                 )
                 Spacer(modifier = Modifier.width(8.dp))
             }
-            Text(if (estado.cargando) "Ingresando..." else "Ingresar")
+            Text(if (estado.cargando) stringResource(R.string.login_ingresando) else stringResource(R.string.login_ingresar))
         }
 
         TextButton(onClick = alIrARegistro) {
-            Text("¿No tienes cuenta? Regístrate")
+            Text(stringResource(R.string.login_no_tienes_cuenta_registrate))
         }
 
         // Ayuda para probar la app con datos ficticios
@@ -165,13 +167,13 @@ fun PantallaLogin(
                 verticalArrangement = Arrangement.spacedBy(4.dp)
             ) {
                 Text(
-                    text = "Cuentas de prueba (datos ficticios)",
+                    text = stringResource(R.string.login_cuentas_de_prueba_datos_ficticios),
                     style = MaterialTheme.typography.labelLarge,
                     fontWeight = FontWeight.Bold,
                     color = MaterialTheme.colorScheme.onSecondaryContainer
                 )
                 Text(
-                    text = "estudiante@escuelamarcelapaz.cl\ndocente@escuelamarcelapaz.cl\nutp@escuelamarcelapaz.cl\nContraseña: ${RepositorioUsuarios.CLAVE_DEMO}",
+                    text = stringResource(R.string.login_cuentas_demo, RepositorioUsuarios.CLAVE_DEMO),
                     style = MaterialTheme.typography.bodySmall,
                     color = MaterialTheme.colorScheme.onSecondaryContainer
                 )

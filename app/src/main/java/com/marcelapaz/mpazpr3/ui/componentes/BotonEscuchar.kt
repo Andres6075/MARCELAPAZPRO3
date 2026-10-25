@@ -1,5 +1,7 @@
 package com.marcelapaz.mpazpr3.ui.componentes
 
+import androidx.compose.ui.res.stringResource
+import com.marcelapaz.mpazpr3.R
 import android.speech.tts.TextToSpeech
 import android.speech.tts.UtteranceProgressListener
 import androidx.compose.foundation.layout.Spacer
@@ -72,6 +74,6 @@ fun BotonEscuchar(texto: String, modifier: Modifier = Modifier) {
             contentDescription = null
         )
         Spacer(modifier = Modifier.width(8.dp))
-        Text(if (hablando) "Detener" else "Escuchar explicación")
+        Text(if (hablando) stringResource(R.string.audio_detener) else stringResource(R.string.audio_escuchar_explicacion))
     }
 }

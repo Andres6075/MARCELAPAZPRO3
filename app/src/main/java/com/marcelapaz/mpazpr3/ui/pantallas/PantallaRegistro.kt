@@ -1,5 +1,7 @@
 package com.marcelapaz.mpazpr3.ui.pantallas
 
+import androidx.compose.ui.res.stringResource
+import com.marcelapaz.mpazpr3.R
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -67,10 +69,10 @@ fun PantallaRegistro(
     Scaffold(
         topBar = {
             TopAppBar(
-                title = { Text("Crear cuenta") },
+                title = { Text(stringResource(R.string.registro_crear_cuenta)) },
                 navigationIcon = {
                     IconButton(onClick = alVolver) {
-                        Icon(Icons.Default.ArrowBack, contentDescription = "Volver")
+                        Icon(Icons.Default.ArrowBack, contentDescription = stringResource(R.string.comun_volver))
                     }
                 }
             )
@@ -86,7 +88,7 @@ fun PantallaRegistro(
         ) {
             CampoTextoValidado(
                 valor = estado.nombre,
-                etiqueta = "Nombre completo",
+                etiqueta = stringResource(R.string.registro_nombre_completo),
                 error = estado.errores.nombre,
                 alCambiar = alCambiarNombre,
                 iconoInicial = Icons.Default.Person
@@ -94,7 +96,7 @@ fun PantallaRegistro(
 
             CampoTextoValidado(
                 valor = estado.correo,
-                etiqueta = "Correo electrónico",
+                etiqueta = stringResource(R.string.comun_correo_electronico),
                 error = estado.errores.correo,
                 alCambiar = alCambiarCorreo,
                 iconoInicial = Icons.Default.Email,
@@ -103,14 +105,14 @@ fun PantallaRegistro(
 
             CampoClave(
                 valor = estado.clave,
-                etiqueta = "Contraseña (mínimo 8, letras y números)",
+                etiqueta = stringResource(R.string.registro_contrasena_minimo_8_letras_y),
                 error = estado.errores.clave,
                 alCambiar = alCambiarClave
             )
 
             CampoClave(
                 valor = estado.confirmacion,
-                etiqueta = "Confirmar contraseña",
+                etiqueta = stringResource(R.string.registro_confirmar_contrasena),
                 error = estado.errores.confirmacion,
                 alCambiar = alCambiarConfirmacion
             )
@@ -124,12 +126,12 @@ fun PantallaRegistro(
                     value = estado.rol?.descripcion ?: "",
                     onValueChange = {},
                     readOnly = true,
-                    label = { Text("Perfil") },
+                    label = { Text(stringResource(R.string.registro_perfil)) },
                     isError = estado.errores.rol != null,
                     supportingText = { estado.errores.rol?.let { Text(it) } },
                     trailingIcon = {
                         if (estado.errores.rol != null) {
-                            Icon(Icons.Default.Error, contentDescription = "Error", tint = MaterialTheme.colorScheme.error)
+                            Icon(Icons.Default.Error, contentDescription = stringResource(R.string.comun_error), tint = MaterialTheme.colorScheme.error)
                         } else {
                             ExposedDropdownMenuDefaults.TrailingIcon(expanded = menuRolAbierto)
                         }
@@ -168,7 +170,7 @@ fun PantallaRegistro(
                     )
                     Spacer(modifier = Modifier.width(8.dp))
                 }
-                Text(if (estado.cargando) "Creando cuenta..." else "Crear cuenta")
+                Text(if (estado.cargando) stringResource(R.string.registro_creando_cuenta) else stringResource(R.string.registro_crear_cuenta))
             }
         }
     }

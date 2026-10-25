@@ -1,5 +1,7 @@
 package com.marcelapaz.mpazpr3.ui.pantallas
 
+import androidx.compose.ui.res.stringResource
+import com.marcelapaz.mpazpr3.R
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.clickable
@@ -53,7 +55,7 @@ fun PantallaModulos(
         verticalArrangement = Arrangement.spacedBy(16.dp)
     ) {
         Text(
-            text = "Asignaturas y Unidades",
+            text = stringResource(R.string.modulos_asignaturas_y_unidades),
             style = MaterialTheme.typography.headlineMedium,
             fontWeight = FontWeight.Bold,
             color = MaterialTheme.colorScheme.primary
@@ -63,8 +65,8 @@ fun PantallaModulos(
             value = textoBusqueda,
             onValueChange = alCambiarTextoBusqueda,
             modifier = Modifier.fillMaxWidth(),
-            placeholder = { Text("Buscar por asignatura, unidad o código OA...") },
-            leadingIcon = { Icon(Icons.Default.Search, contentDescription = "Buscar") },
+            placeholder = { Text(stringResource(R.string.modulos_buscar_por_asignatura_unidad_o)) },
+            leadingIcon = { Icon(Icons.Default.Search, contentDescription = stringResource(R.string.modulos_buscar)) },
             singleLine = true,
             shape = MaterialTheme.shapes.medium
         )
@@ -81,9 +83,9 @@ fun PantallaModulos(
         ) {
             Text(
                 text = when (rolActual) {
-                    RolUsuario.ESTUDIANTE -> "Modo Estudiante: Consulta tus asignaturas y practica con las actividades autorizadas."
-                    RolUsuario.DOCENTE -> "Modo Docente: Configura los intentos máximos permitidos para la evaluación final."
-                    RolUsuario.UTP -> "Modo UTP: Revisa y autoriza oficialmente los contenidos pedagógicos."
+                    RolUsuario.ESTUDIANTE -> stringResource(R.string.modulos_modo_estudiante_consulta_tus_asignaturas)
+                    RolUsuario.DOCENTE -> stringResource(R.string.modulos_modo_docente_configura_los_intentos)
+                    RolUsuario.UTP -> stringResource(R.string.modulos_modo_utp_revisa_y_autoriza)
                 },
                 style = MaterialTheme.typography.bodySmall,
                 fontWeight = FontWeight.SemiBold,
@@ -104,7 +106,7 @@ fun PantallaModulos(
             ) {
                 Icon(Icons.Default.Add, contentDescription = null)
                 Spacer(modifier = Modifier.width(8.dp))
-                Text("Nuevo módulo")
+                Text(stringResource(R.string.modulos_nuevo_modulo))
             }
         }
 
@@ -115,8 +117,8 @@ fun PantallaModulos(
             if (modulosFiltrados.isEmpty()) {
                 item {
                     Text(
-                        text = if (rolActual == RolUsuario.ESTUDIANTE) "Aun no hay modulos autorizados por la UTP."
-                        else "No se encontraron modulos.",
+                        text = if (rolActual == RolUsuario.ESTUDIANTE) stringResource(R.string.modulos_aun_no_hay_modulos_autorizados)
+                        else stringResource(R.string.modulos_no_se_encontraron_modulos),
                         style = MaterialTheme.typography.bodyLarge,
                         color = MaterialTheme.colorScheme.onSurfaceVariant
                     )
@@ -190,7 +192,7 @@ fun TarjetaModuloResumen(
                             color = if (modulo.aprobadoPorUtp) MaterialTheme.colorScheme.primaryContainer else MaterialTheme.colorScheme.errorContainer
                         ) {
                             Text(
-                                text = if (modulo.aprobadoPorUtp) "Autorizado UTP" else "Pendiente UTP",
+                                text = if (modulo.aprobadoPorUtp) stringResource(R.string.modulos_autorizado_utp) else stringResource(R.string.modulos_pendiente_utp),
                                 style = MaterialTheme.typography.labelSmall,
                                 modifier = Modifier.padding(horizontal = 8.dp, vertical = 2.dp),
                                 color = if (modulo.aprobadoPorUtp) MaterialTheme.colorScheme.onPrimaryContainer else MaterialTheme.colorScheme.onErrorContainer
@@ -204,7 +206,7 @@ fun TarjetaModuloResumen(
                         fontWeight = FontWeight.Bold
                     )
                     Text(
-                        text = "${modulo.unidad} • OA: ${modulo.codigoOficial}",
+                        text = stringResource(R.string.modulos_unidad_y_oa, modulo.unidad, modulo.codigoOficial),
                         style = MaterialTheme.typography.bodySmall,
                         color = MaterialTheme.colorScheme.onSurfaceVariant
                     )
@@ -215,7 +217,7 @@ fun TarjetaModuloResumen(
                 if (modulo.estaCompletado) {
                     Icon(
                         imageVector = Icons.Default.CheckCircle,
-                        contentDescription = "Completado",
+                        contentDescription = stringResource(R.string.modulos_completado),
                         tint = MaterialTheme.colorScheme.primary,
                         modifier = Modifier.size(32.dp)
                     )
@@ -238,7 +240,7 @@ fun TarjetaModuloResumen(
                         verticalAlignment = Alignment.CenterVertically
                     ) {
                         Text(
-                            text = "Gestión UTP:",
+                            text = stringResource(R.string.modulos_gestion_utp),
                             style = MaterialTheme.typography.labelMedium,
                             fontWeight = FontWeight.Bold
                         )
@@ -248,7 +250,7 @@ fun TarjetaModuloResumen(
                                 containerColor = if (modulo.aprobadoPorUtp) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.error
                             )
                         ) {
-                            Text(if (modulo.aprobadoPorUtp) "Autorizado" else "Aprobar Contenido")
+                            Text(if (modulo.aprobadoPorUtp) stringResource(R.string.comun_autorizado) else stringResource(R.string.modulos_aprobar_contenido))
                         }
                     }
                 }
@@ -261,7 +263,7 @@ fun TarjetaModuloResumen(
                         verticalAlignment = Alignment.CenterVertically
                     ) {
                         Text(
-                            text = "Intentos Evaluación: ${modulo.intentosPermitidos}",
+                            text = stringResource(R.string.modulos_intentos_evaluacion, modulo.intentosPermitidos),
                             style = MaterialTheme.typography.labelMedium,
                             fontWeight = FontWeight.Bold
                         )
@@ -269,12 +271,12 @@ fun TarjetaModuloResumen(
                             IconButton(
                                 onClick = { if (modulo.intentosPermitidos > 1) alCambiarIntentos(modulo.intentosPermitidos - 1) }
                             ) {
-                                Icon(Icons.Default.Remove, contentDescription = "Restar intento")
+                                Icon(Icons.Default.Remove, contentDescription = stringResource(R.string.modulos_restar_intento))
                             }
                             IconButton(
                                 onClick = { if (modulo.intentosPermitidos < 5) alCambiarIntentos(modulo.intentosPermitidos + 1) }
                             ) {
-                                Icon(Icons.Default.Add, contentDescription = "Sumar intento")
+                                Icon(Icons.Default.Add, contentDescription = stringResource(R.string.modulos_sumar_intento))
                             }
                         }
                     }

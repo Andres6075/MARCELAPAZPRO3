@@ -1,5 +1,7 @@
 package com.marcelapaz.mpazpr3.ui.pantallas
 
+import androidx.compose.ui.res.stringResource
+import com.marcelapaz.mpazpr3.R
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.CircleShape
@@ -71,7 +73,7 @@ fun PantallaPerfil(
                     if (avatar != null) {
                         Image(
                             bitmap = avatar.asImageBitmap(),
-                            contentDescription = "Foto de perfil",
+                            contentDescription = stringResource(R.string.perfil_foto_de_perfil),
                             contentScale = ContentScale.Crop,
                             modifier = Modifier.fillMaxSize()
                         )
@@ -82,7 +84,7 @@ fun PantallaPerfil(
                                 RolUsuario.DOCENTE -> Icons.Default.Verified
                                 RolUsuario.UTP -> Icons.Default.AdminPanelSettings
                             },
-                            contentDescription = "Rol",
+                            contentDescription = stringResource(R.string.perfil_rol),
                             modifier = Modifier.size(45.dp),
                             tint = MaterialTheme.colorScheme.onPrimaryContainer
                         )
@@ -93,7 +95,7 @@ fun PantallaPerfil(
 
         item {
             TextButton(onClick = { elegirFoto() }) {
-                Text("Cambiar foto de perfil")
+                Text(stringResource(R.string.perfil_cambiar_foto_de_perfil))
             }
         }
         item {
@@ -114,7 +116,7 @@ fun PantallaPerfil(
             OutlinedButton(onClick = alCerrarSesion, modifier = Modifier.fillMaxWidth()) {
                 Icon(Icons.AutoMirrored.Filled.Logout, contentDescription = null)
                 Spacer(modifier = Modifier.width(8.dp))
-                Text("Cerrar sesión")
+                Text(stringResource(R.string.perfil_cerrar_sesion))
             }
         }
 
@@ -128,13 +130,13 @@ fun PantallaPerfil(
                     modifier = Modifier.padding(20.dp),
                     verticalArrangement = Arrangement.spacedBy(16.dp)
                 ) {
-                    FilaInformacionPerfil(etiqueta = "Identificador Ficticio", valor = perfil.codigoEstudiante)
+                    FilaInformacionPerfil(etiqueta = stringResource(R.string.perfil_identificador_ficticio), valor = perfil.codigoEstudiante)
                     HorizontalDivider()
-                    FilaInformacionPerfil(etiqueta = "Establecimiento", valor = "Escuela Escritora Marcela Paz")
+                    FilaInformacionPerfil(etiqueta = stringResource(R.string.perfil_establecimiento), valor = stringResource(R.string.perfil_establecimiento_valor))
                     HorizontalDivider()
-                    FilaInformacionPerfil(etiqueta = "Nivel", valor = "Tercero Básico (3° Básico)")
+                    FilaInformacionPerfil(etiqueta = stringResource(R.string.perfil_nivel), valor = stringResource(R.string.perfil_nivel_valor))
                     HorizontalDivider()
-                    FilaInformacionPerfil(etiqueta = "Base de Datos", valor = "Independiente de Prueba")
+                    FilaInformacionPerfil(etiqueta = stringResource(R.string.perfil_base_de_datos), valor = stringResource(R.string.perfil_independiente_de_prueba))
                 }
             }
         }
@@ -153,19 +155,19 @@ fun PantallaPerfil(
                 ) {
                     Icon(
                         imageVector = Icons.Default.DataObject,
-                        contentDescription = "Datos Ficticios",
+                        contentDescription = stringResource(R.string.perfil_datos_ficticios),
                         tint = MaterialTheme.colorScheme.onSecondaryContainer,
                         modifier = Modifier.size(32.dp)
                     )
                     Column(verticalArrangement = Arrangement.spacedBy(2.dp)) {
                         Text(
-                            text = "MVP Independiente y Ficticio",
+                            text = stringResource(R.string.perfil_mvp_independiente_y_ficticio),
                             style = MaterialTheme.typography.titleSmall,
                             fontWeight = FontWeight.Bold,
                             color = MaterialTheme.colorScheme.onSecondaryContainer
                         )
                         Text(
-                            text = "No se conecta al Libro MPAZ ni sistemas institucionales. Trabaja con datos ficticios basados en el Currículum Nacional, sin requerir IA generativa.",
+                            text = stringResource(R.string.perfil_no_se_conecta_al_libro),
                             style = MaterialTheme.typography.bodySmall,
                             color = MaterialTheme.colorScheme.onSecondaryContainer
                         )
@@ -188,13 +190,13 @@ fun PantallaPerfil(
                             verticalArrangement = Arrangement.spacedBy(8.dp)
                         ) {
                             Text(
-                                text = "Panel del Estudiante",
+                                text = stringResource(R.string.perfil_panel_del_estudiante),
                                 style = MaterialTheme.typography.titleMedium,
                                 fontWeight = FontWeight.Bold,
                                 color = MaterialTheme.colorScheme.onPrimaryContainer
                             )
                             Text(
-                                text = "Puedes consultar tu material asignado, desarrollar actividades y revisar tus respuestas correctas e incorrectas.",
+                                text = stringResource(R.string.perfil_puedes_consultar_tu_material_asignado),
                                 style = MaterialTheme.typography.bodySmall,
                                 color = MaterialTheme.colorScheme.onPrimaryContainer
                             )
@@ -215,13 +217,13 @@ fun PantallaPerfil(
                             verticalArrangement = Arrangement.spacedBy(8.dp)
                         ) {
                             Text(
-                                text = "Panel del Docente de Tercero Básico",
+                                text = stringResource(R.string.perfil_panel_del_docente_de_tercero),
                                 style = MaterialTheme.typography.titleMedium,
                                 fontWeight = FontWeight.Bold,
                                 color = MaterialTheme.colorScheme.primary
                             )
                             Text(
-                                text = "Asignación de contenidos, definición de intentos máximos para evaluaciones y revisión de resultados de los estudiantes.",
+                                text = stringResource(R.string.perfil_asignacion_de_contenidos_definicion_de),
                                 style = MaterialTheme.typography.bodySmall,
                                 color = MaterialTheme.colorScheme.onSurfaceVariant
                             )
@@ -242,13 +244,13 @@ fun PantallaPerfil(
                             verticalArrangement = Arrangement.spacedBy(12.dp)
                         ) {
                             Text(
-                                text = "Panel de Jefatura UTP (Revisión de Contenidos)",
+                                text = stringResource(R.string.perfil_panel_de_jefatura_utp_revision),
                                 style = MaterialTheme.typography.titleMedium,
                                 fontWeight = FontWeight.Bold,
                                 color = MaterialTheme.colorScheme.onTertiaryContainer
                             )
                             Text(
-                                text = "Autoriza los contenidos pedagógicos y verifica su relación con los objetivos de aprendizaje oficial.",
+                                text = stringResource(R.string.perfil_autoriza_los_contenidos_pedagogicos_y),
                                 style = MaterialTheme.typography.bodySmall,
                                 color = MaterialTheme.colorScheme.onTertiaryContainer
                             )
@@ -256,7 +258,7 @@ fun PantallaPerfil(
                             HorizontalDivider()
 
                             Text(
-                                text = "Autorización de Módulos:",
+                                text = stringResource(R.string.perfil_autorizacion_de_modulos),
                                 style = MaterialTheme.typography.titleSmall,
                                 fontWeight = FontWeight.Bold
                             )
@@ -278,7 +280,7 @@ fun PantallaPerfil(
                                             containerColor = if (mod.aprobadoPorUtp) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.error
                                         )
                                     ) {
-                                        Text(if (mod.aprobadoPorUtp) "Autorizado" else "Pendiente")
+                                        Text(if (mod.aprobadoPorUtp) stringResource(R.string.comun_autorizado) else stringResource(R.string.perfil_pendiente))
                                     }
                                 }
                             }
@@ -286,14 +288,14 @@ fun PantallaPerfil(
                             HorizontalDivider()
 
                             Text(
-                                text = "Informe Pedagógico Reservado:",
+                                text = stringResource(R.string.perfil_informe_pedagogico_reservado),
                                 style = MaterialTheme.typography.titleSmall,
                                 fontWeight = FontWeight.Bold
                             )
-                            Text(text = "Rendimiento: ${informe.rendimientoPromedio}", style = MaterialTheme.typography.bodySmall)
-                            Text(text = "Fortalezas: ${informe.fortalezas}", style = MaterialTheme.typography.bodySmall)
-                            Text(text = "A reforzar: ${informe.contenidosAReforzar}", style = MaterialTheme.typography.bodySmall)
-                            Text(text = "Estado: ${informe.estadoValidacion}", style = MaterialTheme.typography.bodySmall)
+                            Text(text = stringResource(R.string.perfil_rendimiento, informe.rendimientoPromedio), style = MaterialTheme.typography.bodySmall)
+                            Text(text = stringResource(R.string.perfil_fortalezas, informe.fortalezas), style = MaterialTheme.typography.bodySmall)
+                            Text(text = stringResource(R.string.perfil_a_reforzar, informe.contenidosAReforzar), style = MaterialTheme.typography.bodySmall)
+                            Text(text = stringResource(R.string.perfil_estado, informe.estadoValidacion), style = MaterialTheme.typography.bodySmall)
                         }
                     }
                 }

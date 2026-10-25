@@ -1,5 +1,7 @@
 package com.marcelapaz.mpazpr3.ui.componentes
 
+import androidx.compose.ui.res.stringResource
+import com.marcelapaz.mpazpr3.R
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Error
@@ -43,7 +45,7 @@ fun CampoTextoValidado(
         supportingText = { error?.let { Text(it) } },
         trailingIcon = {
             if (error != null) {
-                Icon(Icons.Default.Error, contentDescription = "Error", tint = MaterialTheme.colorScheme.error)
+                Icon(Icons.Default.Error, contentDescription = stringResource(R.string.comun_error), tint = MaterialTheme.colorScheme.error)
             }
         },
         singleLine = true,
@@ -69,7 +71,7 @@ fun CampoClave(
         label = { Text(etiqueta) },
         leadingIcon = {
             if (error != null) {
-                Icon(Icons.Default.Error, contentDescription = "Error", tint = MaterialTheme.colorScheme.error)
+                Icon(Icons.Default.Error, contentDescription = stringResource(R.string.comun_error), tint = MaterialTheme.colorScheme.error)
             } else {
                 Icon(Icons.Default.Lock, contentDescription = null)
             }
@@ -78,7 +80,7 @@ fun CampoClave(
             IconButton(onClick = { visible = !visible }) {
                 Icon(
                     imageVector = if (visible) Icons.Default.VisibilityOff else Icons.Default.Visibility,
-                    contentDescription = if (visible) "Ocultar contraseña" else "Mostrar contraseña"
+                    contentDescription = if (visible) stringResource(R.string.campos_ocultar_contrasena) else stringResource(R.string.campos_mostrar_contrasena)
                 )
             }
         },
