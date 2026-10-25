@@ -29,7 +29,11 @@ import java.util.Locale
   No necesita permisos; solo se declara <queries> en el Manifest para poder encontrar el motor de voz.
 */
 @Composable
-fun BotonEscuchar(texto: String, modifier: Modifier = Modifier) {
+fun BotonEscuchar(
+    texto: String,
+    modifier: Modifier = Modifier,
+    etiqueta: String = stringResource(R.string.audio_escuchar_explicacion)
+) {
     val contexto = LocalContext.current
     var listo by remember { mutableStateOf(false) }
     var hablando by remember { mutableStateOf(false) }
@@ -74,6 +78,6 @@ fun BotonEscuchar(texto: String, modifier: Modifier = Modifier) {
             contentDescription = null
         )
         Spacer(modifier = Modifier.width(8.dp))
-        Text(if (hablando) stringResource(R.string.audio_detener) else stringResource(R.string.audio_escuchar_explicacion))
+        Text(if (hablando) stringResource(R.string.audio_detener) else etiqueta)
     }
 }

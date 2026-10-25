@@ -153,4 +153,8 @@
     <!-- audio -->
     <string name="audio_detener">Detener</string>
     <string name="audio_escuchar_explicacion">Escuchar explicación</string>
+
+    <!-- recurso -->
+    <string name="recurso_escuchar">Escuchar recurso</string>
+    <string name="recurso_proximamente">Próximamente</string>
 </resources>
