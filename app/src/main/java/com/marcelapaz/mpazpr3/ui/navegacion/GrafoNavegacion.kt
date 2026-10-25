@@ -19,9 +19,12 @@ import androidx.navigation.navArgument
 import com.marcelapaz.mpazpr3.ui.pantallas.PantallaDetalle
 import com.marcelapaz.mpazpr3.ui.pantallas.PantallaFormularioModulo
 import com.marcelapaz.mpazpr3.ui.pantallas.PantallaInicio
+import com.marcelapaz.mpazpr3.ui.pantallas.PantallaLogin
 import com.marcelapaz.mpazpr3.ui.pantallas.PantallaModulos
 import com.marcelapaz.mpazpr3.ui.pantallas.PantallaPerfil
+import com.marcelapaz.mpazpr3.ui.pantallas.PantallaRegistro
 import com.marcelapaz.mpazpr3.datos.RolUsuario
+import com.marcelapaz.mpazpr3.ui.modelovista.AutenticacionModeloVista
 import com.marcelapaz.mpazpr3.ui.modelovista.ModeloVistaMpaz
 
 // Definicion de pantallas y rutas de navegacion (Cumple Guia 10: Navegacion y estructura visual)
@@ -29,6 +32,8 @@ sealed class PantallaNavegacion(val ruta: String, val titulo: String, val icono:
     object Inicio : PantallaNavegacion("inicio", "Inicio", Icons.Default.Home)
     object Modulos : PantallaNavegacion("modulos", "Módulos", Icons.Default.School)
     object Perfil : PantallaNavegacion("perfil", "Perfil", Icons.Default.Person)
+    object Login : PantallaNavegacion("login", "Ingresar", Icons.Default.Person)
+    object Registro : PantallaNavegacion("registro", "Crear cuenta", Icons.Default.Person)
     object NuevoModulo : PantallaNavegacion("nuevoModulo", "Nuevo Módulo", Icons.Default.School)
     object Detalle : PantallaNavegacion("detalle/{idModulo}", "Detalle", Icons.Default.School) {
         fun crearRuta(idModulo: Int) = "detalle/$idModulo"
@@ -37,7 +42,7 @@ sealed class PantallaNavegacion(val ruta: String, val titulo: String, val icono:
 
 // Grafo principal de navegacion y estructura visual con Scaffold y NavHost (Guia 2.2.4)
 @Composable
-fun GrafoNavegacionMpaz(modeloVista: ModeloVistaMpaz) {
+fun GrafoNavegacionMpaz(modeloVista: ModeloVistaMpaz, autenticacion: AutenticacionModeloVista) {
     val controladorNav = rememberNavController()
     val modulos by modeloVista.modulosVisibles.collectAsStateWithLifecycle()
     val recursos by modeloVista.recursos.collectAsStateWithLifecycle()
@@ -46,6 +51,34 @@ fun GrafoNavegacionMpaz(modeloVista: ModeloVistaMpaz) {
     val textoBusqueda by modeloVista.textoBusqueda.collectAsStateWithLifecycle()
     val avatar by modeloVista.avatar.collectAsStateWithLifecycle()
     val contexto = LocalContext.current
+    val usuario by autenticacion.usuario.collectAsStateWithLifecycle()
+    val estadoLogin by autenticacion.login.collectAsStateWithLifecycle()
+    val estadoRegistro by autenticacion.registro.collectAsStateWithLifecycle()
+
+    // Reacciona a la sesion: al iniciar sesion carga el perfil y entra a Inicio; al cerrarla vuelve al login
+    LaunchedEffect(usuario) {
+        val sesion = usuario
+        if (sesion != null) {
+            modeloVista.establecerUsuario(sesion.nombre, sesion.correo, sesion.rol)
+            // Solo entra a Inicio desde las pantallas de acceso (evita navegar de nuevo al rotar la pantalla)
+            val rutaActual = controladorNav.currentDestination?.route
+            if (rutaActual == PantallaNavegacion.Login.ruta || rutaActual == PantallaNavegacion.Registro.ruta) {
+                controladorNav.navigate(PantallaNavegacion.Inicio.ruta) {
+                    popUpTo(PantallaNavegacion.Login.ruta) { inclusive = true }
+                    launchSingleTop = true
+                }
+            }
+        } else {
+            val rutaActual = controladorNav.currentDestination?.route
+            if (rutaActual != null && rutaActual != PantallaNavegacion.Login.ruta &&
+                rutaActual != PantallaNavegacion.Registro.ruta
+            ) {
+                controladorNav.navigate(PantallaNavegacion.Login.ruta) {
+                    popUpTo(controladorNav.graph.id) { inclusive = true }
+                }
+            }
+        }
+    }
 
     // El estudiante solo ve los módulos que la UTP ya autorizó (regla del caso 3.1)
     val modulosVisibles = remember(modulos, perfil.rolActual) {
@@ -94,11 +127,36 @@ fun GrafoNavegacionMpaz(modeloVista: ModeloVistaMpaz) {
             // Host de navegacion para gestionar las transiciones entre pantallas (Guia 2.2.4)
             NavHost(
                 navController = controladorNav,
-                startDestination = PantallaNavegacion.Inicio.ruta,
+                startDestination = PantallaNavegacion.Login.ruta,
                 modifier = Modifier
                     .fillMaxSize()
                     .padding(rellenoInterno)
             ) {
+                // Pantalla de inicio de sesion (formulario validado)
+                composable(PantallaNavegacion.Login.ruta) {
+                    PantallaLogin(
+                        estado = estadoLogin,
+                        alCambiarCorreo = { autenticacion.cambiarCorreoLogin(it) },
+                        alCambiarClave = { autenticacion.cambiarClaveLogin(it) },
+                        alIngresar = { autenticacion.iniciarSesion() },
+                        alIrARegistro = { controladorNav.navigate(PantallaNavegacion.Registro.ruta) }
+                    )
+                }
+
+                // Pantalla de registro de cuenta nueva (formulario validado)
+                composable(PantallaNavegacion.Registro.ruta) {
+                    PantallaRegistro(
+                        estado = estadoRegistro,
+                        alCambiarNombre = { autenticacion.cambiarNombreRegistro(it) },
+                        alCambiarCorreo = { autenticacion.cambiarCorreoRegistro(it) },
+                        alCambiarClave = { autenticacion.cambiarClaveRegistro(it) },
+                        alCambiarConfirmacion = { autenticacion.cambiarConfirmacionRegistro(it) },
+                        alCambiarRol = { autenticacion.cambiarRolRegistro(it) },
+                        alCrearCuenta = { autenticacion.registrarUsuario() },
+                        alVolver = { controladorNav.popBackStack() }
+                    )
+                }
+
                 // Ruta 1: Pantalla de Inicio / Dashboard
                 composable(PantallaNavegacion.Inicio.ruta) {
                     PantallaInicio(
@@ -141,7 +199,7 @@ fun GrafoNavegacionMpaz(modeloVista: ModeloVistaMpaz) {
                         perfil = perfil,
                         modulos = modulos,
                         informe = informe,
-                        alCambiarRol = { rol -> modeloVista.cambiarRolUsuario(rol) },
+                        alCerrarSesion = { autenticacion.cerrarSesion() },
                         alAutorizarModulo = { id -> modeloVista.autorizarModuloUtp(id) },
                         avatar = avatar,
                         alElegirFoto = { uri -> modeloVista.guardarAvatar(contexto, uri) }

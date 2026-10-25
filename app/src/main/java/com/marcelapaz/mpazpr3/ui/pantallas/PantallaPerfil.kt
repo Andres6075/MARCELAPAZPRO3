@@ -5,6 +5,7 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.filled.Logout
 import androidx.compose.material.icons.filled.AdminPanelSettings
 import androidx.compose.material.icons.filled.DataObject
 import androidx.compose.material.icons.filled.Email
@@ -37,13 +38,11 @@ fun PantallaPerfil(
     perfil: PerfilEstudiante,
     modulos: List<ModuloAprendizaje>,
     informe: InformePedagogico,
-    alCambiarRol: (RolUsuario) -> Unit,
+    alCerrarSesion: () -> Unit,
     alAutorizarModulo: (Int) -> Unit,
     avatar: Bitmap?,
     alElegirFoto: (Uri) -> Unit
 ) {
-    var expandido by remember { mutableStateOf(false) }
-
     // Recurso nativo: selector de fotos del sistema (no requiere permisos). Si se cancela, uri es null.
     val lanzadorFoto = rememberLauncherForActivityResult(ActivityResultContracts.PickVisualMedia()) { uri ->
         if (uri != null) alElegirFoto(uri)
@@ -111,37 +110,11 @@ fun PantallaPerfil(
         }
 
         item {
-            // Selector de Perfiles segun la seccion 3.1 del caso
-            ExposedDropdownMenuBox(
-                expanded = expandido,
-                onExpandedChange = { expandido = !expandido }
-            ) {
-                OutlinedTextField(
-                    value = "Cambiar Perfil: ${perfil.rolActual.descripcion}",
-                    onValueChange = {},
-                    readOnly = true,
-                    supportingText = { Text("Selector solo para demostración: simula el inicio de sesión de cada perfil") },
-                    trailingIcon = { ExposedDropdownMenuDefaults.TrailingIcon(expanded = expandido) },
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .menuAnchor(),
-                    shape = RoundedCornerShape(12.dp)
-                )
-
-                ExposedDropdownMenu(
-                    expanded = expandido,
-                    onDismissRequest = { expandido = false }
-                ) {
-                    RolUsuario.values().forEach { rol ->
-                        DropdownMenuItem(
-                            text = { Text(rol.descripcion) },
-                            onClick = {
-                                alCambiarRol(rol)
-                                expandido = false
-                            }
-                        )
-                    }
-                }
+            // Cierra la sesion y vuelve a la pantalla de ingreso
+            OutlinedButton(onClick = alCerrarSesion, modifier = Modifier.fillMaxWidth()) {
+                Icon(Icons.AutoMirrored.Filled.Logout, contentDescription = null)
+                Spacer(modifier = Modifier.width(8.dp))
+                Text("Cerrar sesión")
             }
         }
 

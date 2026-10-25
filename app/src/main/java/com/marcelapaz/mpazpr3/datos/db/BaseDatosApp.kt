@@ -9,10 +9,12 @@ import androidx.room.RoomDatabase
   Clase de Base de Datos principal de Room.
   Proporciona la instancia singleton para acceder a SQLite de forma segura.
 */
-@Database(entities = [ModuloEntidad::class], version = 1, exportSchema = false)
+@Database(entities = [ModuloEntidad::class, UsuarioEntidad::class], version = 2, exportSchema = false)
 abstract class BaseDatosApp : RoomDatabase() {
 
     abstract fun moduloDao(): ModuloDao
+
+    abstract fun usuarioDao(): UsuarioDao
 
     companion object {
         @Volatile
@@ -24,7 +26,10 @@ abstract class BaseDatosApp : RoomDatabase() {
                     contexto.applicationContext,
                     BaseDatosApp::class.java,
                     "mpaz_pro3_database"
-                ).build()
+                )
+                    // Si cambia el esquema (version), se recrea la base de datos local
+                    .fallbackToDestructiveMigration()
+                    .build()
                 INSTANCIA = instancia
                 instancia
             }

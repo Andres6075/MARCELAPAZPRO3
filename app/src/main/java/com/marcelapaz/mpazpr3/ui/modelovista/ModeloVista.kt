@@ -90,8 +90,9 @@ class ModeloVistaMpaz : ViewModel() {
         _textoBusqueda.value = texto
     }
 
-    fun cambiarRolUsuario(nuevoRol: RolUsuario) {
-        _perfil.update { it.copy(rolActual = nuevoRol) }
+    // Carga en el perfil los datos del usuario que inicio sesion (nombre, correo y rol)
+    fun establecerUsuario(nombre: String, correo: String, rol: RolUsuario) {
+        _perfil.update { it.copy(nombre = nombre, correo = correo, rolActual = rol) }
         // El avance general depende de los modulos que ve el rol actual
         calcularProgresoGeneral()
     }
