@@ -1,3 +1,156 @@
 <resources>
     <string name="app_name">APP ESCUELA MARCELA PAZ</string>
+
+    <!-- detalle -->
+    <string name="detalle_detalle_curricular_del_modulo">Detalle Curricular del Módulo</string>
+
+    <!-- comun -->
+    <string name="comun_volver">Volver</string>
+
+    <!-- detalle -->
+    <string name="detalle_modulo_no_encontrado">Módulo no encontrado</string>
+    <string name="detalle_informacion_curricular">Información Curricular</string>
+    <string name="detalle_nivel">Nivel: %1$s</string>
+    <string name="detalle_objetivo">Objetivo: %1$s</string>
+    <string name="detalle_codigo_oficial">Código Oficial: %1$s</string>
+    <string name="detalle_eje_curricular">Eje Curricular: %1$s</string>
+    <string name="detalle_dificultad_intentos">Dificultad: %1$s | Intentos: %2$s/%3$s</string>
+    <string name="detalle_explicacion_e_instrucciones">Explicación e Instrucciones:</string>
+    <string name="detalle_audio">Audio</string>
+    <string name="detalle_incluye_audio_de_apoyo_para">Incluye audio de apoyo para la lectura autónoma</string>
+    <string name="detalle_progreso_modulo">Progreso del Módulo: %1$s%%</string>
+    <string name="detalle_completado_marcar_pendiente">Completado (Marcar Pendiente)</string>
+    <string name="detalle_marcar_como_completado">Marcar como Completado</string>
+    <string name="detalle_recursos_didacticos_y_ejemplos">Recursos Didácticos y Ejemplos</string>
+    <string name="detalle_no_hay_recursos_didacticos_especificos">No hay recursos didácticos específicos para este módulo.</string>
+    <string name="detalle_instrucciones">Instrucciones: %1$s</string>
+    <string name="detalle_ejemplo">Ejemplo: %1$s</string>
+
+    <!-- formulario -->
+    <string name="formulario_nuevo_modulo">Nuevo Módulo</string>
+    <string name="formulario_guardado">Guardado</string>
+    <string name="formulario_modulo_guardado_queda_pendiente_de">Módulo guardado. Queda pendiente de autorización de la UTP.</string>
+    <string name="formulario_titulo_del_modulo">Título del módulo</string>
+    <string name="formulario_asignatura">Asignatura</string>
+
+    <!-- comun -->
+    <string name="comun_error">Error</string>
+
+    <!-- formulario -->
+    <string name="formulario_unidad_ej_unidad_1_descubriendo">Unidad (ej: Unidad 1: Descubriendo Historias)</string>
+    <string name="formulario_codigo_oa_ej_oa_leng">Código OA (ej: OA-LENG-03-03)</string>
+    <string name="formulario_horas_1_20">Horas (1-20)</string>
+    <string name="formulario_intentos_1_5">Intentos (1-5)</string>
+    <string name="formulario_guardar_modulo">Guardar módulo</string>
+
+    <!-- inicio -->
+    <string name="inicio_rol_y_nivel">Rol: %1$s | 3° Básico</string>
+    <string name="inicio_icono_rol">Icono Rol</string>
+    <string name="inicio_android">Android</string>
+    <string name="inicio_apoyo_didactico_y_seguimiento">Apoyo Didáctico y Seguimiento</string>
+    <string name="inicio_interfaz_sencilla_para_tercero_basico">Interfaz sencilla para Tercero Básico. Conserva tu progreso y no requiere cámara, GPS, micrófono ni datos biométricos.</string>
+    <string name="inicio_mi_progreso_de_aprendizaje_3">Mi Progreso de Aprendizaje (3° Básico)</string>
+    <string name="inicio_progreso">Progreso</string>
+    <string name="inicio_porcentaje_completado">%1$s%% completado</string>
+    <string name="inicio_modulos_completados">%1$s/%2$s Módulos</string>
+    <string name="inicio_racha_de_estudio">Racha de Estudio</string>
+    <string name="inicio_racha_dias">%1$s días</string>
+    <string name="inicio_modulos_activos">Módulos Activos</string>
+    <string name="inicio_panel_docente_tercero_basico">Panel Docente - Tercero Básico</string>
+    <string name="inicio_supervision_de_las_4_asignaturas">Supervisión de las 4 asignaturas MVP, gestión de intentos máximos para evaluaciones y seguimiento del curso.</string>
+    <string name="inicio_estudiantes_3b">Estudiantes 3°B</string>
+    <string name="inicio_alumnos_valor">27 Alumnos</string>
+    <string name="inicio_rendimiento_curso">Rendimiento Curso</string>
+    <string name="inicio_rendimiento_valor" formatted="false">82% Logro</string>
+    <string name="inicio_panel_jefatura_utp_revision_curricular">Panel Jefatura UTP - Revisión Curricular</string>
+    <string name="inicio_validacion_y_autorizacion_de_contenidos">Validación y autorización de contenidos pedagógicos según Objetivos de Aprendizaje oficiales.</string>
+    <string name="inicio_autorizados_utp">Autorizados UTP</string>
+    <string name="inicio_estado_informe">Estado Informe</string>
+    <string name="inicio_validado">Validado</string>
+    <string name="inicio_ir_a_modulos_y_asignaturas">Ir a Módulos y Asignaturas</string>
+
+    <!-- login -->
+    <string name="login_escuela_marcela_paz">Escuela Marcela Paz</string>
+    <string name="login_ingresa_con_tu_cuenta_para">Ingresa con tu cuenta para continuar</string>
+
+    <!-- comun -->
+    <string name="comun_correo_electronico">Correo electrónico</string>
+
+    <!-- login -->
+    <string name="login_contrasena">Contraseña</string>
+    <string name="login_ingresando">Ingresando...</string>
+    <string name="login_ingresar">Ingresar</string>
+    <string name="login_no_tienes_cuenta_registrate">¿No tienes cuenta? Regístrate</string>
+    <string name="login_cuentas_de_prueba_datos_ficticios">Cuentas de prueba (datos ficticios)</string>
+    <string name="login_cuentas_demo">estudiante@escuelamarcelapaz.cl\ndocente@escuelamarcelapaz.cl\nutp@escuelamarcelapaz.cl\nContraseña: %1$s</string>
+
+    <!-- modulos -->
+    <string name="modulos_asignaturas_y_unidades">Asignaturas y Unidades</string>
+    <string name="modulos_buscar_por_asignatura_unidad_o">Buscar por asignatura, unidad o código OA...</string>
+    <string name="modulos_buscar">Buscar</string>
+    <string name="modulos_modo_estudiante_consulta_tus_asignaturas">Modo Estudiante: Consulta tus asignaturas y practica con las actividades autorizadas.</string>
+    <string name="modulos_modo_docente_configura_los_intentos">Modo Docente: Configura los intentos máximos permitidos para la evaluación final.</string>
+    <string name="modulos_modo_utp_revisa_y_autoriza">Modo UTP: Revisa y autoriza oficialmente los contenidos pedagógicos.</string>
+    <string name="modulos_nuevo_modulo">Nuevo módulo</string>
+    <string name="modulos_aun_no_hay_modulos_autorizados">Aún no hay módulos autorizados por la UTP.</string>
+    <string name="modulos_no_se_encontraron_modulos">No se encontraron módulos.</string>
+    <string name="modulos_autorizado_utp">Autorizado UTP</string>
+    <string name="modulos_pendiente_utp">Pendiente UTP</string>
+    <string name="modulos_unidad_y_oa">%1$s • OA: %2$s</string>
+    <string name="modulos_completado">Completado</string>
+    <string name="modulos_gestion_utp">Gestión UTP:</string>
+
+    <!-- comun -->
+    <string name="comun_autorizado">Autorizado</string>
+
+    <!-- modulos -->
+    <string name="modulos_aprobar_contenido">Aprobar Contenido</string>
+    <string name="modulos_intentos_evaluacion">Intentos Evaluación: %1$s</string>
+    <string name="modulos_restar_intento">Restar intento</string>
+    <string name="modulos_sumar_intento">Sumar intento</string>
+
+    <!-- perfil -->
+    <string name="perfil_foto_de_perfil">Foto de perfil</string>
+    <string name="perfil_rol">Rol</string>
+    <string name="perfil_cambiar_foto_de_perfil">Cambiar foto de perfil</string>
+    <string name="perfil_cerrar_sesion">Cerrar sesión</string>
+    <string name="perfil_identificador_ficticio">Identificador Ficticio</string>
+    <string name="perfil_establecimiento">Establecimiento</string>
+    <string name="perfil_establecimiento_valor">Escuela Escritora Marcela Paz</string>
+    <string name="perfil_nivel">Nivel</string>
+    <string name="perfil_nivel_valor">Tercero Básico (3° Básico)</string>
+    <string name="perfil_base_de_datos">Base de Datos</string>
+    <string name="perfil_independiente_de_prueba">Independiente de Prueba</string>
+    <string name="perfil_datos_ficticios">Datos Ficticios</string>
+    <string name="perfil_mvp_independiente_y_ficticio">MVP Independiente y Ficticio</string>
+    <string name="perfil_no_se_conecta_al_libro">No se conecta al Libro MPAZ ni sistemas institucionales. Trabaja con datos ficticios basados en el Currículum Nacional, sin requerir IA generativa.</string>
+    <string name="perfil_panel_del_estudiante">Panel del Estudiante</string>
+    <string name="perfil_puedes_consultar_tu_material_asignado">Puedes consultar tu material asignado, desarrollar actividades y revisar tus respuestas correctas e incorrectas.</string>
+    <string name="perfil_panel_del_docente_de_tercero">Panel del Docente de Tercero Básico</string>
+    <string name="perfil_asignacion_de_contenidos_definicion_de">Asignación de contenidos, definición de intentos máximos para evaluaciones y revisión de resultados de los estudiantes.</string>
+    <string name="perfil_panel_de_jefatura_utp_revision">Panel de Jefatura UTP (Revisión de Contenidos)</string>
+    <string name="perfil_autoriza_los_contenidos_pedagogicos_y">Autoriza los contenidos pedagógicos y verifica su relación con los objetivos de aprendizaje oficial.</string>
+    <string name="perfil_autorizacion_de_modulos">Autorización de Módulos:</string>
+    <string name="perfil_pendiente">Pendiente</string>
+    <string name="perfil_informe_pedagogico_reservado">Informe Pedagógico Reservado:</string>
+    <string name="perfil_rendimiento">Rendimiento: %1$s</string>
+    <string name="perfil_fortalezas">Fortalezas: %1$s</string>
+    <string name="perfil_a_reforzar">A reforzar: %1$s</string>
+    <string name="perfil_estado">Estado: %1$s</string>
+
+    <!-- registro -->
+    <string name="registro_crear_cuenta">Crear cuenta</string>
+    <string name="registro_nombre_completo">Nombre completo</string>
+    <string name="registro_contrasena_minimo_8_letras_y">Contraseña (mínimo 8, letras y números)</string>
+    <string name="registro_confirmar_contrasena">Confirmar contraseña</string>
+    <string name="registro_perfil">Perfil</string>
+    <string name="registro_creando_cuenta">Creando cuenta...</string>
+
+    <!-- campos -->
+    <string name="campos_ocultar_contrasena">Ocultar contraseña</string>
+    <string name="campos_mostrar_contrasena">Mostrar contraseña</string>
+
+    <!-- audio -->
+    <string name="audio_detener">Detener</string>
+    <string name="audio_escuchar_explicacion">Escuchar explicación</string>
 </resources>

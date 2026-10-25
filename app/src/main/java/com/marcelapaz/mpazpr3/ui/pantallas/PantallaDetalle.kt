@@ -1,5 +1,7 @@
 package com.marcelapaz.mpazpr3.ui.pantallas
 
+import androidx.compose.ui.res.stringResource
+import com.marcelapaz.mpazpr3.R
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
@@ -40,10 +42,10 @@ fun PantallaDetalle(
     Scaffold(
         topBar = {
             TopAppBar(
-                title = { Text("Detalle Curricular del Módulo") },
+                title = { Text(stringResource(R.string.detalle_detalle_curricular_del_modulo)) },
                 navigationIcon = {
                     IconButton(onClick = alVolver) {
-                        Icon(imageVector = Icons.Default.ArrowBack, contentDescription = "Volver")
+                        Icon(imageVector = Icons.Default.ArrowBack, contentDescription = stringResource(R.string.comun_volver))
                     }
                 }
             )
@@ -56,7 +58,7 @@ fun PantallaDetalle(
                     .padding(rellenoInterno),
                 contentAlignment = Alignment.Center
             ) {
-                Text("Módulo no encontrado")
+                Text(stringResource(R.string.detalle_modulo_no_encontrado))
             }
         } else {
             LazyColumn(
@@ -115,16 +117,16 @@ fun PantallaDetalle(
                             verticalArrangement = Arrangement.spacedBy(8.dp)
                         ) {
                             Text(
-                                text = "Información Curricular",
+                                text = stringResource(R.string.detalle_informacion_curricular),
                                 style = MaterialTheme.typography.titleSmall,
                                 fontWeight = FontWeight.Bold,
                                 color = MaterialTheme.colorScheme.primary
                             )
-                            Text(text = "Nivel: ${modulo.nivelEducativo}", style = MaterialTheme.typography.bodyMedium)
-                            Text(text = "Objetivo: ${modulo.objetivoAprendizaje}", style = MaterialTheme.typography.bodyMedium, fontWeight = FontWeight.SemiBold)
-                            Text(text = "Código Oficial: ${modulo.codigoOficial}", style = MaterialTheme.typography.bodySmall)
-                            Text(text = "Eje Curricular: ${modulo.ejeCurricular}", style = MaterialTheme.typography.bodySmall)
-                            Text(text = "Dificultad: ${modulo.dificultad} | Intentos: ${modulo.intentosRealizados}/${modulo.intentosPermitidos}", style = MaterialTheme.typography.bodySmall)
+                            Text(text = stringResource(R.string.detalle_nivel, modulo.nivelEducativo), style = MaterialTheme.typography.bodyMedium)
+                            Text(text = stringResource(R.string.detalle_objetivo, modulo.objetivoAprendizaje), style = MaterialTheme.typography.bodyMedium, fontWeight = FontWeight.SemiBold)
+                            Text(text = stringResource(R.string.detalle_codigo_oficial, modulo.codigoOficial), style = MaterialTheme.typography.bodySmall)
+                            Text(text = stringResource(R.string.detalle_eje_curricular, modulo.ejeCurricular), style = MaterialTheme.typography.bodySmall)
+                            Text(text = stringResource(R.string.detalle_dificultad_intentos, modulo.dificultad, modulo.intentosRealizados, modulo.intentosPermitidos), style = MaterialTheme.typography.bodySmall)
                         }
                     }
                 }
@@ -132,7 +134,7 @@ fun PantallaDetalle(
                 item {
                     Column {
                         Text(
-                            text = "Explicación e Instrucciones:",
+                            text = stringResource(R.string.detalle_explicacion_e_instrucciones),
                             style = MaterialTheme.typography.titleMedium,
                             fontWeight = FontWeight.Bold
                         )
@@ -151,8 +153,8 @@ fun PantallaDetalle(
                                 verticalAlignment = Alignment.CenterVertically,
                                 horizontalArrangement = Arrangement.spacedBy(8.dp)
                             ) {
-                                Icon(imageVector = Icons.Default.VolumeUp, contentDescription = "Audio", tint = MaterialTheme.colorScheme.primary)
-                                Text(text = "Incluye audio de apoyo para la lectura autónoma", style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.primary)
+                                Icon(imageVector = Icons.Default.VolumeUp, contentDescription = stringResource(R.string.detalle_audio), tint = MaterialTheme.colorScheme.primary)
+                                Text(text = stringResource(R.string.detalle_incluye_audio_de_apoyo_para), style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.primary)
                             }
                         }
                     }
@@ -173,7 +175,7 @@ fun PantallaDetalle(
                             verticalArrangement = Arrangement.spacedBy(12.dp)
                         ) {
                             Text(
-                                text = "Progreso del Módulo: ${(progresoLocal * 100).toInt()}%",
+                                text = stringResource(R.string.detalle_progreso_modulo, (progresoLocal * 100).toInt()),
                                 style = MaterialTheme.typography.titleMedium,
                                 fontWeight = FontWeight.Bold
                             )
@@ -192,7 +194,7 @@ fun PantallaDetalle(
                                     modifier = Modifier.size(20.dp)
                                 )
                                 Spacer(modifier = Modifier.width(8.dp))
-                                Text(if (modulo.estaCompletado) "Completado (Marcar Pendiente)" else "Marcar como Completado")
+                                Text(if (modulo.estaCompletado) stringResource(R.string.detalle_completado_marcar_pendiente) else stringResource(R.string.detalle_marcar_como_completado))
                             }
                         }
                     }
@@ -200,7 +202,7 @@ fun PantallaDetalle(
 
                 item {
                     Text(
-                        text = "Recursos Didácticos y Ejemplos",
+                        text = stringResource(R.string.detalle_recursos_didacticos_y_ejemplos),
                         style = MaterialTheme.typography.titleMedium,
                         fontWeight = FontWeight.Bold
                     )
@@ -209,7 +211,7 @@ fun PantallaDetalle(
                 if (recursosModulo.isEmpty()) {
                     item {
                         Text(
-                            text = "No hay recursos didácticos específicos para este módulo.",
+                            text = stringResource(R.string.detalle_no_hay_recursos_didacticos_especificos),
                             style = MaterialTheme.typography.bodyMedium,
                             color = MaterialTheme.colorScheme.onSurfaceVariant
                         )
@@ -267,17 +269,17 @@ fun TarjetaRecurso(recurso: RecursoDidactico) {
                 }
 
                 if (recurso.tieneAudio) {
-                    Icon(imageVector = Icons.Default.VolumeUp, contentDescription = "Audio", tint = MaterialTheme.colorScheme.primary)
+                    Icon(imageVector = Icons.Default.VolumeUp, contentDescription = stringResource(R.string.detalle_audio), tint = MaterialTheme.colorScheme.primary)
                 }
             }
 
             Text(
-                text = "Instrucciones: ${recurso.instrucciones}",
+                text = stringResource(R.string.detalle_instrucciones, recurso.instrucciones),
                 style = MaterialTheme.typography.bodySmall,
                 color = MaterialTheme.colorScheme.onSurface
             )
             Text(
-                text = "Ejemplo: ${recurso.ejemplo}",
+                text = stringResource(R.string.detalle_ejemplo, recurso.ejemplo),
                 style = MaterialTheme.typography.bodySmall,
                 fontWeight = FontWeight.SemiBold,
                 color = MaterialTheme.colorScheme.primary

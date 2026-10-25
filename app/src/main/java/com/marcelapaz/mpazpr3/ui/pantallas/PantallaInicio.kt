@@ -1,5 +1,7 @@
 package com.marcelapaz.mpazpr3.ui.pantallas
 
+import androidx.compose.ui.res.stringResource
+import com.marcelapaz.mpazpr3.R
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.layout.*
@@ -45,13 +47,13 @@ fun PantallaInicio(
             ) {
                 Column {
                     Text(
-                        text = "APP ESCUELA MARCELA PAZ",
+                        text = stringResource(R.string.app_name),
                         style = MaterialTheme.typography.headlineSmall,
                         fontWeight = FontWeight.Bold,
                         color = MaterialTheme.colorScheme.primary
                     )
                     Text(
-                        text = "Rol: ${perfil.rolActual.descripcion} | 3° Básico",
+                        text = stringResource(R.string.inicio_rol_y_nivel, perfil.rolActual.descripcion),
                         style = MaterialTheme.typography.bodyMedium,
                         fontWeight = FontWeight.SemiBold,
                         color = MaterialTheme.colorScheme.onSurfaceVariant
@@ -69,7 +71,7 @@ fun PantallaInicio(
                                 RolUsuario.DOCENTE -> Icons.Default.Verified
                                 RolUsuario.UTP -> Icons.Default.AdminPanelSettings
                             },
-                            contentDescription = "Icono Rol",
+                            contentDescription = stringResource(R.string.inicio_icono_rol),
                             tint = MaterialTheme.colorScheme.onPrimaryContainer
                         )
                     }
@@ -93,18 +95,18 @@ fun PantallaInicio(
                 ) {
                     Icon(
                         imageVector = Icons.Default.PhoneAndroid,
-                        contentDescription = "Android",
+                        contentDescription = stringResource(R.string.inicio_android),
                         tint = MaterialTheme.colorScheme.primary,
                         modifier = Modifier.size(32.dp)
                     )
                     Column(verticalArrangement = Arrangement.spacedBy(2.dp)) {
                         Text(
-                            text = "Apoyo Didáctico y Seguimiento",
+                            text = stringResource(R.string.inicio_apoyo_didactico_y_seguimiento),
                             style = MaterialTheme.typography.titleSmall,
                             fontWeight = FontWeight.Bold
                         )
                         Text(
-                            text = "Interfaz sencilla para Tercero Básico. Conserva tu progreso y no requiere cámara, GPS, micrófono ni datos biométricos.",
+                            text = stringResource(R.string.inicio_interfaz_sencilla_para_tercero_basico),
                             style = MaterialTheme.typography.bodySmall,
                             color = MaterialTheme.colorScheme.onSurfaceVariant
                         )
@@ -136,13 +138,13 @@ fun PantallaInicio(
                                 verticalAlignment = Alignment.CenterVertically
                             ) {
                                 Text(
-                                    text = "Mi Progreso de Aprendizaje (3° Básico)",
+                                    text = stringResource(R.string.inicio_mi_progreso_de_aprendizaje_3),
                                     style = MaterialTheme.typography.titleMedium,
                                     fontWeight = FontWeight.SemiBold
                                 )
                                 Icon(
                                     imageVector = Icons.Default.TrendingUp,
-                                    contentDescription = "Progreso"
+                                    contentDescription = stringResource(R.string.inicio_progreso)
                                 )
                             }
 
@@ -166,11 +168,11 @@ fun PantallaInicio(
                                 horizontalArrangement = Arrangement.SpaceBetween
                             ) {
                                 Text(
-                                    text = "${(perfil.progresoGeneral * 100).toInt()}% completado",
+                                    text = stringResource(R.string.inicio_porcentaje_completado, (perfil.progresoGeneral * 100).toInt()),
                                     style = MaterialTheme.typography.bodyMedium
                                 )
                                 Text(
-                                    text = "${perfil.modulosCompletadosTotal}/${modulos.size} Módulos",
+                                    text = stringResource(R.string.inicio_modulos_completados, perfil.modulosCompletadosTotal, modulos.size),
                                     style = MaterialTheme.typography.bodyMedium
                                 )
                             }
@@ -186,13 +188,13 @@ fun PantallaInicio(
                     ) {
                         TarjetaEstadistica(
                             modifier = Modifier.weight(1f),
-                            titulo = "Racha de Estudio",
-                            valor = "${perfil.rachaDiasEstudio} días",
+                            titulo = stringResource(R.string.inicio_racha_de_estudio),
+                            valor = stringResource(R.string.inicio_racha_dias, perfil.rachaDiasEstudio),
                             icono = Icons.Default.TrendingUp
                         )
                         TarjetaEstadistica(
                             modifier = Modifier.weight(1f),
-                            titulo = "Módulos Activos",
+                            titulo = stringResource(R.string.inicio_modulos_activos),
                             valor = "${modulos.size}",
                             icono = Icons.Default.School
                         )
@@ -216,12 +218,12 @@ fun PantallaInicio(
                             verticalArrangement = Arrangement.spacedBy(12.dp)
                         ) {
                             Text(
-                                text = "Panel Docente - Tercero Básico",
+                                text = stringResource(R.string.inicio_panel_docente_tercero_basico),
                                 style = MaterialTheme.typography.titleMedium,
                                 fontWeight = FontWeight.Bold
                             )
                             Text(
-                                text = "Supervisión de las 4 asignaturas MVP, gestión de intentos máximos para evaluaciones y seguimiento del curso.",
+                                text = stringResource(R.string.inicio_supervision_de_las_4_asignaturas),
                                 style = MaterialTheme.typography.bodyMedium
                             )
                         }
@@ -235,14 +237,14 @@ fun PantallaInicio(
                     ) {
                         TarjetaEstadistica(
                             modifier = Modifier.weight(1f),
-                            titulo = "Estudiantes 3°B",
-                            valor = "27 Alumnos",
+                            titulo = stringResource(R.string.inicio_estudiantes_3b),
+                            valor = stringResource(R.string.inicio_alumnos_valor),
                             icono = Icons.Default.Person
                         )
                         TarjetaEstadistica(
                             modifier = Modifier.weight(1f),
-                            titulo = "Rendimiento Curso",
-                            valor = "82% Logro",
+                            titulo = stringResource(R.string.inicio_rendimiento_curso),
+                            valor = stringResource(R.string.inicio_rendimiento_valor),
                             icono = Icons.Default.TrendingUp
                         )
                     }
@@ -265,12 +267,12 @@ fun PantallaInicio(
                             verticalArrangement = Arrangement.spacedBy(12.dp)
                         ) {
                             Text(
-                                text = "Panel Jefatura UTP - Revisión Curricular",
+                                text = stringResource(R.string.inicio_panel_jefatura_utp_revision_curricular),
                                 style = MaterialTheme.typography.titleMedium,
                                 fontWeight = FontWeight.Bold
                             )
                             Text(
-                                text = "Validación y autorización de contenidos pedagógicos según Objetivos de Aprendizaje oficiales.",
+                                text = stringResource(R.string.inicio_validacion_y_autorizacion_de_contenidos),
                                 style = MaterialTheme.typography.bodyMedium
                             )
                         }
@@ -284,14 +286,14 @@ fun PantallaInicio(
                     ) {
                         TarjetaEstadistica(
                             modifier = Modifier.weight(1f),
-                            titulo = "Autorizados UTP",
+                            titulo = stringResource(R.string.inicio_autorizados_utp),
                             valor = "${modulos.count { it.aprobadoPorUtp }}/${modulos.size}",
                             icono = Icons.Default.Verified
                         )
                         TarjetaEstadistica(
                             modifier = Modifier.weight(1f),
-                            titulo = "Estado Informe",
-                            valor = "Validado",
+                            titulo = stringResource(R.string.inicio_estado_informe),
+                            valor = stringResource(R.string.inicio_validado),
                             icono = Icons.Default.AdminPanelSettings
                         )
                     }
@@ -311,7 +313,7 @@ fun PantallaInicio(
                     modifier = Modifier.size(20.dp)
                 )
                 Spacer(modifier = Modifier.width(8.dp))
-                Text("Ir a Módulos y Asignaturas")
+                Text(stringResource(R.string.inicio_ir_a_modulos_y_asignaturas))
             }
         }
     }

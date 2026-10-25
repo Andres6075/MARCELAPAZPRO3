@@ -1,5 +1,7 @@
 package com.marcelapaz.mpazpr3.ui.pantallas
 
+import androidx.compose.ui.res.stringResource
+import com.marcelapaz.mpazpr3.R
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.animateColorAsState
 import androidx.compose.animation.expandVertically
@@ -50,10 +52,10 @@ fun PantallaFormularioModulo(
     Scaffold(
         topBar = {
             TopAppBar(
-                title = { Text("Nuevo Módulo") },
+                title = { Text(stringResource(R.string.formulario_nuevo_modulo)) },
                 navigationIcon = {
                     IconButton(onClick = alVolver) {
-                        Icon(Icons.Default.ArrowBack, contentDescription = "Volver")
+                        Icon(Icons.Default.ArrowBack, contentDescription = stringResource(R.string.comun_volver))
                     }
                 }
             )
@@ -83,9 +85,9 @@ fun PantallaFormularioModulo(
                         verticalAlignment = Alignment.CenterVertically,
                         horizontalArrangement = Arrangement.spacedBy(8.dp)
                     ) {
-                        Icon(Icons.Default.CheckCircle, contentDescription = "Guardado")
+                        Icon(Icons.Default.CheckCircle, contentDescription = stringResource(R.string.formulario_guardado))
                         Text(
-                            "Módulo guardado. Queda pendiente de autorización de la UTP.",
+                            stringResource(R.string.formulario_modulo_guardado_queda_pendiente_de),
                             fontWeight = FontWeight.SemiBold
                         )
                     }
@@ -94,7 +96,7 @@ fun PantallaFormularioModulo(
 
             CampoFormulario(
                 valor = estado.titulo,
-                etiqueta = "Título del módulo",
+                etiqueta = stringResource(R.string.formulario_titulo_del_modulo),
                 error = errores.titulo,
                 alCambiar = modeloVista::cambiarTitulo
             )
@@ -108,12 +110,12 @@ fun PantallaFormularioModulo(
                     value = estado.asignatura,
                     onValueChange = {},
                     readOnly = true,
-                    label = { Text("Asignatura") },
+                    label = { Text(stringResource(R.string.formulario_asignatura)) },
                     isError = errores.asignatura != null,
                     supportingText = { errores.asignatura?.let { Text(it) } },
                     trailingIcon = {
                         if (errores.asignatura != null) {
-                            Icon(Icons.Default.Error, contentDescription = "Error", tint = MaterialTheme.colorScheme.error)
+                            Icon(Icons.Default.Error, contentDescription = stringResource(R.string.comun_error), tint = MaterialTheme.colorScheme.error)
                         } else {
                             ExposedDropdownMenuDefaults.TrailingIcon(expanded = menuAsignaturaAbierto)
                         }
@@ -140,14 +142,14 @@ fun PantallaFormularioModulo(
 
             CampoFormulario(
                 valor = estado.unidad,
-                etiqueta = "Unidad (ej: Unidad 1: Descubriendo Historias)",
+                etiqueta = stringResource(R.string.formulario_unidad_ej_unidad_1_descubriendo),
                 error = errores.unidad,
                 alCambiar = modeloVista::cambiarUnidad
             )
 
             CampoFormulario(
                 valor = estado.codigoOa,
-                etiqueta = "Código OA (ej: OA-LENG-03-03)",
+                etiqueta = stringResource(R.string.formulario_codigo_oa_ej_oa_leng),
                 error = errores.codigoOa,
                 alCambiar = modeloVista::cambiarCodigoOa
             )
@@ -155,7 +157,7 @@ fun PantallaFormularioModulo(
             Row(horizontalArrangement = Arrangement.spacedBy(12.dp)) {
                 CampoFormulario(
                     valor = estado.horas,
-                    etiqueta = "Horas (1-20)",
+                    etiqueta = stringResource(R.string.formulario_horas_1_20),
                     error = errores.horas,
                     alCambiar = modeloVista::cambiarHoras,
                     soloNumeros = true,
@@ -163,7 +165,7 @@ fun PantallaFormularioModulo(
                 )
                 CampoFormulario(
                     valor = estado.intentos,
-                    etiqueta = "Intentos (1-5)",
+                    etiqueta = stringResource(R.string.formulario_intentos_1_5),
                     error = errores.intentos,
                     alCambiar = modeloVista::cambiarIntentos,
                     soloNumeros = true,
@@ -179,7 +181,7 @@ fun PantallaFormularioModulo(
                 colors = ButtonDefaults.buttonColors(containerColor = colorBoton),
                 modifier = Modifier.fillMaxWidth()
             ) {
-                Text("Guardar módulo")
+                Text(stringResource(R.string.formulario_guardar_modulo))
             }
         }
     }
@@ -203,7 +205,7 @@ private fun CampoFormulario(
         supportingText = { error?.let { Text(it) } },
         trailingIcon = {
             if (error != null) {
-                Icon(Icons.Default.Error, contentDescription = "Error", tint = MaterialTheme.colorScheme.error)
+                Icon(Icons.Default.Error, contentDescription = stringResource(R.string.comun_error), tint = MaterialTheme.colorScheme.error)
             }
         },
         singleLine = true,
