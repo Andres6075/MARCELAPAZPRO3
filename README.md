@@ -101,7 +101,7 @@ En Windows (PowerShell): `.\gradlew testDebugUnitTest`.
 
 ## Control de versiones y planificación
 
-- **GitHub:** repositorio público con commits por cada cambio técnico (formulario con validación, recursos nativos, animaciones, repositorios de Room, autenticación, textos en `strings.xml` y pruebas).
+- **GitHub:** repositorio público con commits por cada cambio técnico (formulario con validación, recursos nativos, animaciones, repositorios de Room, autenticación, textos en `strings.xml` y pruebas). https://github.com/Andres6075/MARCELAPAZPRO3 
 - **Trello:** tablero con las listas *Por hacer*, *En progreso* y *Hecho* y la distribución de las tareas: https://trello.com/b/DFTy2a06
 
 ## Limitaciones conocidas
