@@ -5,9 +5,8 @@ Aplicación móvil Android de apoyo didáctico y seguimiento del aprendizaje par
 - **Asignatura:** DSY1105 - Desarrollo de Aplicaciones Móviles (Duoc UC)
 - **Evaluaciones:** Parcial 2 (Encargo) y Parcial 3 (Presentación/defensa)
 - **Estudiante:** Andres Zuniga Saavedra
-- **Modalidad:** trabajo individual [COMPLETAR: autorizado por el/la docente NOMBRE]
 - **Planificación (Trello):** https://trello.com/b/DFTy2a06
-
+- **Repositorio:** https://github.com/Andres6075/MARCELAPAZPRO3
 ## Caso que resuelve
 
 La escuela trabaja con guías impresas, por lo que el avance por objetivo de aprendizaje queda repartido en distintos documentos. La app organiza una unidad por asignatura (Lenguaje y Comunicación, Matemática, Ciencias Naturales e Historia, Geografía y Cs. Sociales), conserva el progreso del estudiante y permite que la UTP autorice los contenidos antes de usarlos. Todos los datos (usuarios, módulos, resultados) son ficticios y no hay conexión con sistemas reales.
