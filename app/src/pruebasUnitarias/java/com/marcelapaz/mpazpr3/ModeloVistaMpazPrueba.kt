@@ -1,7 +1,7 @@
 package com.marcelapaz.mpazpr3
 
-import com.marcelapaz.mpazpr3.datos.ModuloAprendizaje
-import com.marcelapaz.mpazpr3.datos.RolUsuario
+import com.marcelapaz.mpazpr3.datos.modelos.ModuloAprendizaje
+import com.marcelapaz.mpazpr3.datos.modelos.RolUsuario
 import com.marcelapaz.mpazpr3.ui.modelovista.ModeloVistaMpaz
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertFalse

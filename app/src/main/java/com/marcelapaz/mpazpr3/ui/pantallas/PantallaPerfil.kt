@@ -29,10 +29,10 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.ui.graphics.asImageBitmap
 import androidx.compose.ui.layout.ContentScale
-import com.marcelapaz.mpazpr3.datos.InformePedagogico
-import com.marcelapaz.mpazpr3.datos.ModuloAprendizaje
-import com.marcelapaz.mpazpr3.datos.PerfilEstudiante
-import com.marcelapaz.mpazpr3.datos.RolUsuario
+import com.marcelapaz.mpazpr3.datos.modelos.InformePedagogico
+import com.marcelapaz.mpazpr3.datos.modelos.ModuloAprendizaje
+import com.marcelapaz.mpazpr3.datos.modelos.PerfilEstudiante
+import com.marcelapaz.mpazpr3.datos.modelos.RolUsuario
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable

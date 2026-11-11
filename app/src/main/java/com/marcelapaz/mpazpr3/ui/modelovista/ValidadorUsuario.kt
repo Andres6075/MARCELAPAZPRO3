@@ -1,6 +1,6 @@
 package com.marcelapaz.mpazpr3.ui.modelovista
 
-import com.marcelapaz.mpazpr3.datos.RolUsuario
+import com.marcelapaz.mpazpr3.datos.modelos.RolUsuario
 
 /*
   Validaciones de los formularios de inicio de sesion y registro.

@@ -23,7 +23,7 @@ import com.marcelapaz.mpazpr3.ui.pantallas.PantallaLogin
 import com.marcelapaz.mpazpr3.ui.pantallas.PantallaModulos
 import com.marcelapaz.mpazpr3.ui.pantallas.PantallaPerfil
 import com.marcelapaz.mpazpr3.ui.pantallas.PantallaRegistro
-import com.marcelapaz.mpazpr3.datos.RolUsuario
+import com.marcelapaz.mpazpr3.datos.modelos.RolUsuario
 import com.marcelapaz.mpazpr3.ui.modelovista.AutenticacionModeloVista
 import com.marcelapaz.mpazpr3.ui.modelovista.ModeloVistaMpaz
 

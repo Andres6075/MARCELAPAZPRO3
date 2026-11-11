@@ -40,7 +40,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
-import com.marcelapaz.mpazpr3.datos.RolUsuario
+import com.marcelapaz.mpazpr3.datos.modelos.RolUsuario
 import com.marcelapaz.mpazpr3.ui.componentes.CampoClave
 import com.marcelapaz.mpazpr3.ui.componentes.CampoTextoValidado
 import com.marcelapaz.mpazpr3.ui.modelovista.EstadoRegistro

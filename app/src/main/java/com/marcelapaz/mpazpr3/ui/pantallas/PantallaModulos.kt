@@ -20,8 +20,8 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
-import com.marcelapaz.mpazpr3.datos.ModuloAprendizaje
-import com.marcelapaz.mpazpr3.datos.RolUsuario
+import com.marcelapaz.mpazpr3.datos.modelos.ModuloAprendizaje
+import com.marcelapaz.mpazpr3.datos.modelos.RolUsuario
 
 @Composable
 fun PantallaModulos(

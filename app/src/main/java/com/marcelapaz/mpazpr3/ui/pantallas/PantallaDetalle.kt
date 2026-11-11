@@ -22,9 +22,9 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
-import com.marcelapaz.mpazpr3.datos.RecursoDidactico
+import com.marcelapaz.mpazpr3.datos.modelos.ModuloAprendizaje
+import com.marcelapaz.mpazpr3.datos.modelos.RecursoDidactico
 import com.marcelapaz.mpazpr3.ui.componentes.BotonEscuchar
-import com.marcelapaz.mpazpr3.datos.ModuloAprendizaje
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable

@@ -3,10 +3,10 @@ package com.marcelapaz.mpazpr3.ui.modelovista
 import android.content.Context
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.marcelapaz.mpazpr3.datos.ResultadoRegistro
-import com.marcelapaz.mpazpr3.datos.RepositorioUsuarios
-import com.marcelapaz.mpazpr3.datos.RolUsuario
-import com.marcelapaz.mpazpr3.datos.Usuario
+import com.marcelapaz.mpazpr3.datos.modelos.RolUsuario
+import com.marcelapaz.mpazpr3.datos.modelos.Usuario
+import com.marcelapaz.mpazpr3.datos.repositorios.RepositorioUsuarios
+import com.marcelapaz.mpazpr3.datos.repositorios.ResultadoRegistro
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow

@@ -1,7 +1,7 @@
 package com.marcelapaz.mpazpr3.ui.modelovista
 
 import androidx.lifecycle.ViewModel
-import com.marcelapaz.mpazpr3.datos.ModuloAprendizaje
+import com.marcelapaz.mpazpr3.datos.modelos.ModuloAprendizaje
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow

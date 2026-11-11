@@ -1,10 +1,11 @@
-package com.marcelapaz.mpazpr3.datos
+package com.marcelapaz.mpazpr3.datos.repositorios
 
 import android.content.Context
 import com.marcelapaz.mpazpr3.datos.db.BaseDatosApp
 import com.marcelapaz.mpazpr3.datos.db.ModuloDao
 import com.marcelapaz.mpazpr3.datos.db.aEntidad
 import com.marcelapaz.mpazpr3.datos.db.aModeloDominio
+import com.marcelapaz.mpazpr3.datos.modelos.ModuloAprendizaje
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 

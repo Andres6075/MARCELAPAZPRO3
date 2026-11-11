@@ -2,7 +2,7 @@ package com.marcelapaz.mpazpr3.datos.db
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import com.marcelapaz.mpazpr3.datos.ModuloAprendizaje
+import com.marcelapaz.mpazpr3.datos.modelos.ModuloAprendizaje
 
 /*
   Entidad de Room para representar la tabla de modulos en la base de datos local SQLite.

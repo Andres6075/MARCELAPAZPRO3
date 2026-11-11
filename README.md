@@ -40,14 +40,11 @@ También se puede crear una cuenta nueva desde la pantalla de registro.
 
 ```
 app/src/main/java/com/marcelapaz/mpazpr3/
-├── datos/                 Modelos, repositorios y utilidades de datos
-│   ├── Modelo.kt              Clases de datos (módulo, perfil, rol, informe)
-│   ├── Repositorio.kt         Datos de prueba en memoria
-│   ├── RepositorioModulos.kt  Acceso a Room para los módulos
-│   ├── RepositorioUsuarios.kt Registro e inicio de sesión sobre Room
-│   ├── Seguridad.kt           Hash SHA-256 con sal
-│   ├── AlmacenAvatar.kt       Foto de perfil en almacenamiento interno
-│   └── db/                    Room: entidades, DAO y base de datos
+├── datos/                 Modelos, repositorios, utilidades y base de datos
+│   ├── db/                Room: entidades, DAO y base de datos (BaseDatosApp)
+│   ├── modelos/           Clases y estructuras de datos (Modelo.kt, Usuario.kt - módulo, perfil, rol, informe, usuario)
+│   ├── repositorios/      Capa de acceso a datos (Repositorio.kt, RepositorioModulos.kt, RepositorioUsuarios.kt)
+│   └── utilidades/        Utilidades de seguridad y almacenamiento local (Seguridad.kt, AlmacenAvatar.kt)
 ├── ui/
 │   ├── modelovista/       ViewModels (StateFlow) y validadores
 │   ├── pantallas/         Pantallas en Jetpack Compose

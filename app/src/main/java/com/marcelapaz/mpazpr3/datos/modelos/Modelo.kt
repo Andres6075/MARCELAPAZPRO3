@@ -1,4 +1,4 @@
-package com.marcelapaz.mpazpr3.datos
+package com.marcelapaz.mpazpr3.datos.modelos
 
 /*
   En este archivo definimos todas las estructuras de datos (moldes) que usa nuestra app.
@@ -69,19 +69,3 @@ data class InformePedagogico(
     val fechaValidacion: String,
     val estadoValidacion: String
 )
-
-/*
-  Glosario bien contundente de modelos de datos y arquitectura:
-  - Data Class: Una clase especial en Kotlin pensada unicamente para almacenar datos y estructuras fijas.
-  - Enum Class: Un conjunto limitado de opciones constantes (en nuestro caso, los tres roles del caso).
-  - Val: Propiedad de solo lectura que no puede ser modificada despues de crearse.
-  - Int: Numero entero (para IDs o contadores).
-  - String: Texto plano para titulos, descripciones y codigos oficiales.
-  - Float: Numero decimal (utilizado para calcular el progreso de 0.0 a 1.0).
-  - Boolean: Valor verdadero o falso (para saber si esta completado o aprobado).
-  - OA (Objetivo de Aprendizaje): Meta curricular oficial del ministerio.
-  - UTP: Unidad Tecnico Pedagogica encargada de autorizar contenidos.
-  - MVP: Producto minimo viable desarrollado como prototipo academico.
-  - Racha de estudio: Dias seguidos que el alumno entra a estudiar.
-  - Identificador ficticio: Codigo de prueba para proteger datos personales segun la regla 5.1 del caso.
-*/

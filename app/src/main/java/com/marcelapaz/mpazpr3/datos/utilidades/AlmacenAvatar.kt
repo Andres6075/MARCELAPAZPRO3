@@ -1,4 +1,4 @@
-package com.marcelapaz.mpazpr3.datos
+package com.marcelapaz.mpazpr3.datos.utilidades
 
 import android.content.Context
 import android.graphics.Bitmap

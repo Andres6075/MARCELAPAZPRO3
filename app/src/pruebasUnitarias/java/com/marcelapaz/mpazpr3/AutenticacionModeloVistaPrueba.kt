@@ -1,6 +1,6 @@
 package com.marcelapaz.mpazpr3
 
-import com.marcelapaz.mpazpr3.datos.RolUsuario
+import com.marcelapaz.mpazpr3.datos.modelos.RolUsuario
 import com.marcelapaz.mpazpr3.ui.modelovista.AutenticacionModeloVista
 import com.marcelapaz.mpazpr3.ui.modelovista.EstadoLogin
 import com.marcelapaz.mpazpr3.ui.modelovista.EstadoRegistro

@@ -42,7 +42,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import com.marcelapaz.mpazpr3.datos.RepositorioUsuarios
+import com.marcelapaz.mpazpr3.datos.repositorios.RepositorioUsuarios
 import com.marcelapaz.mpazpr3.ui.componentes.CampoClave
 import com.marcelapaz.mpazpr3.ui.componentes.CampoTextoValidado
 import com.marcelapaz.mpazpr3.ui.modelovista.EstadoLogin

@@ -1,4 +1,10 @@
-package com.marcelapaz.mpazpr3.datos
+package com.marcelapaz.mpazpr3.datos.repositorios
+
+import com.marcelapaz.mpazpr3.datos.modelos.InformePedagogico
+import com.marcelapaz.mpazpr3.datos.modelos.ModuloAprendizaje
+import com.marcelapaz.mpazpr3.datos.modelos.PerfilEstudiante
+import com.marcelapaz.mpazpr3.datos.modelos.RecursoDidactico
+import com.marcelapaz.mpazpr3.datos.modelos.RolUsuario
 
 /*
   Aqui creamos nuestro repositorio de datos. Como este MVP no se conecta 
@@ -131,17 +137,3 @@ object RepositorioDatos {
         )
     }
 }
-
-/*
-  Glosario bien contundente de repositorio y gestion de datos:
-  - Repositorio (Repository): Objeto o clase centralizada que provee los datos a la aplicacion.
-  - Object: Declaracion en Kotlin para un objeto unico que no necesita instanciarse (patron Singleton).
-  - List: Coleccion ordenada de elementos (en este caso, una lista de modulos).
-  - MVP (Producto Minimo Viable): Version simplificada del software para validar la solucion escolar.
-  - Datos ficticios: Informacion de prueba que no utiliza datos reales de alumnos para proteger su privacidad.
-  - Currículum Nacional: Marco de referencia oficial del ministerio que usamos para los objetivos de aprendizaje.
-  - Informe Pedagogico: Reporte reservado para docentes y UTP con rendimientos y areas a reforzar.
-  - UTP: Unidad Tecnico Pedagogica que revisa y autoriza los contenidos educativos.
-  - Asignatura: Materia escolar (Lenguaje, Matematica, Ciencias e Historia).
-  - Unidad: Subdivision de la asignatura segun el plan curricular.
-*/

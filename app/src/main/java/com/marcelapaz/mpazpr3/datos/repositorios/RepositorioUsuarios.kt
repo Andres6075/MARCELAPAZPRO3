@@ -1,10 +1,13 @@
-package com.marcelapaz.mpazpr3.datos
+package com.marcelapaz.mpazpr3.datos.repositorios
 
 import android.content.Context
 import com.marcelapaz.mpazpr3.datos.db.BaseDatosApp
 import com.marcelapaz.mpazpr3.datos.db.UsuarioDao
 import com.marcelapaz.mpazpr3.datos.db.UsuarioEntidad
 import com.marcelapaz.mpazpr3.datos.db.aModeloDominio
+import com.marcelapaz.mpazpr3.datos.modelos.RolUsuario
+import com.marcelapaz.mpazpr3.datos.modelos.Usuario
+import com.marcelapaz.mpazpr3.datos.utilidades.Seguridad
 
 // Resultado de intentar registrar un usuario nuevo
 sealed class ResultadoRegistro {

@@ -3,8 +3,8 @@ package com.marcelapaz.mpazpr3.datos.db
 import androidx.room.Entity
 import androidx.room.Index
 import androidx.room.PrimaryKey
-import com.marcelapaz.mpazpr3.datos.RolUsuario
-import com.marcelapaz.mpazpr3.datos.Usuario
+import com.marcelapaz.mpazpr3.datos.modelos.RolUsuario
+import com.marcelapaz.mpazpr3.datos.modelos.Usuario
 
 /*
   Entidad de Room para la tabla de usuarios.

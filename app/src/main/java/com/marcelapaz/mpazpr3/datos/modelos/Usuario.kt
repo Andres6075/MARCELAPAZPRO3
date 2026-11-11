@@ -1,4 +1,4 @@
-package com.marcelapaz.mpazpr3.datos
+package com.marcelapaz.mpazpr3.datos.modelos
 
 // Usuario que inicio sesion. No incluye la contrasena: solo los datos que necesita la interfaz.
 data class Usuario(
