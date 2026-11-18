@@ -5,11 +5,13 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import android.graphics.Bitmap
 import android.net.Uri
+import com.marcelapaz.mpazpr3.datos.modelos.CitaPedagogica
 import com.marcelapaz.mpazpr3.datos.modelos.InformePedagogico
 import com.marcelapaz.mpazpr3.datos.modelos.ModuloAprendizaje
 import com.marcelapaz.mpazpr3.datos.modelos.PerfilEstudiante
 import com.marcelapaz.mpazpr3.datos.modelos.RecursoDidactico
 import com.marcelapaz.mpazpr3.datos.modelos.RolUsuario
+import com.marcelapaz.mpazpr3.datos.repositorios.RepositorioApiExterna
 import com.marcelapaz.mpazpr3.datos.repositorios.RepositorioDatos
 import com.marcelapaz.mpazpr3.datos.repositorios.RepositorioModulos
 import com.marcelapaz.mpazpr3.datos.utilidades.AlmacenAvatar
@@ -26,6 +28,20 @@ import kotlinx.coroutines.launch
 // Modelo de vista para manejar el estado de la aplicacion, perfiles y persistencia local con Room
 class ModeloVistaMpaz : ViewModel() {
     private var repositorio: RepositorioModulos? = null
+    private val repoApiExterna = RepositorioApiExterna()
+
+    private val _citaPedagogica = MutableStateFlow<CitaPedagogica?>(null)
+    val citaPedagogica: StateFlow<CitaPedagogica?> = _citaPedagogica.asStateFlow()
+
+    init {
+        cargarCitaPedagogica()
+    }
+
+    fun cargarCitaPedagogica() {
+        viewModelScope.launch {
+            _citaPedagogica.value = repoApiExterna.obtenerCitaDelDia()
+        }
+    }
 
     private val _modulos = MutableStateFlow(RepositorioDatos.obtenerModulos())
     val modulos: StateFlow<List<ModuloAprendizaje>> = _modulos.asStateFlow()

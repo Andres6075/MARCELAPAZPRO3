@@ -21,6 +21,9 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import androidx.compose.material.icons.filled.AutoAwesome
+import androidx.compose.material.icons.filled.Refresh
+import com.marcelapaz.mpazpr3.datos.modelos.CitaPedagogica
 import com.marcelapaz.mpazpr3.datos.modelos.ModuloAprendizaje
 import com.marcelapaz.mpazpr3.datos.modelos.PerfilEstudiante
 import com.marcelapaz.mpazpr3.datos.modelos.RolUsuario
@@ -29,6 +32,8 @@ import com.marcelapaz.mpazpr3.datos.modelos.RolUsuario
 fun PantallaInicio(
     perfil: PerfilEstudiante,
     modulos: List<ModuloAprendizaje>,
+    citaPedagogica: CitaPedagogica? = null,
+    alRefrescarCita: () -> Unit = {},
     alHacerClicModulo: (Int) -> Unit,
     alIrAModulos: () -> Unit
 ) {
@@ -111,6 +116,63 @@ fun PantallaInicio(
                             color = MaterialTheme.colorScheme.onSurfaceVariant
                         )
                     }
+                }
+            }
+        }
+
+        // Tarjeta de Cita Pedagógica del Día (Consumo de API REST Externa con Retrofit - IE 3.1.4)
+        item {
+            Card(
+                colors = CardDefaults.cardColors(
+                    containerColor = MaterialTheme.colorScheme.tertiaryContainer,
+                    contentColor = MaterialTheme.colorScheme.onTertiaryContainer
+                ),
+                shape = RoundedCornerShape(16.dp),
+                modifier = Modifier.fillMaxWidth()
+            ) {
+                Column(
+                    modifier = Modifier.padding(16.dp),
+                    verticalArrangement = Arrangement.spacedBy(8.dp)
+                ) {
+                    Row(
+                        modifier = Modifier.fillMaxWidth(),
+                        horizontalArrangement = Arrangement.SpaceBetween,
+                        verticalAlignment = Alignment.CenterVertically
+                    ) {
+                        Row(
+                            horizontalArrangement = Arrangement.spacedBy(8.dp),
+                            verticalAlignment = Alignment.CenterVertically
+                        ) {
+                            Icon(
+                                imageVector = Icons.Default.AutoAwesome,
+                                contentDescription = null,
+                                tint = MaterialTheme.colorScheme.primary
+                            )
+                            Text(
+                                text = "Inspiración Pedagógica del Día (API REST)",
+                                style = MaterialTheme.typography.titleSmall,
+                                fontWeight = FontWeight.Bold
+                            )
+                        }
+                        IconButton(onClick = alRefrescarCita) {
+                            Icon(
+                                imageVector = Icons.Default.Refresh,
+                                contentDescription = "Refrescar Cita"
+                            )
+                        }
+                    }
+
+                    Text(
+                        text = "“${citaPedagogica?.cita ?: "Cargando frase motivacional..."}”",
+                        style = MaterialTheme.typography.bodyMedium,
+                        fontWeight = FontWeight.Medium
+                    )
+                    Text(
+                        text = "— ${citaPedagogica?.autor ?: "Autor educador"}",
+                        style = MaterialTheme.typography.labelSmall,
+                        fontWeight = FontWeight.Bold,
+                        color = MaterialTheme.colorScheme.primary
+                    )
                 }
             }
         }

@@ -1,110 +1,128 @@
 # APP ESCUELA MARCELA PAZ (MPAZ PRO 3)
 
-Aplicación móvil Android de apoyo didáctico y seguimiento del aprendizaje para **Tercero Básico** de la Escuela Escritora Marcela Paz (San Bernardo). Es un MVP académico que reemplaza las guías impresas por módulos digitales organizados por Objetivos de Aprendizaje (OA).
+Aplicación móvil Android de apoyo didáctico y seguimiento del aprendizaje para **Tercero Básico** de la Escuela Escritora Marcela Paz (San Bernardo). Es un proyecto académico funcional e integrado que reemplaza las guías impresas por módulos digitales organizados por Objetivos de Aprendizaje (OA), conectando componentes de Front-end en Jetpack Compose, almacenamiento local con Room, consumo de API REST Externa con Retrofit y un Microservicio propio en Spring Boot.
 
 - **Asignatura:** DSY1105 - Desarrollo de Aplicaciones Móviles (Duoc UC)
-- **Evaluaciones:** Parcial 2 (Encargo) y Parcial 3 (Presentación/defensa)
+- **Evaluaciones:** Evaluación Parcial 4 (Encargo 6%) y Evaluación Parcial 5 (Defensa Individual 24%)
 - **Estudiante:** Andres Zuniga Saavedra
 - **Planificación (Trello):** https://trello.com/b/DFTy2a06
-- **Repositorio:** https://github.com/Andres6075/MARCELAPAZPRO3
+- **Repositorio GitHub:** https://github.com/Andres6075/MARCELAPAZPRO3
+
+---
+
 ## Caso que resuelve
 
-La escuela trabaja con guías impresas, por lo que el avance por objetivo de aprendizaje queda repartido en distintos documentos. La app organiza una unidad por asignatura (Lenguaje y Comunicación, Matemática, Ciencias Naturales e Historia, Geografía y Cs. Sociales), conserva el progreso del estudiante y permite que la UTP autorice los contenidos antes de usarlos. Todos los datos (usuarios, módulos, resultados) son ficticios y no hay conexión con sistemas reales.
+La escuela trabaja con guías impresas, por lo que el avance por objetivo de aprendizaje queda repartido en distintos documentos. La app organiza una unidad por asignatura (Lenguaje y Comunicación, Matemática, Ciencias Naturales e Historia, Geografía y Cs. Sociales), conserva el progreso del estudiante y permite que la UTP autorice los contenidos antes de usarlos.
 
-## Funcionalidades implementadas
+---
 
-- **Inicio de sesión y registro:** dos formularios con validación por campo (correo, contraseña, confirmación y perfil), íconos y mensajes de error. Las contraseñas se guardan con hash SHA-256 y sal aleatoria en Room, y el perfil de la sesión define los permisos.
-- **Tres perfiles con permisos distintos:** Estudiante (consulta y avanza solo en los módulos autorizados por la UTP, sin modificar contenidos ni ver el informe), Docente (asigna contenidos y define intentos) y UTP (autoriza módulos y accede al informe pedagógico reservado).
-- **Módulos y asignaturas:** lista con buscador en tiempo real por asignatura, unidad, código OA o palabra clave.
-- **Detalle del módulo:** información curricular, recursos didácticos, avance ajustable con deslizador (se guarda al soltarlo) y botón para marcar como completado.
-- **Formulario "Nuevo módulo" (Docente y UTP):** seis campos con validación por campo, mensaje de error e ícono de error. El módulo se guarda como pendiente de autorización de la UTP.
-- **Persistencia local con Room:** usuarios, módulos, avance y autorizaciones se conservan al cerrar la app.
-- **Recursos nativos:** lectura en voz alta de la explicación (TextToSpeech) y foto de perfil con el selector de fotos del sistema.
-- **Animaciones:** mensaje de éxito con `AnimatedVisibility`, color de los botones con `animateColorAsState` y barras de progreso con `animateFloatAsState`.
-- **Navegación:** `Scaffold` con `NavigationBar`, `NavHost`, pantallas de acceso (login y registro) y paso de argumento (`idModulo`) a la pantalla de detalle.
-- **Textos en `strings.xml`:** los textos de las pantallas están fuera del código.
+## Funcionalidades e Integraciones Implementadas
 
-## Cuentas de prueba
+- **Inicio de Sesión y Registro:** Formularios con validación por campo (correo, contraseña, confirmación y perfil). Las contraseñas se gestionan con hash SHA-256 y sal aleatoria.
+- **Tres Perfiles de Usuario:** Estudiante (consulta y avanza solo en módulos autorizados), Docente (crea módulos y ajusta intentos) y UTP (autoriza módulos y revisa el informe pedagógico).
+- **Consumo de API Externa con Retrofit (Guía 14 & IE 3.1.4):** Integración en tiempo real con una API REST de citas pedagógicas e inspiración docente (`DummyJSON Quotes / ServicioApiExterna`), expuesta dinámicamente en la pantalla de inicio.
+- **Microservicio propio en Spring Boot (IE 3.1.2 e IE 3.1.3):** Proyecto independiente en `backend-microservicio/` que expone endpoints REST con Spring Data JPA y base de datos H2 para operaciones CRUD completas sobre módulos y usuarios.
+- **Persistencia Híbrida Local y Remota (Room + Retrofit):** Usuarios y módulos se sincronizan en SQLite mediante Room localmente y a través del microservicio Spring Boot.
+- **Recursos Nativos:** Lectura en voz alta de explicaciones (`TextToSpeech`) y foto de perfil mediante el selector nativo del sistema (`PickVisualMedia`).
+- **Animaciones y Material 3:** Transiciones dinámicas con `AnimatedVisibility`, `animateColorAsState` y `animateFloatAsState`.
+- **Firma Digital de APK (IE 3.3.1):** Configuración de firma digital en Gradle con el archivo KeyStore `llave-firmada-mpaz.jks` y generación del APK firmado `app-release-firmado.apk`.
 
-Al abrir la app por primera vez se crean tres cuentas ficticias (contraseña `Mpaz2026`):
+---
 
-| Perfil | Correo |
-|---|---|
-| Estudiante | estudiante@escuelamarcelapaz.cl |
-| Docente | docente@escuelamarcelapaz.cl |
-| UTP | utp@escuelamarcelapaz.cl |
+## Endpoints de la Aplicación y Microservicio
 
-También se puede crear una cuenta nueva desde la pantalla de registro.
+### 1. API Externa (Retrofit)
+- **URL Base:** `https://dummyjson.com/`
+- **GET** `quotes/random` - Obtiene una frase/cita pedagógica al azar para el área escolar.
 
-## Arquitectura (MVVM)
+### 2. Microservicio propio en Spring Boot
+- **URL Base:** `http://localhost:8080/api/` (en emulador Android: `http://10.0.2.2:8080/api/`)
+- **GET** `/api/modulos` - Obtiene la lista completa de módulos de aprendizaje.
+- **POST** `/api/modulos` - Registra un nuevo módulo de aprendizaje desde la app.
+- **PUT** `/api/modulos/{id}` - Actualiza el avance, estado o autorización UTP de un módulo.
+- **DELETE** `/api/modulos/{id}` - Elimina un módulo de la base de datos.
+- **GET** `/api/usuarios` - Obtiene la lista de usuarios registrados.
+
+---
+
+## Arquitectura (MVVM + Microservicios)
 
 ```
 app/src/main/java/com/marcelapaz/mpazpr3/
-├── datos/                 Modelos, repositorios, utilidades y base de datos
-│   ├── db/                Room: entidades, DAO y base de datos (BaseDatosApp)
-│   ├── modelos/           Clases y estructuras de datos (Modelo.kt, Usuario.kt - módulo, perfil, rol, informe, usuario)
-│   ├── repositorios/      Capa de acceso a datos (Repositorio.kt, RepositorioModulos.kt, RepositorioUsuarios.kt)
-│   └── utilidades/        Utilidades de seguridad y almacenamiento local (Seguridad.kt, AlmacenAvatar.kt)
+├── datos/
+│   ├── db/                Room: entidades, DAO y base de datos local (BaseDatosApp)
+│   ├── modelos/           Clases de datos (Modelo.kt, Usuario.kt, CitaPedagogica.kt)
+│   ├── red/               Capa de red Retrofit (ServicioApiExterna, ServicioMicroservicio, ClienteRetrofit)
+│   ├── repositorios/      Repositorios de abstracción de datos (RepositorioDatos, RepositorioModulos, RepositorioApiExterna)
+│   └── utilidades/        Seguridad (SHA-256/Sal) y AlmacenAvatar (imágenes)
 ├── ui/
-│   ├── modelovista/       ViewModels (StateFlow) y validadores
-│   ├── pantallas/         Pantallas en Jetpack Compose
+│   ├── modelovista/       ViewModels con StateFlow (ModeloVistaMpaz, AutenticacionModeloVista)
+│   ├── pantallas/         Pantallas en Jetpack Compose (Inicio, Módulos, Perfil, Formulario, Detalle)
 │   ├── componentes/       Componentes reutilizables (BotonEscuchar, CamposFormulario)
-│   ├── navegacion/        Rutas y NavHost
-│   └── tema/              Colores, tipografía y tema Material 3
+│   └── navegacion/        NavHost y rutas de navegación
 └── MainActivity.kt
+
+backend-microservicio/     Proyecto Spring Boot independiente
+├── pom.xml                Dependencias de Spring Web, Spring Data JPA y H2
+└── src/main/java/com/marcelapaz/microservicio/
+    ├── controlador/       ModuloController (/api/modulos) y UsuarioController (/api/usuarios)
+    ├── modelo/            ModuloEntity y UsuarioEntity
+    └── repositorio/       ModuloRepository y UsuarioRepository
 ```
 
-- **Model (`datos/`):** clases de datos y entidades de Room.
-- **Repository (`RepositorioModulos`, `RepositorioUsuarios`):** únicos puntos de acceso a Room. Los ViewModel no conocen el DAO.
-- **ViewModel (`ui/modelovista/`):** mantiene el estado con `StateFlow` y contiene la lógica. Las validaciones están en `ValidadorModulo` y `ValidadorUsuario`, sin depender de Compose.
-- **View (`ui/pantallas/`):** solo dibuja el estado y envía eventos al ViewModel.
+---
 
-## Tecnologías
+## Pruebas Unitarias (Guía 15 & IE 3.2.1)
 
-Kotlin, Jetpack Compose, Material 3, Navigation Compose, Room con KSP, ViewModel y StateFlow, TextToSpeech de Android, Photo Picker (`ActivityResultContracts.PickVisualMedia`), JUnit 4 y `kotlinx-coroutines-test`.
+Pruebas unitarias en `app/src/pruebasUnitarias/java/com/marcelapaz/mpazpr3`:
 
-## Recursos nativos y permisos
+- `ServicioMicroservicioPrueba`: Validación mockeada con **Mockk** de endpoints REST del microservicio (GET, POST, DELETE).
+- `RepositorioApiExternaPrueba`: Validación mockeada de respuestas de Retrofit y resiliencia offline.
+- `ValidadorModuloPrueba` y `ValidadorUsuarioPrueba`: Validación de reglas de negocio en formularios y cifrado.
+- `FormularioModuloModeloVistaPrueba`: Validación de creación de módulos.
+- `AutenticacionModeloVistaPrueba` y `ModeloVistaMpazPrueba`: Flujos de login, roles y progreso de aprendizaje.
 
-| Recurso | Uso | Permisos |
+### Ejecución de Pruebas
+En Windows (PowerShell):
+```powershell
+.\gradlew testDebugUnitTest
+```
+
+---
+
+## Firma Digital y Generación del APK (IE 3.3.1)
+
+La aplicación cuenta con su configuración de firma digital en `app/build.gradle.kts` mediante el bloque `signingConfigs`:
+
+- **Archivo KeyStore (.jks):** `llave-firmada-mpaz.jks` (ubicado en la raíz del proyecto).
+- **Alias:** `mpazkey`
+- **Algoritmo:** RSA 2048-bit (válido por 10.000 días)
+- **Ejecutable firmado:** `app-release-firmado.apk` (disponible en la raíz del proyecto).
+
+---
+
+## Cómo Ejecutar el Proyecto
+
+### 1. Ejecutar el Microservicio Backend (Spring Boot)
+1. Abrir la carpeta `backend-microservicio` en una consola de comandos o IDE (IntelliJ / Eclipse / VS Code).
+2. Ejecutar con Maven:
+   ```bash
+   mvn spring-boot:run
+   ```
+3. El microservicio quedará escuchando en `http://localhost:8080/api/modulos`.
+
+### 2. Ejecutar la Aplicación Móvil (Android)
+1. Abrir el proyecto en **Android Studio**.
+2. Esperar a que finalice la sincronización de Gradle.
+3. Conectar un emulador o teléfono Android físico.
+4. Presionar **Run** (▶) para instalar y probar la app.
+
+---
+
+## Cuentas de Prueba
+
+| Perfil | Correo | Contraseña |
 |---|---|---|
-| TextToSpeech | Lee en voz alta la explicación del módulo | Ninguno. Solo declara `<queries>` en el Manifest para encontrar el motor de voz (Android 11 o superior) |
-| Selector de fotos | Foto de perfil, copiada al almacenamiento interno de la app | Ninguno |
-
-La app no usa cámara, GPS, micrófono ni datos biométricos, según las condiciones del caso.
-
-## Pruebas
-
-Pruebas unitarias en `app/src/pruebasUnitarias`:
-
-- `ValidadorModuloPrueba` y `ValidadorUsuarioPrueba`: reglas de validación y hash de contraseñas.
-- `FormularioModuloModeloVistaPrueba`: estado y envío del formulario "Nuevo módulo".
-- `AutenticacionModeloVistaPrueba`: validación de login y registro.
-- `ModeloVistaMpazPrueba`: filtro de módulos por rol, avance y progreso general.
-
-```
-./gradlew testDebugUnitTest
-```
-
-En Windows (PowerShell): `.\gradlew testDebugUnitTest`.
-
-## Cómo ejecutar
-
-1. Instalar una versión reciente de **Android Studio** (compatible con Android Gradle Plugin 9.4.1) y el SDK de Android 37.
-2. Clonar el repositorio y abrir la carpeta del proyecto en Android Studio.
-3. Esperar a que termine **Sync Project with Gradle Files** (requiere conexión a internet la primera vez).
-4. Conectar un teléfono Android con depuración USB (recomendado, sobre todo para la voz) o crear un emulador en **Device Manager** con una imagen que incluya Google Play. Requiere Android 7.0 (API 24) o superior.
-5. Presionar **Run** (▶) e ingresar con una de las cuentas de prueba.
-
-## Control de versiones y planificación
-
-- **GitHub:** repositorio público con commits por cada cambio técnico (formulario con validación, recursos nativos, animaciones, repositorios de Room, autenticación, textos en `strings.xml` y pruebas). https://github.com/Andres6075/MARCELAPAZPRO3 
-- **Trello:** tablero con las listas *Por hacer*, *En progreso* y *Hecho* y la distribución de las tareas: https://trello.com/b/DFTy2a06
-
-## Limitaciones conocidas
-
-- La sesión no se conserva al cerrar la app.
-- El registro permite elegir cualquier perfil, incluido UTP (aceptable para un prototipo con datos ficticios).
-- El hash SHA-256 con sal basta para este prototipo; en producción se usaría un algoritmo pensado para contraseñas (como PBKDF2 o bcrypt).
-- Los mensajes de error de los validadores están en el código, no en `strings.xml`.
-- Aún no hay actividades ni cuestionarios para el estudiante (el contador de intentos no avanza).
-- Al cambiar la versión de la base de datos, Room la recrea y se pierden los datos locales.
+| Estudiante | estudiante@escuelamarcelapaz.cl | Mpaz2026 |
+| Docente | docente@escuelamarcelapaz.cl | Mpaz2026 |
+| UTP | utp@escuelamarcelapaz.cl | Mpaz2026 |

@@ -50,6 +50,7 @@ fun GrafoNavegacionMpaz(modeloVista: ModeloVistaMpaz, autenticacion: Autenticaci
     val informe by modeloVista.informe.collectAsStateWithLifecycle()
     val textoBusqueda by modeloVista.textoBusqueda.collectAsStateWithLifecycle()
     val avatar by modeloVista.avatar.collectAsStateWithLifecycle()
+    val citaPedagogica by modeloVista.citaPedagogica.collectAsStateWithLifecycle()
     val contexto = LocalContext.current
     val usuario by autenticacion.usuario.collectAsStateWithLifecycle()
     val estadoLogin by autenticacion.login.collectAsStateWithLifecycle()
@@ -162,6 +163,8 @@ fun GrafoNavegacionMpaz(modeloVista: ModeloVistaMpaz, autenticacion: Autenticaci
                     PantallaInicio(
                         perfil = perfil,
                         modulos = modulosVisibles,
+                        citaPedagogica = citaPedagogica,
+                        alRefrescarCita = { modeloVista.cargarCitaPedagogica() },
                         alHacerClicModulo = { idModulo ->
                             controladorNav.navigate(PantallaNavegacion.Detalle.crearRuta(idModulo))
                         },
