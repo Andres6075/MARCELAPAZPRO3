@@ -28,6 +28,9 @@ interface ModuloDao {
 
     @Query("SELECT COUNT(*) FROM modulos_aprendizaje")
     suspend fun contarModulos(): Int
+
+    @Query("DELETE FROM modulos_aprendizaje WHERE id = :id")
+    suspend fun eliminarModuloPorId(id: Int)
 }
 
 /*

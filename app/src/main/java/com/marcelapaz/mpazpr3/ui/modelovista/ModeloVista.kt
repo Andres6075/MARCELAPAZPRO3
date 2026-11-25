@@ -69,7 +69,7 @@ class ModeloVistaMpaz : ViewModel() {
     private val _textoBusqueda = MutableStateFlow("")
     val textoBusqueda: StateFlow<String> = _textoBusqueda.asStateFlow()
 
-    // Crea el repositorio (Room) y mantiene la lista de modulos sincronizada con la base de datos local
+    // Crea el repositorio (Room + Microservicio Spring Boot) y mantiene la lista de modulos sincronizada
     fun inicializarRoom(contexto: Context) {
         if (repositorio != null) return
         val repo = RepositorioModulos.crear(contexto)
@@ -77,6 +77,8 @@ class ModeloVistaMpaz : ViewModel() {
 
         viewModelScope.launch {
             repo.sembrarDatosIniciales()
+            // Intenta sincronizar datos con el microservicio Spring Boot si está disponible
+            repo.sincronizarConMicroservicio()
             repo.modulos.collect { lista ->
                 if (lista.isNotEmpty()) {
                     _modulos.value = lista
@@ -171,10 +173,22 @@ class ModeloVistaMpaz : ViewModel() {
         calcularProgresoGeneral()
     }
 
-    // Guarda en Room un modulo nuevo creado desde el formulario (Room asigna el id)
+    // Guarda en el microservicio en Spring Boot y en Room un modulo nuevo creado desde el formulario
     fun agregarModulo(modulo: ModuloAprendizaje) {
         viewModelScope.launch {
-            repositorio?.insertar(modulo)
+            val guardado = repositorio?.insertar(modulo) ?: modulo
+            if (repositorio == null) {
+                _modulos.update { it + guardado }
+            }
+        }
+    }
+
+    // Elimina un modulo tanto en el microservicio Spring Boot como en la base de datos local Room
+    fun eliminarModulo(idModulo: Int) {
+        viewModelScope.launch {
+            repositorio?.eliminar(idModulo)
+            _modulos.update { lista -> lista.filter { it.id != idModulo } }
+            calcularProgresoGeneral()
         }
     }
 

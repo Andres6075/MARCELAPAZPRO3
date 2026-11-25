@@ -15,8 +15,8 @@ object ClienteRetrofit {
     // URL base de la API Externa pública (DummyJSON Quotes)
     private const val URL_BASE_API_EXTERNA = "https://dummyjson.com/"
 
-    // URL base del Microservicio Spring Boot local (10.0.2.2 es localhost para el emulador Android)
-    private const val URL_BASE_MICROSERVICIO = "http://10.0.2.2:8080/api/"
+    // URL base del Microservicio Spring Boot local (localhost para celular físico con 'adb reverse tcp:8080 tcp:8080')
+    private const val URL_BASE_MICROSERVICIO = "http://localhost:8080/api/"
 
     private val clienteOkHttp: OkHttpClient by lazy {
         val interceptor = HttpLoggingInterceptor().apply {

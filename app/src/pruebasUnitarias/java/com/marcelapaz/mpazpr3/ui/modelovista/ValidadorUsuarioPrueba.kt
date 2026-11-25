@@ -1,8 +1,7 @@
-package com.marcelapaz.mpazpr3
+package com.marcelapaz.mpazpr3.ui.modelovista
 
 import com.marcelapaz.mpazpr3.datos.modelos.RolUsuario
 import com.marcelapaz.mpazpr3.datos.utilidades.Seguridad
-import com.marcelapaz.mpazpr3.ui.modelovista.ValidadorUsuario
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertFalse
 import org.junit.Assert.assertNotEquals
